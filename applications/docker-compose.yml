@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  product-db:
+    image: mongo
+#    container_name: product-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
+  stock-db:
+    image: postgres:15.2
+    container_name: "stock-db"
+    environment:
+      POSTGRES_DB: stock
+      POSTGRES_PASSWORD: pwd
+    ports:
+      - "5432:5432"
+#  api:
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/mydatabase
+#    depends_on:
+#      - mongodb
