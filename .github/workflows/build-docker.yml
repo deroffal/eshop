@@ -35,7 +35,7 @@ jobs:
           echo "PROJECT_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Build Docker
-        run: mvn -B spring-boot:build-image -Dspring-boot.build-image.imageName=k8slab-productapi
+        run: mvn -B spring-boot:build-image -Dspring-boot.build-image.imageName=deroffal/k8slab-productapi
         
       - name: Push to DockerHub
         run: |
@@ -73,7 +73,7 @@ jobs:
           echo "PROJECT_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Build Docker
-        run: mvn -B spring-boot:build-image -Dspring-boot.build-image.imageName=k8slab-stockapi
+        run: mvn -B spring-boot:build-image -Dspring-boot.build-image.imageName=deroffal/k8slab-stockapi
         
       - name: Push to DockerHub
         run: |
