@@ -12,7 +12,7 @@
 
 	<groupId>fr.deroffal</groupId>
 	<artifactId>k8s-lab.product-api</artifactId>
-	<version>0.0.1</version>
+	<version>0.1</version>
 	<name>k8s-lab.product-api</name>
 
 	<properties>
