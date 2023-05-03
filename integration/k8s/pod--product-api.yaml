@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: product-api
+spec:
+  containers:
+    - name: product-api
+      image: deroffal/k8slab-productapi:0.1
+      imagePullPolicy: Always

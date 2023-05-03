@@ -1,15 +1,21 @@
+
+#local
+BASE_URI='http://localhost:8081'
+#port-forward
+BASE_URI='http://localhost:8080'
+
 # Create a baguette
-curl --location --request POST 'http://localhost:8081/products' \
+curl --location --request POST "$BASE_URI/products" \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "Baguette traditionnelle",
-#    "description": "La baguette traditionnelle française, croustillante à l'\''extérieur et moelleuse à l'\''intérieur",
+    "description": "La baguette traditionnelle française, croustillante à l'\''extérieur et moelleuse à l'\''intérieur",
     "price": 0.9
 }'
 
 
 # Create a croissant
-curl --location --request POST 'http://localhost:8081/products' \
+curl --location --request POST "$BASE_URI/products" \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "Croissant",
@@ -18,7 +24,7 @@ curl --location --request POST 'http://localhost:8081/products' \
 }'
 
 # Create a bottle of champagne
-curl --location --request POST 'http://localhost:8081/products' \
+curl --location --request POST "$BASE_URI/products" \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "Champagne brut",
@@ -27,7 +33,7 @@ curl --location --request POST 'http://localhost:8081/products' \
 }'
 
 # Create a wheel of camembert cheese
-curl --location --request POST 'http://localhost:8081/products' \
+curl --location --request POST "$BASE_URI/products" \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "Camembert de Normandie",
@@ -36,7 +42,7 @@ curl --location --request POST 'http://localhost:8081/products' \
 }'
 
 # Create a jar of Dijon mustard
-curl --location --request POST 'http://localhost:8081/products' \
+curl --location --request POST "$BASE_URI/products" \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "Moutarde de Dijon",
