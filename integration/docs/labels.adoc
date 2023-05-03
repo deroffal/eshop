@@ -1,0 +1,21 @@
+Add `labels` to `metadata` descriptor to be able to select all objects by labels :
+
+.pod--product-api.yaml
+[source,yaml]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: product-api
+  labels: # add labels here :
+    app: product-api
+spec:
+  containers:
+    - name: product-api
+      image: deroffal/k8slab-productapi:0.1
+----
+
+[source,shell]
+----
+kubectl get pods --selector='env=dev'
+----
