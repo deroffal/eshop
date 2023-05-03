@@ -6,6 +6,8 @@ import fr.deroffal.k8slab.productapi.Product;
 import fr.deroffal.k8slab.productapi.ProductDetail;
 import fr.deroffal.k8slab.productapi.ProductService;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
   private final ProductService service;
 
@@ -40,6 +44,7 @@ public class ProductController {
 
   @GetMapping("/{id}")
   public ProductDetail getProductById(@PathVariable String id) {
+    LOGGER.debug("getProductById - " + id);
     return service.getProductDetail(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
   }
 
