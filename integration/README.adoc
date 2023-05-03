@@ -4,4 +4,24 @@
 
 https://kubernetes.io/docs/tasks/tools/#minikube
 
+== Start
+
+[source,shell]
+----
+minikube start
+----
+
+== k8s commands
+
+.Apply yml descriptor :
+[source,shell]
+----
+kubectl apply -f integration/k8s/pod--product-api.yaml
+----
+
+.Create port-forwarding to an object :
+[source,shell]
+----
+kubectl port-forward pod/product-api 8080:8080
+----
 
