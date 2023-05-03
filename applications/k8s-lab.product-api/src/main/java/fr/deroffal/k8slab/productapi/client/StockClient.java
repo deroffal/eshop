@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Profile("http")
-@FeignClient(value = "stockClient", url = "${stock.api.url}")
+//@FeignClient(value = "stockClient", url = "${stock.api.url}")
 public interface StockClient extends StockPort {
 
   @GetMapping("/stock/{productName}")
