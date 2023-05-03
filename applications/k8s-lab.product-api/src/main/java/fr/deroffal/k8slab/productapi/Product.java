@@ -1,10 +1,9 @@
 package fr.deroffal.k8slab.productapi;
 
-import org.springframework.data.annotation.Id;
 
 public class Product {
 
-  @Id
+//  @org.springframework.data.annotation.Id
   private String id;
   private String name;
   private String description;
