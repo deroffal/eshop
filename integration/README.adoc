@@ -1,27 +1,35 @@
+:toc:
+:toc-placement!:
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
 = Integration
 
 == Minikube
 
 https://kubernetes.io/docs/tasks/tools/#minikube
 
-== Start
-
 [source,shell]
 ----
 minikube start
+minikube stop
 ----
 
-== k8s commands
+NOTE: `Minikube` + `Colima` pull image issues : `minikube config set driver docker`
+(https://pet2cattle.com/2022/09/minikube-colima-macos-m1[ref]).
 
-.Apply yml descriptor :
-[source,shell]
-----
-kubectl apply -f integration/k8s/pod--product-api.yaml
-----
+== k8s
 
-.Create port-forwarding to an object :
-[source,shell]
-----
-kubectl port-forward pod/product-api 8080:8080
-----
+=== Run a pod
 
+include::docs/run_pod.adoc[]
+
+=== Labels
+
+include::docs/labels.adoc[]
+
+=== Annotations
+
+include::docs/annotations.adoc[]
