@@ -12,7 +12,7 @@ jobs:
   version-job:
     runs-on: ubuntu-latest
     outputs:
-      product-version: ${{ steps.evaluate.product-version }}
+      product-version: ${{ steps.evaluate.outputs.version }}
     steps:
       - uses: actions/checkout@v4
       - name: Evaluate version
@@ -20,7 +20,7 @@ jobs:
         id: evaluate
         run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "product-version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
   product-build:
     needs:
