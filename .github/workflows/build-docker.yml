@@ -12,12 +12,19 @@ jobs:
   version-job:
     runs-on: ubuntu-latest
     outputs:
-      product-version: ${{ steps.evaluate.outputs.version }}
+      product-version: ${{ steps.evaluate-product.outputs.version }}
+      stock-version: ${{ steps.evaluate-stock.outputs.version }}
     steps:
       - uses: actions/checkout@v4
-      - name: Evaluate version
+      - name: Evaluate product version
         working-directory: ./applications/k8s-lab.product-api
-        id: evaluate
+        id: evaluate-product
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Evaluate stock version
+        working-directory: ./applications/k8s-lab.stock-api
+        id: evaluate-stock
         run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -34,72 +41,14 @@ jobs:
       image-name: 'deroffal/k8slab-productapi'
       tag-name: ${{ needs.version-job.outputs.product-version }}
 
-#    steps:
-#      - name: Checkout branche
-#        uses: actions/checkout@master
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@master
-#        with:
-#          java-version: 17
-#          distribution: 'adopt'
-#
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@master
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#
-#      - name: Get version
-#        id: get-version
-#        run: |
-#          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-#          echo "PROJECT_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-#
-#      - name: Build Docker
-#        run: mvn -B spring-boot:build-image -Dspring-boot.build-image.imageName=deroffal/k8slab-productapi
-#
-#      - name: Push to DockerHub
-#        run: |
-#            PROJECT_VERSION=${{ steps.get-version.outputs.PROJECT_VERSION }}
-#            docker tag deroffal/k8slab-productapi:latest deroffal/k8slab-productapi:${PROJECT_VERSION}
-#            docker push deroffal/k8slab-productapi:${PROJECT_VERSION}
-#            docker push deroffal/k8slab-productapi:latest
-
-#  stock-build:
-#    runs-on: ubuntu-latest
-#    defaults:
-#      run:
-#        working-directory: ./applications/k8s-lab.stock-api
-#
-#    steps:
-#      - name: Checkout branche
-#        uses: actions/checkout@master
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@master
-#        with:
-#          java-version: 17
-#          distribution: 'adopt'
-#
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@master
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#
-#      - name: Get version
-#        id: get-version
-#        run: |
-#          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-#          echo "PROJECT_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-#
-#      - name: Build Docker
-#        run: mvn -B spring-boot:build-image -Dspring-boot.build-image.imageName=deroffal/k8slab-stockapi
-#
-#      - name: Push to DockerHub
-#        run: |
-#            PROJECT_VERSION=${{ steps.get-version.outputs.PROJECT_VERSION }}
-#            docker tag deroffal/k8slab-stockapi:latest deroffal/k8slab-stockapi:${PROJECT_VERSION}
-#            docker push deroffal/k8slab-stockapi:${PROJECT_VERSION}
-#            docker push deroffal/k8slab-stockapi:latest
+  stock-build:
+    needs:
+      - version-job
+    uses: deroffal/github-actions/.github/workflows/build-maven-docker.yml@main
+    secrets: inherit
+    with:
+      working-directory: ./applications/k8s-lab.stock-api
+      java-version: '17'
+      java-distribution: 'adopt'
+      image-name: 'deroffal/k8slab-stockapi'
+      tag-name: ${{ needs.version-job.outputs.stock-version }}
