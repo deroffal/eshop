@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-@RestController
-@RequestMapping("/price")
+//@RestController
+//@RequestMapping("/amount")
 public class PriceController {
 
   private final static Map<UUID, Price> PRICES = Stream.of(
@@ -31,7 +31,7 @@ public class PriceController {
       )
       .collect(Collectors.toMap(Function.identity(), id -> new Price(id, new BigDecimal("10.00"), "EUR")));
 
-  @GetMapping("/{product}")
+//  @GetMapping("/{product}")
   public Price getStockByProductName(@PathVariable UUID product) {
     return Optional.ofNullable(PRICES.get(product))
         .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
