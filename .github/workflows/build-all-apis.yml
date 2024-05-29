@@ -1,0 +1,37 @@
+name: Build all APIs
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'applications/**'
+  workflow_dispatch:
+
+jobs:
+
+  product-build:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-product
+      cancel-in-progress: true
+    uses: ./.github/workflows/build-api.yml
+    secrets: inherit
+    with:
+      api-name: 'product-api'
+
+  stock-build:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-stock
+      cancel-in-progress: true
+    uses: ./.github/workflows/build-api.yml
+    secrets: inherit
+    with:
+      api-name: 'stock-api'
+
+  price-build:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-price
+      cancel-in-progress: true
+    uses: ./.github/workflows/build-api.yml
+    secrets: inherit
+    with:
+      api-name: 'price-api'
