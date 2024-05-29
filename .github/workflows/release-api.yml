@@ -1,0 +1,35 @@
+name: Release an API
+
+on:
+  workflow_call:
+    inputs:
+      api-name:
+        required: true
+        type: string
+        description: name of the api to release.
+
+jobs:
+
+  evaluate-version:
+    runs-on: ubuntu-latest
+    outputs:
+      api-version: ${{ steps.evaluate-version.outputs.maven-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Evaluate version
+        uses: deroffal/github-actions/actions/maven-evaluate-version@main
+        id: evaluate-version
+        with:
+          working-directory: ./applications/${{ inputs.api-name }}
+
+  build-api:
+    needs:
+      - evaluate-version
+    uses: deroffal/github-actions/.github/workflows/build-maven-docker.yml@main
+    secrets: inherit
+    with:
+      working-directory: ./applications/${{ inputs.api-name }}
+      java-version: '21'
+      java-distribution: 'temurin'
+      image-name: 'deroffal/k8slab-${{ inputs.api-name }}'
+      tag-name: ${{ needs.evaluate-version.outputs.api-version }}
