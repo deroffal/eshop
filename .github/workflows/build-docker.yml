@@ -39,8 +39,8 @@ jobs:
     secrets: inherit
     with:
       working-directory: ./applications/k8s-lab.product-api
-      java-version: '17'
-      java-distribution: 'adopt'
+      java-version: '21'
+      java-distribution: 'temurin'
       image-name: 'deroffal/k8slab-productapi'
       tag-name: ${{ needs.version-job.outputs.product-version }}
 
@@ -54,7 +54,7 @@ jobs:
     secrets: inherit
     with:
       working-directory: ./applications/k8s-lab.stock-api
-      java-version: '17'
-      java-distribution: 'adopt'
+      java-version: '21'
+      java-distribution: 'temurin'
       image-name: 'deroffal/k8slab-stockapi'
       tag-name: ${{ needs.version-job.outputs.stock-version }}
