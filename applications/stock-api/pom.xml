@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>k8s-lab.stock-api</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 	<name>k8s-lab.stock-api</name>
 
 	<dependencies>

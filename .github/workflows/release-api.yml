@@ -1,4 +1,4 @@
-name: Build an API
+name: Release an API
 
 on:
   workflow_call:
@@ -6,7 +6,7 @@ on:
       api-name:
         required: true
         type: string
-        description: name of the api to build.
+        description: name of the api to release.
 
 jobs:
 

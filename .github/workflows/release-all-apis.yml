@@ -1,10 +1,6 @@
-name: Build all APIs
+name: Release all APIs
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'applications/**'
   workflow_dispatch:
 
 jobs:
@@ -13,7 +9,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-product
       cancel-in-progress: true
-    uses: ./.github/workflows/build-api.yml
+    uses: ./.github/workflows/release-api.yml
     secrets: inherit
     with:
       api-name: 'product-api'
@@ -22,7 +18,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-stock
       cancel-in-progress: true
-    uses: ./.github/workflows/build-api.yml
+    uses: ./.github/workflows/release-api.yml
     secrets: inherit
     with:
       api-name: 'stock-api'
@@ -31,7 +27,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-price
       cancel-in-progress: true
-    uses: ./.github/workflows/build-api.yml
+    uses: ./.github/workflows/release-api.yml
     secrets: inherit
     with:
       api-name: 'price-api'
