@@ -2,8 +2,6 @@ package fr.deroffal.k8slab.priceapi.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import fr.deroffal.k8slab.priceapi.domain.model.BasketItem;
-import fr.deroffal.k8slab.priceapi.domain.model.Discount;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -18,13 +16,13 @@ class DiscountTest {
     })
     void isRelevantOn(final String discountItemName, final int discountItemThreshold, final boolean expectedRelevance){
         //given:
-        final BasketItem basketItem = new BasketItem("book", 5);
+        final CartItem cartItem = new CartItem("book", 5);
 
         //when:
         final Discount discount = new Discount(discountItemName, discountItemThreshold, 0);
 
         //then:
-        assertThat(discount.isRelevantOn(basketItem)).isEqualTo(expectedRelevance);
+        assertThat(discount.isRelevantOn(cartItem)).isEqualTo(expectedRelevance);
     }
 
     @ParameterizedTest

@@ -1,8 +1,5 @@
 package fr.deroffal.k8slab.priceapi.database.item;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
-import fr.deroffal.k8slab.priceapi.Price;
 import fr.deroffal.k8slab.priceapi.domain.ItemPort;
 import fr.deroffal.k8slab.priceapi.domain.exception.NotFoundException;
 import fr.deroffal.k8slab.priceapi.domain.model.ItemPrice;
@@ -18,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -45,9 +41,7 @@ public class ItemInMemoryRepository implements InitializingBean, ItemPort {
 
     @Override
     public Mono<ItemPriceV2> getPrice(UUID product) {
-        return Optional.ofNullable(PRICES.get(product))
-            .map(Mono::just)
-            .orElseGet(()-> Mono.error(()-> new NotFoundException(product)));
+        return Mono.just(PRICES.get(product));
     }
 
     @Override

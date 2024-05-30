@@ -7,12 +7,12 @@ Feature: Price calculation with simple discount (x% from n same items)
     And a discount of 50% from 3 'blue-ray'
 
   Scenario: Price calculation with a simple discount
-    Given I add 5 'book' in my basket
-    When I validate my basket
+    Given I add 5 'book' in my cart
+    When I validate my cart
     Then I should pay 45.00
 
   Scenario: Price calculation with a simple discount for 2 items
-    Given I add 10 'book' in my basket
-    And I add 10 'blue-ray' in my basket
-    When I validate my basket
+    Given I add 10 'book' in my cart
+    And I add 10 'blue-ray' in my cart
+    When I validate my cart
     Then I should pay 215.00

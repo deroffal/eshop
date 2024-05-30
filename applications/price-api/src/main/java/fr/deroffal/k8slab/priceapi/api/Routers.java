@@ -13,11 +13,14 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 public class Routers {
 
     @Bean
-    public RouterFunction<ServerResponse> basketRoutes(final BasketHandler basketHandler) {
+    public RouterFunction<ServerResponse> cartRoutes(
+        final CartHandler cartHandler,
+        final PriceHandler priceHandler
+    ) {
         //@formatter:off
         return RouterFunctions.route()
-            .POST("/basket", accept(APPLICATION_JSON), basketHandler::newBasket)
-            .GET("/price/{product}", accept(APPLICATION_JSON), basketHandler::getPrice)
+            .POST("/cart", accept(APPLICATION_JSON), cartHandler::newCart)
+            .GET("/price/{product}", accept(APPLICATION_JSON), priceHandler::getPrice)
             .build();
         //@formatter:on
     }

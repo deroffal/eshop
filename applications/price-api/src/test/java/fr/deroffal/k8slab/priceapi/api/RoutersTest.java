@@ -6,7 +6,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 import fr.deroffal.k8slab.priceapi.api.request.ItemRequest;
-import fr.deroffal.k8slab.priceapi.api.response.BasketPriceResponse;
+import fr.deroffal.k8slab.priceapi.api.response.CartPriceResponse;
 import fr.deroffal.k8slab.priceapi.domain.PriceCalculator;
 import java.util.List;
 
@@ -39,16 +39,16 @@ class RoutersTest {
             );
 
         var exchange = webTestClient.post()
-            .uri("/basket").accept(APPLICATION_JSON)
+            .uri("/cart").accept(APPLICATION_JSON)
             .body(fromValue(List.of(new ItemRequest("ball", 1), new ItemRequest("book", 2))))
             .exchange();
 
         exchange.expectStatus().isOk();
 
-        final Flux<BasketPriceResponse> responseBody = exchange.returnResult(BasketPriceResponse.class).getResponseBody();
+        final Flux<CartPriceResponse> responseBody = exchange.returnResult(CartPriceResponse.class).getResponseBody();
 
         StepVerifier.create(responseBody)
-            .expectNext(new BasketPriceResponse(1008.22d))
+            .expectNext(new CartPriceResponse(1008.22d))
             .verifyComplete();
 
     }

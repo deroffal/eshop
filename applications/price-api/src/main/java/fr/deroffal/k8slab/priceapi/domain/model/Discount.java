@@ -2,8 +2,8 @@ package fr.deroffal.k8slab.priceapi.domain.model;
 
 public record Discount(String itemName, int threshold, double amount) {
 
-    public boolean isRelevantOn(final BasketItem basketItem) {
-        return basketItem.item().equals(itemName) && basketItem.quantity() >= threshold;
+    public boolean isRelevantOn(final CartItem cartItem) {
+        return cartItem.item().equals(itemName) && cartItem.quantity() >= threshold;
     }
 
     public double applyTo(final double price) {

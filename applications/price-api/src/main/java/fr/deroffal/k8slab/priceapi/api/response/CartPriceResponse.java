@@ -1,4 +1,4 @@
 package fr.deroffal.k8slab.priceapi.api.response;
 
-public record BasketPriceResponse(double price) {
+public record CartPriceResponse(double price) {
 }
