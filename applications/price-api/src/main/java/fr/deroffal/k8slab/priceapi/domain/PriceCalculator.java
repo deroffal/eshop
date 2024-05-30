@@ -5,7 +5,6 @@ import fr.deroffal.k8slab.priceapi.domain.model.CartItem;
 import fr.deroffal.k8slab.priceapi.domain.model.Discount;
 import fr.deroffal.k8slab.priceapi.domain.model.ItemPrice;
 import fr.deroffal.k8slab.priceapi.domain.model.ItemPriceV2;
-import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +18,8 @@ public class PriceCalculator {
     private final ItemPort itemPort;
     private final DiscountPort discountPort;
 
-    public double getPrice(final Collection<CartItem> cartItems) {
-        return cartItems.stream().map(this::getPrice).reduce(0d, Double::sum);
+    public double getPrice(final CartCalculationRequest request) {
+        return request.items().stream().map(this::getPrice).reduce(0d, Double::sum);
     }
 
     public Mono<ItemPriceV2> getItemPrice(final UUID product) {

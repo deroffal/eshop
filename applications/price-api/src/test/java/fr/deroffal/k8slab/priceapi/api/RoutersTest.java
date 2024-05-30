@@ -34,8 +34,8 @@ class RoutersTest {
         doReturn(1008.22)
             .when(priceCalculator)
             .getPrice(argThat(
-                basketItems -> basketItems.stream().anyMatch(item -> item.item().equals("ball") && item.quantity() == 1L)
-                    &&basketItems.stream().anyMatch(item -> item.item().equals("book") && item.quantity() == 2L))
+                basketItems -> basketItems.items().stream().anyMatch(item -> item.item().equals("ball") && item.quantity() == 1L)
+                    &&basketItems.items().stream().anyMatch(item -> item.item().equals("book") && item.quantity() == 2L))
             );
 
         var exchange = webTestClient.post()
