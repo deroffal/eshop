@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import fr.deroffal.k8slab.priceapi.domain.model.Price;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -24,10 +25,11 @@ public class ItemInMemoryRepository implements InitializingBean, PriceStoragePor
     }
 
     @Override
-    public Mono<ItemPrice> getPrice(UUID product) {
+    public Mono<Price> getPrice(UUID product) {
         return items.stream()
                 .filter(item -> item.product().equals(product))
                 .findAny()
+                .map(item -> new Price(item.amount(), item.currency()))
                 .map(Mono::just)
                 .orElse(Mono.empty());
     }

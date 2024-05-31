@@ -40,7 +40,6 @@ public class PriceCalculator {
 
     public Mono<Price> getItemPrice(final UUID product) {
         return priceStoragePort.getPrice(product)
-                .map(item -> new Price(item.amount(), item.currency()))//fixme
                 .switchIfEmpty(Mono.error(() -> new NotFoundException(product)));
     }
 }
