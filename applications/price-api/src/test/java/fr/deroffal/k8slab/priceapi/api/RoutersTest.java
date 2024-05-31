@@ -8,6 +8,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 import fr.deroffal.k8slab.priceapi.api.request.ItemRequest;
 import fr.deroffal.k8slab.priceapi.api.response.CartPriceResponse;
 import fr.deroffal.k8slab.priceapi.domain.PriceCalculator;
+import fr.deroffal.k8slab.priceapi.domain.model.Price;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -23,33 +24,33 @@ import reactor.test.StepVerifier;
 @WebFluxTest
 class RoutersTest {
 
-    @Autowired
-    private WebTestClient webTestClient;
-    @Autowired
-    private PriceCalculator priceCalculator;
+  @Autowired
+  private WebTestClient webTestClient;
+  @Autowired
+  private PriceCalculator priceCalculator;
 
-    @Test
-    @DisplayName("api : /basket")
-    void postBasket() {
-        doReturn(1008.22)
-            .when(priceCalculator)
-            .getPrice(argThat(
-                basketItems -> basketItems.items().stream().anyMatch(item -> item.item().equals("ball") && item.quantity() == 1L)
-                    &&basketItems.items().stream().anyMatch(item -> item.item().equals("book") && item.quantity() == 2L))
-            );
+  @Test
+  @DisplayName("api : /cart")
+  void postBasket() {
+    doReturn(Price.euros(100822))
+        .when(priceCalculator)
+        .getPrice(argThat(
+            basketItems ->
+                basketItems.items().stream().anyMatch(item -> item.item().equals("ball") && item.quantity() == 1L)
+                    && basketItems.items().stream()
+                    .anyMatch(item -> item.item().equals("book") && item.quantity() == 2L))
+        );
 
-        var exchange = webTestClient.post()
-            .uri("/cart").accept(APPLICATION_JSON)
-            .body(fromValue(List.of(new ItemRequest("ball", 1), new ItemRequest("book", 2))))
-            .exchange();
+    var result = webTestClient.post()
+        .uri("/cart").accept(APPLICATION_JSON)
+        .body(fromValue(List.of(new ItemRequest("ball", 1), new ItemRequest("book", 2))))
+        .exchange()
+        .expectStatus().isOk()
+        .returnResult(Price.class);
 
-        exchange.expectStatus().isOk();
+    StepVerifier.create(result.getResponseBody())
+        .expectNext(Price.euros(100822))
+        .verifyComplete();
 
-        final Flux<CartPriceResponse> responseBody = exchange.returnResult(CartPriceResponse.class).getResponseBody();
-
-        StepVerifier.create(responseBody)
-            .expectNext(new CartPriceResponse(1008.22d))
-            .verifyComplete();
-
-    }
+  }
 }

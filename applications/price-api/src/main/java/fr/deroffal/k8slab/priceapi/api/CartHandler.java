@@ -3,8 +3,7 @@ package fr.deroffal.k8slab.priceapi.api;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import fr.deroffal.k8slab.priceapi.api.request.ItemRequest;
-import fr.deroffal.k8slab.priceapi.api.response.CartPriceResponse;
-import fr.deroffal.k8slab.priceapi.domain.CartCalculationRequest;
+import fr.deroffal.k8slab.priceapi.domain.PriceCalculationRequest;
 import fr.deroffal.k8slab.priceapi.domain.PriceCalculator;
 import java.util.List;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,15 +26,12 @@ class CartHandler {
 
   public Mono<ServerResponse> newCart(final ServerRequest request) {
     return request.bodyToMono(new ParameterizedTypeReference<List<ItemRequest>>() {})
-        .map(it -> new CartCalculationRequest(it.stream().map(apiMapper::toBasketItem).toList()))
+        .map(it -> new PriceCalculationRequest(it.stream().map(apiMapper::toBasketItem).toList()))
         .map(priceCalculator::getPrice)
-        .flatMap(this::toNewBasketServerResponse);
-  }
-
-  private Mono<ServerResponse> toNewBasketServerResponse(final Double price) {
-    return ServerResponse.ok()
-        .contentType(APPLICATION_JSON)
-        .body(BodyInserters.fromValue(new CartPriceResponse(price)));
+        .flatMap(price -> ServerResponse.ok()
+            .contentType(APPLICATION_JSON)
+            .body(BodyInserters.fromValue(price))
+        );
   }
 }
 

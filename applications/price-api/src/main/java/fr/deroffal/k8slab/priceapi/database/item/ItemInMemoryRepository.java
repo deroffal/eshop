@@ -46,7 +46,7 @@ public class ItemInMemoryRepository implements InitializingBean, ItemPort {
 
     @Override
     public void afterPropertiesSet() {
-        items.add(new ItemPrice("book", 10d, "EUR"));
-        items.add(new ItemPrice("ball", 5.5d, "EUR"));
+        items.add(new ItemPrice("book", new BigDecimal("10.00"), "EUR"));
+        items.add(new ItemPrice("ball", new BigDecimal("5.50"), "EUR"));
     }
 }

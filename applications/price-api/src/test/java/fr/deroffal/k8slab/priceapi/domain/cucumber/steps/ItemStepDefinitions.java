@@ -4,6 +4,7 @@ import static org.mockito.Mockito.doReturn;
 
 import fr.deroffal.k8slab.priceapi.domain.ItemPort;
 import fr.deroffal.k8slab.priceapi.domain.model.ItemPrice;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +21,8 @@ public class ItemStepDefinitions {
         items.forEach(item -> doReturn(Optional.of(item)).when(itemPort).loadItem(item.name()));
     }
 
-    @Given("a {string} costs {double} {string}")
-    public void initializePrices(final String itemName, final double price, final String currency) {
+    @Given("a {string} costs {bigdecimal} {string}")
+    public void initializePrices(final String itemName, final BigDecimal price, final String currency) {
         final ItemPrice item = new ItemPrice(itemName, price, currency);
         doReturn(Optional.of(item)).when(itemPort).loadItem(itemName);
     }

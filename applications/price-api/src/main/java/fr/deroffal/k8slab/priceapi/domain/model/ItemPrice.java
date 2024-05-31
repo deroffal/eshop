@@ -1,4 +1,6 @@
 package fr.deroffal.k8slab.priceapi.domain.model;
 
-public record ItemPrice(String name, double price, String currency) {
+import java.math.BigDecimal;
+
+public record ItemPrice(String name, BigDecimal amount, String currency) {
 }

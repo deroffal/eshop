@@ -1,12 +1,19 @@
 package fr.deroffal.k8slab.priceapi.domain.model;
 
-public record Discount(String itemName, int threshold, double amount) {
+import static java.math.RoundingMode.DOWN;
 
-    public boolean isRelevantOn(final CartItem cartItem) {
-        return cartItem.item().equals(itemName) && cartItem.quantity() >= threshold;
-    }
+import java.math.BigDecimal;
 
-    public double applyTo(final double price) {
-        return price * (100 - amount()) / 100;
-    }
+public record Discount(String itemName, int threshold, BigDecimal amount) {
+
+  public static final BigDecimal HUNDRED = new BigDecimal(100);
+
+  public boolean isRelevantOn(final CartItem cartItem) {
+    return cartItem.item().equals(itemName) && cartItem.quantity() >= threshold;
+  }
+
+  public BigDecimal applyTo(final BigDecimal price) {
+    BigDecimal percentage = HUNDRED.add(amount.negate()).movePointLeft(2);
+    return price.multiply(percentage).setScale(0, DOWN);
+  }
 }

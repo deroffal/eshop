@@ -1,5 +1,7 @@
 package fr.deroffal.k8slab.priceapi.database.discount;
 
+import static java.math.BigDecimal.TEN;
+
 import fr.deroffal.k8slab.priceapi.domain.DiscountPort;
 import fr.deroffal.k8slab.priceapi.domain.model.Discount;
 import java.util.ArrayList;
@@ -11,15 +13,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscountInMemoryDatabase implements InitializingBean, DiscountPort {
 
-    private final List<Discount> discounts = new ArrayList<>();
+  private final List<Discount> discounts = new ArrayList<>();
 
-    @Override
-    public Optional<Discount> loadByItemName(final String name) {
-        return discounts.stream().filter(discount -> discount.itemName().equals(name)).findFirst();
-    }
+  @Override
+  public Optional<Discount> loadByItemName(final String name) {
+    return discounts.stream().filter(discount -> discount.itemName().equals(name)).findFirst();
+  }
 
-    @Override
-    public void afterPropertiesSet() {
-        discounts.add(new Discount("book", 2, 10));
-    }
+  @Override
+  public void afterPropertiesSet() {
+    discounts.add(new Discount("book", 2, TEN));
+  }
 }
