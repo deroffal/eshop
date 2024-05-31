@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ItemPort {
+public interface PriceStoragePort {
 
     Optional<ItemPrice> loadItem(String item);
     Mono<ItemPrice> getPrice(UUID product);

@@ -1,6 +1,6 @@
 package fr.deroffal.k8slab.priceapi.database.item;
 
-import fr.deroffal.k8slab.priceapi.domain.ItemPort;
+import fr.deroffal.k8slab.priceapi.domain.PriceStoragePort;
 import fr.deroffal.k8slab.priceapi.domain.model.ItemPrice;
 
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class ItemInMemoryRepository implements InitializingBean, ItemPort {
+public class ItemInMemoryRepository implements InitializingBean, PriceStoragePort {
 
     private final List<ItemPrice> items = new ArrayList<>();
 

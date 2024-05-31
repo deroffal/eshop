@@ -17,7 +17,7 @@ import static fr.deroffal.k8slab.priceapi.domain.model.Price.ZERO_EURO;
 @RequiredArgsConstructor
 public class PriceCalculator {
 
-    private final ItemPort itemPort;
+    private final PriceStoragePort priceStoragePort;
     private final DiscountPort discountPort;
 
     public Price getPrice(final PriceCalculationRequest request) {
@@ -25,7 +25,7 @@ public class PriceCalculator {
     }
 
     private Price getPrice(final CartItem cartItem) {
-        final ItemPrice item = itemPort.loadItem(cartItem.item())
+        final ItemPrice item = priceStoragePort.loadItem(cartItem.item())
                 .orElseThrow(() -> new IllegalArgumentException("Unknown item : " + cartItem.item()));
 
         final BigDecimal amount = item.amount().multiply(BigDecimal.valueOf(cartItem.quantity()));
@@ -39,8 +39,8 @@ public class PriceCalculator {
     }
 
     public Mono<Price> getItemPrice(final UUID product) {
-        return itemPort.getPrice(product)
-                .map(item -> new Price(item.amount(), item.currency()))
+        return priceStoragePort.getPrice(product)
+                .map(item -> new Price(item.amount(), item.currency()))//fixme
                 .switchIfEmpty(Mono.error(() -> new NotFoundException(product)));
     }
 }

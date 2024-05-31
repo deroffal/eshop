@@ -1,7 +1,7 @@
 package fr.deroffal.k8slab.priceapi.domain.cucumber;
 
 import fr.deroffal.k8slab.priceapi.domain.DiscountPort;
-import fr.deroffal.k8slab.priceapi.domain.ItemPort;
+import fr.deroffal.k8slab.priceapi.domain.PriceStoragePort;
 import java.lang.reflect.Type;
 
 import com.fasterxml.jackson.databind.JavaType;
@@ -20,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 public class DomainCucumberConfig {
 
     @MockBean
-    private ItemPort itemPort;
+    private PriceStoragePort priceStoragePort;
 
     @MockBean
     private DiscountPort discountPort;
