@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import io.cucumber.java.en.Given;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ItemStepDefinitions {
@@ -23,7 +24,7 @@ public class ItemStepDefinitions {
 
     @Given("a {string} costs {bigdecimal} {string}")
     public void initializePrices(final String itemName, final BigDecimal price, final String currency) {
-        final ItemPrice item = new ItemPrice(itemName, price, currency);
+        final ItemPrice item = new ItemPrice(UUID.randomUUID(), itemName, price, currency);
         doReturn(Optional.of(item)).when(itemPort).loadItem(itemName);
     }
 }
