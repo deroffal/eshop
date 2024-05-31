@@ -17,29 +17,30 @@ import static fr.deroffal.k8slab.priceapi.domain.model.Price.ZERO_EURO;
 @RequiredArgsConstructor
 public class PriceCalculator {
 
-  private final ItemPort itemPort;
-  private final DiscountPort discountPort;
+    private final ItemPort itemPort;
+    private final DiscountPort discountPort;
 
-  public Price getPrice(final PriceCalculationRequest request) {
-    return request.items().stream().map(this::getPrice).reduce(ZERO_EURO, Price::add);
-  }
+    public Price getPrice(final PriceCalculationRequest request) {
+        return request.items().stream().map(this::getPrice).reduce(ZERO_EURO, Price::add);
+    }
 
-  private Price getPrice(final CartItem cartItem) {
-    final ItemPrice item = itemPort.loadItem(cartItem.item())
-        .orElseThrow(() -> new IllegalArgumentException("Unknown item : " + cartItem.item()));
+    private Price getPrice(final CartItem cartItem) {
+        final ItemPrice item = itemPort.loadItem(cartItem.item())
+                .orElseThrow(() -> new IllegalArgumentException("Unknown item : " + cartItem.item()));
 
-    final BigDecimal amount = item.amount().multiply(BigDecimal.valueOf(cartItem.quantity()));
+        final BigDecimal amount = item.amount().multiply(BigDecimal.valueOf(cartItem.quantity()));
 
-    var finalAmount = discountPort.loadByItemName(item.name())
-        .filter(discount -> discount.isRelevantOn(cartItem))
-        .map(discount -> discount.applyTo(amount))
-        .orElse(amount);
+        var finalAmount = discountPort.loadByItemName(item.name())
+                .filter(discount -> discount.isRelevantOn(cartItem))
+                .map(discount -> discount.applyTo(amount))
+                .orElse(amount);
 
-    return new Price(finalAmount, item.currency());
-  }
+        return new Price(finalAmount, item.currency());
+    }
 
-  public Mono<ItemPrice> getItemPrice(final UUID product) {
-    return itemPort.getPrice(product)
-        .switchIfEmpty(Mono.error(() -> new NotFoundException(product)));
-  }
+    public Mono<Price> getItemPrice(final UUID product) {
+        return itemPort.getPrice(product)
+                .map(item -> new Price(item.amount(), item.currency()))
+                .switchIfEmpty(Mono.error(() -> new NotFoundException(product)));
+    }
 }
