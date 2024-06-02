@@ -6,7 +6,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 import fr.deroffal.k8slab.priceapi.api.request.ItemRequest;
-import fr.deroffal.k8slab.priceapi.api.response.CartPriceResponse;
 import fr.deroffal.k8slab.priceapi.domain.PriceCalculator;
 import fr.deroffal.k8slab.priceapi.domain.model.Price;
 import java.util.List;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 @ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
@@ -36,9 +34,9 @@ class RoutersTest {
         .when(priceCalculator)
         .getPrice(argThat(
             basketItems ->
-                basketItems.items().stream().anyMatch(item -> item.item().equals("ball") && item.quantity() == 1L)
+                basketItems.items().stream().anyMatch(item -> item.product().equals("ball") && item.quantity() == 1L)
                     && basketItems.items().stream()
-                    .anyMatch(item -> item.item().equals("book") && item.quantity() == 2L))
+                    .anyMatch(item -> item.product().equals("book") && item.quantity() == 2L))
         );
 
     var result = webTestClient.post()

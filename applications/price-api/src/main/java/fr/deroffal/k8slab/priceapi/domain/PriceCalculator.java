@@ -25,12 +25,12 @@ public class PriceCalculator {
     }
 
     private Price getPrice(final CartItem cartItem) {
-        final ItemPrice item = priceStoragePort.loadItem(cartItem.item())
-                .orElseThrow(() -> new IllegalArgumentException("Unknown item : " + cartItem.item()));
+        final Price item = priceStoragePort.getPrice(cartItem.product()).blockOptional()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown product : " + cartItem.product()));
 
         final BigDecimal amount = item.amount().multiply(BigDecimal.valueOf(cartItem.quantity()));
 
-        var finalAmount = discountPort.loadByItemName(item.name())
+        var finalAmount = discountPort.loadByItemName("item.name()")//FIXME ignore les tests avec reduc dans un 1er temps
                 .filter(discount -> discount.isRelevantOn(cartItem))
                 .map(discount -> discount.applyTo(amount))
                 .orElse(amount);

@@ -12,6 +12,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CartStepDefinition {
@@ -19,12 +21,16 @@ public class CartStepDefinition {
   @Autowired
   private PriceCalculator priceCalculator;
 
+  @Autowired
+  private StepContext stepContext ;
+
   private final PriceCalculationRequest cart = new PriceCalculationRequest(new ArrayList<>());
   private Price actualPrice;
 
   @Given("I add {int} {string} in my cart")
   public void addItemToCart(final long quantity, final String item) {
-    cart.items().add(new CartItem(item, quantity));
+    UUID uuid = stepContext.getItemByName(item);
+    cart.items().add(new CartItem(uuid, quantity));
   }
 
   @When("I validate my cart")

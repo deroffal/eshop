@@ -2,9 +2,9 @@ Feature: Simple price calculation
 
   Background:
     Given the price of the following items :
-      | name | amount | currency |
-      | book | 1000  | EUR      |
-      | ball | 550   | EUR      |
+      | item | amount | currency |
+      | book | 1000   | EUR      |
+      | ball | 550    | EUR      |
 
   Scenario: Price calculation for a basket with only one kind of item
     Given I add 2 'book' in my cart

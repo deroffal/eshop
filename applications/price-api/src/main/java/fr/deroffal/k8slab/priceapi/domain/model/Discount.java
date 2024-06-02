@@ -9,7 +9,7 @@ public record Discount(String itemName, int threshold, BigDecimal amount) {
   public static final BigDecimal HUNDRED = new BigDecimal(100);
 
   public boolean isRelevantOn(final CartItem cartItem) {
-    return cartItem.item().equals(itemName) && cartItem.quantity() >= threshold;
+    return cartItem.product().equals(itemName) && cartItem.quantity() >= threshold;
   }
 
   public BigDecimal applyTo(final BigDecimal price) {
