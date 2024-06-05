@@ -6,6 +6,8 @@ import fr.deroffal.eshop.price.api.request.ItemRequest;
 import fr.deroffal.eshop.price.domain.PriceCalculationRequest;
 import fr.deroffal.eshop.price.domain.PriceCalculator;
 import java.util.List;
+
+import fr.deroffal.eshop.price.domain.model.Price;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -27,8 +29,8 @@ class CartHandler {
   public Mono<ServerResponse> newCart(final ServerRequest request) {
     return request.bodyToMono(new ParameterizedTypeReference<List<ItemRequest>>() {})
         .map(it -> new PriceCalculationRequest(it.stream().map(apiMapper::toBasketItem).toList()))
-        .map(priceCalculator::getPrice)
-        .flatMap(price -> ServerResponse.ok()
+        .flatMap(priceCalculator::getPrice)
+        .flatMap((Price price) -> ServerResponse.ok()
             .contentType(APPLICATION_JSON)
             .body(BodyInserters.fromValue(price))
         );

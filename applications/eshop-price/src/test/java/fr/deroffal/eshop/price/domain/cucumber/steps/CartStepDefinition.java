@@ -10,6 +10,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 import java.awt.print.Book;
 import java.math.BigDecimal;
@@ -21,29 +23,31 @@ import static org.assertj.core.api.Assertions.in;
 
 public class CartStepDefinition {
 
-  @Autowired
-  private PriceCalculator priceCalculator;
+    @Autowired
+    private PriceCalculator priceCalculator;
 
-  @Autowired
-  private StepContext stepContext ;
+    @Autowired
+    private StepContext stepContext;
 
-  private final PriceCalculationRequest cart = new PriceCalculationRequest(new ArrayList<>());
-  private Price actualPrice;
+    private final PriceCalculationRequest cart = new PriceCalculationRequest(new ArrayList<>());
+    private Mono<Price> actualPrice;
 
-  @Given("I add {int} {string} in my cart")
-  public void addItemToCart(final long quantity, final String item) {
-    UUID uuid = stepContext.getItemByName(item);
-    cart.items().add(new CartItem(uuid, quantity));
-  }
+    @Given("I add {int} {string} in my cart")
+    public void addItemToCart(final long quantity, final String item) {
+        UUID uuid = stepContext.getItemByName(item);
+        cart.items().add(new CartItem(uuid, quantity));
+    }
 
-  @When("I validate my cart")
-  public void validateCart() {
-    actualPrice = priceCalculator.getPrice(cart);
-  }
+    @When("I validate my cart")
+    public void validateCart() {
+        actualPrice = priceCalculator.getPrice(cart);
+    }
 
-  @Then("I should pay {price}")
-  public void iShouldPay(final Price expectedPrice) {
-    assertThat(actualPrice).isEqualTo(expectedPrice);
-  }
+    @Then("I should pay {price}")
+    public void iShouldPay(final Price expectedPrice) {
+        StepVerifier.create(actualPrice)
+                .expectNext(expectedPrice)
+                .verifyComplete();
+    }
 
 }
