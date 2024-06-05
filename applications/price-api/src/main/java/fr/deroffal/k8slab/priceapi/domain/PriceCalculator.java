@@ -2,7 +2,6 @@ package fr.deroffal.k8slab.priceapi.domain;
 
 import fr.deroffal.k8slab.priceapi.domain.exception.NotFoundException;
 import fr.deroffal.k8slab.priceapi.domain.model.CartItem;
-import fr.deroffal.k8slab.priceapi.domain.model.ItemPrice;
 import fr.deroffal.k8slab.priceapi.domain.model.Price;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

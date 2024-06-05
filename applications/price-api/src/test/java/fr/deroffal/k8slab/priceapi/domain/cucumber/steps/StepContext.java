@@ -1,12 +1,9 @@
 package fr.deroffal.k8slab.priceapi.domain.cucumber.steps;
 
-import io.cucumber.spring.ScenarioScope;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@ScenarioScope
 public class StepContext {
 
     private final Map<String, UUID> itemsByName = new HashMap<>();

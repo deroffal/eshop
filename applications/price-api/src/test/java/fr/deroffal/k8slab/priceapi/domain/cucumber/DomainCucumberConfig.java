@@ -1,28 +1,25 @@
 package fr.deroffal.k8slab.priceapi.domain.cucumber;
 
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.cucumber.java.DefaultDataTableCellTransformer;
-import io.cucumber.java.DefaultDataTableEntryTransformer;
-import io.cucumber.java.DefaultParameterTransformer;
-import io.cucumber.spring.CucumberContextConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import fr.deroffal.k8slab.priceapi.domain.cucumber.steps.StepContext;
+import io.cucumber.spring.ScenarioScope;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Type;
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
-@ContextConfiguration(classes = CucumberSpringConfig.class)
-@CucumberContextConfiguration
+@Configuration
 public class DomainCucumberConfig {
 
-    @Autowired
-    private ObjectMapper cucumberObjectMapper;
+    @Bean
+    @ScenarioScope
+    public StepContext stepContext() {
+        return new StepContext();
+    }
 
-    @DefaultParameterTransformer
-    @DefaultDataTableEntryTransformer
-    @DefaultDataTableCellTransformer
-    public Object defaultTransformer(final Object fromValue, final Type toValueType) {
-        final JavaType javaType = cucumberObjectMapper.constructType(toValueType);
-        return cucumberObjectMapper.convertValue(fromValue, javaType);
+    @Bean
+    public ObjectMapper cucumberObjectMapper() {
+        return new ObjectMapper()
+                .configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 }
