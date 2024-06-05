@@ -12,14 +12,14 @@
     </parent>
 
     <groupId>fr.deroffal</groupId>
-    <artifactId>k8s-lab.parent</artifactId>
+    <artifactId>eshop-parent</artifactId>
     <version>0.4</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>stock-api</module>
-        <module>product-api</module>
-        <module>price-api</module>
+        <module>eshop-stock</module>
+        <module>eshop-product</module>
+        <module>eshop-price</module>
     </modules>
 
     <properties>
