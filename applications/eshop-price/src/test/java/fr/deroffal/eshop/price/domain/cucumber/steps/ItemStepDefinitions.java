@@ -19,15 +19,14 @@ public class ItemStepDefinitions {
     private PriceStoragePort priceStoragePort;
 
     @Autowired
-    private ObjectMapper cucumberObjectMapper ;
+    private ObjectMapper cucumberObjectMapper;
 
     @Autowired
-    private StepContext stepContext ;
+    private StepContext stepContext;
 
     @Given("the price of the following items :")
     public void initializePrices(final List<Map<String, String>> items) {
-
-        items.forEach(item ->{
+        items.forEach(item -> {
             UUID id = UUID.randomUUID();
             Price itemPrice = cucumberObjectMapper.convertValue(item, Price.class);
             stepContext.addItem(item.get("item"), id);

@@ -5,16 +5,19 @@ import fr.deroffal.eshop.price.domain.PriceCalculator;
 import fr.deroffal.eshop.price.domain.model.CartItem;
 import fr.deroffal.eshop.price.domain.model.Price;
 import fr.deroffal.eshop.price.utils.PriceMatcher;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 public class CartStepDefinition {
 
@@ -38,9 +41,9 @@ public class CartStepDefinition {
     actualPrice = priceCalculator.getPrice(cart);
   }
 
-  @Then("I should pay {bigdecimal} {string}")
-  public void iShouldPay(final BigDecimal expectedPrice, final String expectedCurrency) {
-    assertThat(actualPrice).satisfies(PriceMatcher.of(expectedPrice, expectedCurrency));
+  @Then("I should pay {price}")
+  public void iShouldPay(final Price expectedPrice) {
+    assertThat(actualPrice).isEqualTo(expectedPrice);
   }
 
 }
