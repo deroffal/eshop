@@ -1,0 +1,17 @@
+name: Mutation testing
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'applications/eshop-price/**'
+
+jobs:
+
+  mutation-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: deroffal/github-actions/actions/maven-mutation-testing@main
+        with:
+          working-directory: ./applications/eshop-price
