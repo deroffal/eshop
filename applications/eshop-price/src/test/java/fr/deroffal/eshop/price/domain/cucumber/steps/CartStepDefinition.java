@@ -33,9 +33,14 @@ public class CartStepDefinition {
     private Mono<Price> actualPrice;
 
     @Given("I add {int} {string} in my cart")
-    public void addItemToCart(final long quantity, final String item) {
-        UUID uuid = stepContext.getItemByName(item);
+    public void addItemToCart(final long quantity, final String name) {
+        UUID uuid = stepContext.getItemByName(name);
         cart.items().add(new CartItem(uuid, quantity));
+    }
+
+    @Given("I add the item {string} in my cart")
+    public void addItemToCart(final String name) {
+        addItemToCart(1, name);
     }
 
     @When("I validate my cart")
