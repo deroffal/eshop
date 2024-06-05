@@ -6,6 +6,8 @@ import fr.deroffal.k8slab.productapi.domain.Price;
 import fr.deroffal.k8slab.productapi.domain.PricePort;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +20,7 @@ class PriceService implements PricePort {
   }
 
   @Override
+  @Async
   public CompletableFuture<Price> getPriceByProduct(UUID product) {
     var response = priceClient.getPriceByProduct(product);
     return completedFuture(new Price(response.amount(), response.currency()));
