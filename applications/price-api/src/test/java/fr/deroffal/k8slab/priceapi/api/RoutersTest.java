@@ -9,6 +9,7 @@ import fr.deroffal.k8slab.priceapi.api.request.ItemRequest;
 import fr.deroffal.k8slab.priceapi.domain.PriceCalculator;
 import fr.deroffal.k8slab.priceapi.domain.model.Price;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,18 +31,24 @@ class RoutersTest {
   @Test
   @DisplayName("api : /cart")
   void postBasket() {
+    //given the following items :
+    UUID id1 = UUID.randomUUID();
+    UUID id2 = UUID.randomUUID();
+    List<ItemRequest> items = List.of(new ItemRequest(id1.toString(), 1), new ItemRequest(id2.toString(), 2));
+
     doReturn(Price.euros(100822))
         .when(priceCalculator)
         .getPrice(argThat(
             basketItems ->
-                basketItems.items().stream().anyMatch(item -> item.product().equals("ball") && item.quantity() == 1L)
+                basketItems.items().stream().anyMatch(item -> item.product().equals(id1) && item.quantity() == 1L)
                     && basketItems.items().stream()
-                    .anyMatch(item -> item.product().equals("book") && item.quantity() == 2L))
+                    .anyMatch(item -> item.product().equals(id2) && item.quantity() == 2L))
         );
+
 
     var result = webTestClient.post()
         .uri("/cart").accept(APPLICATION_JSON)
-        .body(fromValue(List.of(new ItemRequest("ball", 1), new ItemRequest("book", 2))))
+        .body(fromValue(items))
         .exchange()
         .expectStatus().isOk()
         .returnResult(Price.class);
