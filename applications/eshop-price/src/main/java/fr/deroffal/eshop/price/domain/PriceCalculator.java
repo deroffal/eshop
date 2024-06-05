@@ -16,7 +16,6 @@ import static fr.deroffal.eshop.price.domain.model.Price.ZERO_EURO;
 public class PriceCalculator {
 
     private final PriceService priceStoragePort;
-    private final DiscountPort discountPort;
 
     public Mono<Price> getPrice(final PriceCalculationRequest request) {
         return Flux.fromIterable(request.items())

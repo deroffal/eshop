@@ -18,4 +18,7 @@ public class DomainTestConfig {
     @MockBean
     private DiscountPort discountPort;
 
+    @MockBean
+    private ProductPort productPort;
+
 }
