@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/release-api.yml
     secrets: inherit
     with:
-      api-name: 'product-api'
+      api-name: 'product'
 
   stock-build:
     concurrency:
@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/release-api.yml
     secrets: inherit
     with:
-      api-name: 'stock-api'
+      api-name: 'stock'
 
   price-build:
     concurrency:
@@ -30,4 +30,4 @@ jobs:
     uses: ./.github/workflows/release-api.yml
     secrets: inherit
     with:
-      api-name: 'price-api'
+      api-name: 'price'

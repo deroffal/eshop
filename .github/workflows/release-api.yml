@@ -20,7 +20,7 @@ jobs:
         uses: deroffal/github-actions/actions/maven-evaluate-version@main
         id: evaluate-version
         with:
-          working-directory: ./applications/${{ inputs.api-name }}
+          working-directory: ./applications/eshop-${{ inputs.api-name }}
 
   build-api:
     needs:
@@ -28,8 +28,8 @@ jobs:
     uses: deroffal/github-actions/.github/workflows/build-maven-docker.yml@main
     secrets: inherit
     with:
-      working-directory: ./applications/${{ inputs.api-name }}
+      working-directory: ./applications/eshop-${{ inputs.api-name }}
       java-version: '21'
       java-distribution: 'temurin'
-      image-name: 'deroffal/k8slab-${{ inputs.api-name }}'
+      image-name: 'deroffal/eshop-${{ inputs.api-name }}'
       tag-name: ${{ needs.evaluate-version.outputs.api-version }}
