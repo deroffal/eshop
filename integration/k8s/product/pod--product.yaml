@@ -11,5 +11,5 @@ metadata:
 spec:
   containers:
     - name: product-api
-      image: deroffal/k8slab-product-api:0.4
+      image: deroffal/eshop-product:0.4
       imagePullPolicy: Always
