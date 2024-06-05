@@ -12,10 +12,10 @@ Feature: Price calculation with simple discount (x% from n same items)
 #  Scenario: Price calculation with a simple discount
 #    Given I add 5 'book' in my cart
 #    When I validate my cart
-#    Then I should pay 4500 'EUR'
+#    Then I should pay 4500 EUR
 #
 #  Scenario: Price calculation with a simple discount for 2 items
 #    Given I add 10 'book' in my cart
 #    Given I add 10 'racket' in my cart
 #    When I validate my cart
-#    Then I should pay 21500 'EUR'
+#    Then I should pay 21500 EUR
