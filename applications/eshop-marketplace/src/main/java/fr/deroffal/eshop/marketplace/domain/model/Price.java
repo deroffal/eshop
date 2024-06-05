@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.product.domain;
+package fr.deroffal.eshop.marketplace.domain.model;
 
 import java.math.BigDecimal;
 

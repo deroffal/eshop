@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.product.clients;
+package fr.deroffal.eshop.marketplace.clients;
 
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;

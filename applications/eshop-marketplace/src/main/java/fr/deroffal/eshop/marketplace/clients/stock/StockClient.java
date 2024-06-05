@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.product.clients.stock;
+package fr.deroffal.eshop.marketplace.clients.stock;
 
 import java.util.UUID;
 import org.springframework.cloud.openfeign.FeignClient;

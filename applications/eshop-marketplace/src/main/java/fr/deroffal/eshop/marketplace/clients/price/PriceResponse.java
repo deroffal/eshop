@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.product.clients.price;
+package fr.deroffal.eshop.marketplace.clients.price;
 
 import java.math.BigDecimal;
 import java.util.UUID;

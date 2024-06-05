@@ -1,13 +1,13 @@
-package fr.deroffal.eshop.product.clients.price;
+package fr.deroffal.eshop.marketplace.clients.price;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
-import fr.deroffal.eshop.product.domain.PricePort;
-import fr.deroffal.eshop.product.domain.Price;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+import fr.deroffal.eshop.marketplace.domain.model.Price;
+import fr.deroffal.eshop.marketplace.domain.service.PricePort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 

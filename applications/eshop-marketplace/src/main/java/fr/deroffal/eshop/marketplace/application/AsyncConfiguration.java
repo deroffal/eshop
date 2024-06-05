@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.product.application;
+package fr.deroffal.eshop.marketplace.application;
 
 import java.util.concurrent.Executor;
 import org.springframework.context.annotation.Bean;
