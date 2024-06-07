@@ -1,15 +1,13 @@
 package fr.deroffal.eshop.price.domain.model;
 
-import static java.math.BigDecimal.ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 
-import fr.deroffal.eshop.price.domain.model.Discount;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class DiscountTest {
+class DiscountOldTest {
 
   @ParameterizedTest
   @CsvSource({
@@ -38,10 +36,10 @@ class DiscountTest {
   })
   void applyTo(final BigDecimal price, final BigDecimal discountAmount, final BigDecimal expectedValue) {
     //given:
-    final Discount discount = new Discount("book", 1, discountAmount);
+    final DiscountOld discountOld = new DiscountOld("book", 1, discountAmount);
 
     //when:
-    final BigDecimal actualValue = discount.applyTo(price);
+    final BigDecimal actualValue = discountOld.applyTo(price);
 
     //then:
     assertThat(actualValue).isEqualTo(expectedValue);

@@ -4,7 +4,7 @@ import static java.math.RoundingMode.DOWN;
 
 import java.math.BigDecimal;
 
-public record Discount(String itemName, int threshold, BigDecimal amount) {
+public record DiscountOld(String itemName, int threshold, BigDecimal amount) {
 
   public static final BigDecimal HUNDRED = new BigDecimal(100);
 
@@ -13,7 +13,11 @@ public record Discount(String itemName, int threshold, BigDecimal amount) {
   }
 
   public BigDecimal applyTo(final BigDecimal price) {
-    BigDecimal percentage = HUNDRED.add(amount.negate()).movePointLeft(2);
-    return price.multiply(percentage).setScale(0, DOWN);
+    return computeDiscount(price, amount);
+  }
+
+  public static BigDecimal computeDiscount(BigDecimal originalPrice, BigDecimal discountAmount) {
+    BigDecimal percentage = HUNDRED.add(discountAmount.negate()).movePointLeft(2);
+    return originalPrice.multiply(percentage).setScale(0, DOWN);
   }
 }
