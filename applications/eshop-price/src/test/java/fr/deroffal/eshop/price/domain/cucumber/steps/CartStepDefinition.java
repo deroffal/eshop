@@ -4,8 +4,6 @@ import fr.deroffal.eshop.price.domain.PriceCalculationRequest;
 import fr.deroffal.eshop.price.domain.PriceCalculator;
 import fr.deroffal.eshop.price.domain.model.CartItem;
 import fr.deroffal.eshop.price.domain.model.Price;
-import fr.deroffal.eshop.price.utils.PriceMatcher;
-import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,13 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.awt.print.Book;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 public class CartStepDefinition {
 
@@ -27,14 +20,14 @@ public class CartStepDefinition {
     private PriceCalculator priceCalculator;
 
     @Autowired
-    private StepContext stepContext;
+    private PriceCalculationContext priceCalculationContext;
 
     private final PriceCalculationRequest cart = new PriceCalculationRequest(new ArrayList<>());
     private Mono<Price> actualPrice;
 
     @Given("I add {int} {string} in my cart")
     public void addItemToCart(final long quantity, final String name) {
-        UUID uuid = stepContext.getItemByName(name);
+        UUID uuid = priceCalculationContext.getItemByName(name);
         cart.items().add(new CartItem(uuid, quantity));
     }
 

@@ -27,24 +27,14 @@ public class ItemStepDefinitions {
     private ObjectMapper cucumberObjectMapper;
 
     @Autowired
-    private StepContext stepContext;
-
-    @Given("the price of the following items :")
-    public void initializePrices(final List<Map<String, String>> items) {
-        items.forEach(item -> {
-            UUID id = UUID.randomUUID();
-            Price itemPrice = cucumberObjectMapper.convertValue(item, Price.class);
-            stepContext.addItem(item.get("item"), id);
-            when(priceStoragePort.getPrice(id)).thenReturn(Mono.just(itemPrice));
-        });
-    }
+    private PriceCalculationContext priceCalculationContext;
 
     @Given("the following items :")
     public void initializeItems(List<Map<String, String>> items) {
         items.forEach(item -> {
             UUID id = UUID.randomUUID();
             Price itemPrice = cucumberObjectMapper.convertValue(item, Price.class);
-            stepContext.addItem(item.get("name"), id);
+            priceCalculationContext.addItem(item.get("name"), id);
             when(priceStoragePort.getPrice(id)).thenReturn(Mono.just(itemPrice));
 
             Product product = cucumberObjectMapper.convertValue(item, Product.class);

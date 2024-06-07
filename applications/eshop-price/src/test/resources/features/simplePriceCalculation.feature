@@ -1,8 +1,8 @@
 Feature: Simple price calculation
 
   Background:
-    Given the price of the following items :
-      | item | amount | currency |
+    Given the following items :
+      | name | amount | currency |
       | book | 1000   | EUR      |
       | ball | 550    | EUR      |
 
