@@ -3,25 +3,34 @@ package fr.deroffal.eshop.price.database.discount;
 import static java.math.BigDecimal.TEN;
 
 import fr.deroffal.eshop.price.domain.DiscountPort;
-import fr.deroffal.eshop.price.domain.model.Discount;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import fr.deroffal.eshop.price.domain.model.DiscountOld;
+
+import java.util.*;
+
+import fr.deroffal.eshop.price.domain.model.DiscountOnItem;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
 public class DiscountInMemoryDatabase implements InitializingBean, DiscountPort {
 
-  private final List<Discount> discounts = new ArrayList<>();
+  private final List<DiscountOld> discountOlds = new ArrayList<>();
 
   @Override
-  public Optional<Discount> loadByItemName(final String name) {
-    return discounts.stream().filter(discount -> discount.itemName().equals(name)).findFirst();
+  public Optional<DiscountOld> loadByItemName(final String name) {
+    return discountOlds.stream().filter(discountOld -> discountOld.itemName().equals(name)).findFirst();
   }
 
   @Override
+  public Mono<DiscountOnItem> loadByProduct(UUID product) {
+    return null;
+  }
+
+
+
+  @Override
   public void afterPropertiesSet() {
-    discounts.add(new Discount("book", 2, TEN));
+    discountOlds.add(new DiscountOld("book", 2, TEN));
   }
 }

@@ -1,7 +1,7 @@
 package fr.deroffal.eshop.price.domain.cucumber;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.deroffal.eshop.price.domain.cucumber.steps.StepContext;
+import fr.deroffal.eshop.price.domain.cucumber.steps.PriceCalculationContext;
 import io.cucumber.spring.ScenarioScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +13,8 @@ public class DomainCucumberConfig {
 
     @Bean
     @ScenarioScope
-    public StepContext stepContext() {
-        return new StepContext();
+    public PriceCalculationContext stepContext() {
+        return new PriceCalculationContext();
     }
 
     @Bean

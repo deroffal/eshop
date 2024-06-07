@@ -16,6 +16,7 @@ import static fr.deroffal.eshop.price.domain.model.Price.ZERO_EURO;
 public class PriceCalculator {
 
     private final PriceService priceStoragePort;
+    private final DiscountService discountService;
 
     public Mono<Price> getPrice(final PriceCalculationRequest request) {
         return Flux.fromIterable(request.items())
@@ -26,10 +27,13 @@ public class PriceCalculator {
     private Mono<Price> getPrice(final CartItem cartItem) {
         return priceStoragePort.getItemPrice(cartItem.product())
                 .switchIfEmpty(Mono.error(() -> new IllegalArgumentException("Unknown product : " + cartItem.product())))
-                .map(item -> {
-                    final BigDecimal amount = item.amount().multiply(BigDecimal.valueOf(cartItem.quantity()));
-                    return new Price(amount, item.currency());
-                });
+                .flatMap(item ->
+                        discountService.findDiscountOnItem(cartItem).map(discount -> discount.applyOn(item))
+                                .switchIfEmpty(Mono.just(item))
+                                .map(discountedPrice -> {
+                                    final BigDecimal amount = discountedPrice.amount().multiply(BigDecimal.valueOf(cartItem.quantity()));
+                                    return new Price(amount, item.currency());
+                                }));
     }
 
 }
