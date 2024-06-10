@@ -5,7 +5,7 @@ on:
 
 jobs:
 
-  product-build:
+  product-release:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-product
       cancel-in-progress: true
@@ -14,7 +14,7 @@ jobs:
     with:
       api-name: 'product'
 
-  stock-build:
+  stock-release:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-stock
       cancel-in-progress: true
@@ -23,7 +23,7 @@ jobs:
     with:
       api-name: 'stock'
 
-  price-build:
+  price-release:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-price
       cancel-in-progress: true
