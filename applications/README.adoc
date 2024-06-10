@@ -1,9 +1,3 @@
 = Applications
 
 == Start
-
-[source,shell]
-----
-docker run -p 8080:8080 deroffal/k8slab-productapi:latest
-docker run -p 8080:8080 deroffal/k8slab-stockapi:latest
-----
