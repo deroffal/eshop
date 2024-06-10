@@ -6,7 +6,7 @@
     </encoder>
   </appender>
 
-  <logger name="fr.deroffal.k8slab.priceapi" level="DEBUG"/>
+  <logger name="fr.deroffal.eshop.price" level="DEBUG"/>
 
   <root level="INFO">
     <appender-ref ref="STDOUT"/>

@@ -1,30 +1,77 @@
+name: eshop
 
 services:
 
   product-api:
-    image: deroffal/eshop-product:0.7
+    image: deroffal/eshop-product:0.8
     container_name: "product-api"
     ports:
       - "8081:8080"
+    environment:
+#      - JAVA_TOOL_OPTIONS=-javaagent:"/app/otel/opentelemetry-javaagent.jar"
+      - OTEL_METRIC_EXPORT_INTERVAL=15000
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_SERVICE_NAME=product-api
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+    volumes:
+      - ./../applications/otel/:/app/otel
 
   stock-api:
-    image: deroffal/eshop-stock:0.7
+    image: deroffal/eshop-stock:0.8
     container_name: "stock-api"
     ports:
       - "8082:8080"
+    environment:
+#      - JAVA_TOOL_OPTIONS=-javaagent:"/app/otel/opentelemetry-javaagent.jar"
+      - OTEL_METRIC_EXPORT_INTERVAL=15000
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_SERVICE_NAME=stock-api
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+    volumes:
+      - ./../applications/otel/:/app/otel
 
   price-api:
-    image: deroffal/eshop-price:0.7
+    image: deroffal/eshop-price:0.8
     container_name: "price-api"
     ports:
       - "8083:8080"
     environment:
       - JAVA_TOOL_OPTIONS=-Dproduct.api.url=http://product-api:8080
+      - OTEL_METRIC_EXPORT_INTERVAL=15000
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_SERVICE_NAME=price-api
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+    volumes:
+      - ./../applications/otel/:/app/otel
 
   marketplace-api:
-    image: deroffal/eshop-marketplace:0.7
+    image: deroffal/eshop-marketplace:0.8
     container_name: "marketplace-api"
     ports:
       - "8080:8080"
+    depends_on:
+      - otel-collector
     environment:
       - JAVA_TOOL_OPTIONS=-Dproduct.api.url=http://product-api:8080 -Dstock.api.url=http://stock-api:8080 -Dprice.api.url=http://price-api:8080
+      - OTEL_METRIC_EXPORT_INTERVAL=15000
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_SERVICE_NAME=marketplace-api
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+    volumes:
+      - ./../applications/otel/:/app/otel
+
+  otel-collector:
+    image: otel/opentelemetry-collector
+    container_name: otel-collector
+    depends_on:
+      - jaeger-server
+    volumes:
+      - ./otel/collector-config.yaml:/etc/otelcol/config.yaml
+
+  jaeger-server:
+    image: jaegertracing/all-in-one:1.57
+    container_name: jaeger
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "16686:16686"
