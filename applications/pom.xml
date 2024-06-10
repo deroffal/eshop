@@ -34,6 +34,8 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <cucumber.version>7.18.0</cucumber.version>
 
+        <mockserver.version>5.15.0</mockserver.version>
+
         <pitest.version>1.16.1</pitest.version>
         <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
     </properties>
@@ -71,6 +73,12 @@
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-java8</artifactId>
                 <version>${cucumber.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mock-server</groupId>
+                <artifactId>mockserver-spring-test-listener</artifactId>
+                <version>${mockserver.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
