@@ -13,7 +13,7 @@
 
     <groupId>fr.deroffal</groupId>
     <artifactId>eshop-parent</artifactId>
-    <version>0.7</version>
+    <version>0.8</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -38,6 +38,7 @@
 
         <pitest.version>1.16.1</pitest.version>
         <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
+        <opentelemetry.version>1.39.0</opentelemetry.version>
     </properties>
 
     <dependencyManagement>
@@ -46,6 +47,14 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
                 <version>${spring-cloud-starter-openfeign.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-bom</artifactId>
+                <version>${opentelemetry.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>

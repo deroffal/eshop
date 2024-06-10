@@ -13,16 +13,18 @@ import java.util.UUID;
 public class ProductService implements ProductPort {
 
     private final ClientConfiguration clientConfiguration;
+    private final WebClient webClient;
     private final ProductMapper productMapper;
 
-    public ProductService(ClientConfiguration clientConfiguration, ProductMapper productMapper) {
+    public ProductService(ClientConfiguration clientConfiguration, WebClient webClient, ProductMapper productMapper) {
         this.clientConfiguration = clientConfiguration;
+        this.webClient = webClient;
         this.productMapper = productMapper;
     }
 
     @Override
     public Mono<Product> getProduct(UUID productId) {
-        return WebClient.create().get()
+        return webClient.get()
                 .uri(clientConfiguration.product().url().resolve("/products/" + productId))
                 .retrieve()
                 .bodyToMono(ProductModel.class)
