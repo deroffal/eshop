@@ -13,7 +13,7 @@
 
     <groupId>fr.deroffal</groupId>
     <artifactId>eshop-parent</artifactId>
-    <version>0.6</version>
+    <version>0.7</version>
     <packaging>pom</packaging>
 
     <modules>

@@ -6,11 +6,11 @@
     <parent>
         <groupId>fr.deroffal</groupId>
         <artifactId>eshop-parent</artifactId>
-        <version>0.6</version>
+        <version>0.7</version>
     </parent>
 
     <artifactId>eshop-stock</artifactId>
-    <version>0.6</version>
+    <version>0.7</version>
 
     <dependencies>
         <dependency>
@@ -28,6 +28,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <env>
+                            <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+                        </env>
+                    </image>
+                </configuration>
             </plugin>
         </plugins>
     </build>
