@@ -14,13 +14,13 @@ import java.util.function.Function;
 import static java.util.function.UnaryOperator.identity;
 
 @Service
-public class MarketplaceService {
+public class ProductAggregatorService {
 
     private final ProductPort productPort;
     private final StockPort stockPort;
     private final PricePort pricePort;
 
-    public MarketplaceService(ProductPort productPort, StockPort stockPort, PricePort pricePort) {
+    public ProductAggregatorService(ProductPort productPort, StockPort stockPort, PricePort pricePort) {
         this.productPort = productPort;
         this.stockPort = stockPort;
         this.pricePort = pricePort;
@@ -28,9 +28,9 @@ public class MarketplaceService {
 
     public ProductDetail getProductDetail(UUID id) {
         var futures = List.of(
-                productPort.getProduct(id).thenApply(MarketplaceService::withProduct),
-                pricePort.getPriceByProduct(id).thenApply(MarketplaceService::withPrice),
-                stockPort.getStockByProduct(id).thenApply(MarketplaceService::withQuantity)
+                productPort.getProduct(id).thenApply(ProductAggregatorService::withProduct),
+                pricePort.getPriceByProduct(id).thenApply(ProductAggregatorService::withPrice),
+                stockPort.getStockByProduct(id).thenApply(ProductAggregatorService::withQuantity)
         );
 
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new))

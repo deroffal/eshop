@@ -31,3 +31,12 @@ jobs:
     secrets: inherit
     with:
       api-name: 'price'
+
+  marketplace-release:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-marketplace
+      cancel-in-progress: true
+    uses: ./.github/workflows/release-api.yml
+    secrets: inherit
+    with:
+      api-name: 'marketplace'
