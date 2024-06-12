@@ -17,10 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Evaluate version
-        uses: deroffal/github-actions/actions/maven-evaluate-version@main
         id: evaluate-version
+        uses: deroffal/github-actions/actions/maven/evaluate-version@main
         with:
           working-directory: ./applications/eshop-${{ inputs.api-name }}
+
 
   build-api:
     needs:
@@ -29,7 +30,7 @@ jobs:
     secrets: inherit
     with:
       working-directory: ./applications/eshop-${{ inputs.api-name }}
-      java-version: '21'
+      java-version: 21
       java-distribution: 'temurin'
       image-name: 'deroffal/eshop-${{ inputs.api-name }}'
       tag-name: ${{ needs.evaluate-version.outputs.api-version }}

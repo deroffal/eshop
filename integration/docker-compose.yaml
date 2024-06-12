@@ -2,19 +2,19 @@
 services:
 
   product-api:
-    image: deroffal/eshop-product:0.6
+    image: deroffal/eshop-product:0.7
     container_name: "product-api"
     ports:
       - "8081:8080"
 
   stock-api:
-    image: deroffal/eshop-stock:0.6
+    image: deroffal/eshop-stock:0.7
     container_name: "stock-api"
     ports:
       - "8082:8080"
 
   price-api:
-    image: deroffal/eshop-price:0.6
+    image: deroffal/eshop-price:0.7
     container_name: "price-api"
     ports:
       - "8083:8080"
@@ -22,7 +22,7 @@ services:
       - JAVA_TOOL_OPTIONS=-Dproduct.api.url=http://product-api:8080
 
   marketplace-api:
-    image: deroffal/eshop-marketplace:0.6
+    image: deroffal/eshop-marketplace:0.7
     container_name: "marketplace-api"
     ports:
       - "8080:8080"

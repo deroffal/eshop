@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: deroffal/github-actions/actions/maven-mutation-testing@main
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - uses: deroffal/github-actions/actions/maven/mutation-testing@main
         with:
           working-directory: ./applications/eshop-price
