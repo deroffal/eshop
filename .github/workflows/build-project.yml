@@ -18,4 +18,5 @@ jobs:
     secrets: inherit
     with:
       working-directory: ./applications
+      sonar-project-key: deroffal-github_eshop
 
