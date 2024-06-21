@@ -32,7 +32,7 @@
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>deroffal-github</sonar.organization>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+<!--        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>-->
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../report-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <jacoco.version>0.8.12</jacoco.version>
 
