@@ -8,10 +8,10 @@ import static org.springframework.boot.Banner.Mode.OFF;
 @SpringBootApplication
 public class ProductApplication {
 
-  public static void main(String[] args) {
-    SpringApplication app = new SpringApplication(ProductApplication.class);
-    app.setBannerMode(OFF);
-    app.run(args);
-  }
+    public static void main(String[] args) {
+        SpringApplication app = new SpringApplication(ProductApplication.class);
+        app.setBannerMode(OFF);
+        app.run(args);
+    }
 
 }

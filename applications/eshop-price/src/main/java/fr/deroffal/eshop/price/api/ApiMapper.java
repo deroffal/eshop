@@ -11,8 +11,8 @@ import org.mapstruct.Mapping;
 @Mapper(config = MapperConfiguration.class)
 interface ApiMapper {
 
-  @Mapping(source = "item", target = "product")
-  CartItem toBasketItem(ItemRequest itemRequest);
+    @Mapping(source = "item", target = "product")
+    CartItem toBasketItem(ItemRequest itemRequest);
 
-  PriceResponse toPriceResponse(Price itemPrice);
+    PriceResponse toPriceResponse(Price itemPrice);
 }
