@@ -1,20 +1,21 @@
 package fr.deroffal.eshop.product.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
@@ -31,7 +32,7 @@ public class ProductServiceTest {
     @BeforeEach
     void setUp() {
         productId = UUID.randomUUID();
-        product = new Product(productId,ProductType.BIKE, "name", "description");
+        product = new Product(productId, ProductType.BIKE, "name", "description");
     }
 
     @Test
@@ -57,7 +58,7 @@ public class ProductServiceTest {
 
     @Test
     void testFindAll() {
-        List<Product> products = Arrays.asList(product, new Product(UUID.randomUUID(),ProductType.BIKE, "name", "description"));
+        List<Product> products = Arrays.asList(product, new Product(UUID.randomUUID(), ProductType.BIKE, "name", "description"));
         when(productRepository.findAll()).thenReturn(products);
 
         List<Product> foundProducts = productService.findAll();

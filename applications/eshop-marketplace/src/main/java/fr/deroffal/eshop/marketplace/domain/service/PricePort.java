@@ -8,7 +8,7 @@ import java.util.concurrent.CompletableFuture;
 
 public interface PricePort {
 
-  CompletableFuture<Price> getPriceByProduct(UUID product);
+    CompletableFuture<Price> getPriceByProduct(UUID product);
 
-  Price getCartPrice(Cart cart);
+    Price getCartPrice(Cart cart);
 }

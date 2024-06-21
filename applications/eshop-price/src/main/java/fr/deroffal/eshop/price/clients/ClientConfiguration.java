@@ -6,11 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.reactive.function.client.*;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-
 
 
 @Validated
@@ -45,7 +45,7 @@ public record ClientConfiguration(@NotNull ProductConfiguration product) {
 
         public static ExchangeFilterFunction responseLogger() {
             return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
-                logger.debug("received {} from {}",clientResponse.statusCode(), clientResponse.request().getURI());
+                logger.debug("received {} from {}", clientResponse.statusCode(), clientResponse.request().getURI());
                 return Mono.just(clientResponse);
             });
         }

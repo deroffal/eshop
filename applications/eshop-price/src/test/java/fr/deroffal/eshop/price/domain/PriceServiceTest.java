@@ -1,7 +1,5 @@
 package fr.deroffal.eshop.price.domain;
 
-import static org.mockito.Mockito.when;
-
 import fr.deroffal.eshop.price.domain.exception.NotFoundException;
 import fr.deroffal.eshop.price.domain.model.Price;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,8 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.UUID;
+
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = DomainTestConfig.class)
 class PriceServiceTest {

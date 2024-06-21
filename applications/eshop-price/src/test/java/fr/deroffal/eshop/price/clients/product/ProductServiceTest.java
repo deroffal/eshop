@@ -2,7 +2,6 @@ package fr.deroffal.eshop.price.clients.product;
 
 import fr.deroffal.eshop.price.clients.ClientTestConfiguration;
 import fr.deroffal.eshop.price.domain.model.Product;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.springtest.MockServerTest;
@@ -13,7 +12,7 @@ import reactor.test.StepVerifier;
 
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
@@ -57,9 +56,9 @@ class ProductServiceTest {
 
         StepVerifier.create(product)
                 .assertNext(actual -> assertAll(
-                        ()-> assertThat(actual.id()).isEqualTo(productId),
-                        ()-> assertThat(actual.name()).isEqualTo("Bike900"),
-                        ()-> assertThat(actual.type()).isEqualTo("bike")
+                        () -> assertThat(actual.id()).isEqualTo(productId),
+                        () -> assertThat(actual.name()).isEqualTo("Bike900"),
+                        () -> assertThat(actual.type()).isEqualTo("bike")
                 ))
                 .verifyComplete();
     }
