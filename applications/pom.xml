@@ -21,6 +21,7 @@
         <module>eshop-product</module>
         <module>eshop-price</module>
         <module>eshop-marketplace</module>
+        <module>report-aggregate</module>
     </modules>
 
     <properties>
@@ -31,6 +32,8 @@
 
         <sonar.organization>deroffal-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+<!--        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>-->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../report-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <jacoco.version>0.8.12</jacoco.version>
 
         <spring-cloud-starter-openfeign.version>4.1.2</spring-cloud-starter-openfeign.version>
@@ -48,6 +51,27 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-stock</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-product</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-price</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-marketplace</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
