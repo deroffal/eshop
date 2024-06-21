@@ -7,5 +7,5 @@ import java.util.concurrent.CompletableFuture;
 
 public interface StockPort {
 
-  CompletableFuture<Stock> getStockByProduct(UUID product);
+    CompletableFuture<Stock> getStockByProduct(UUID product);
 }

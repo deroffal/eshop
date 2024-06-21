@@ -21,7 +21,7 @@ public class CartRepository implements CartPort {
     @Override
     public Cart save(Cart cart) {
         int cartIndex = getCartIndex(cart.id());
-        if(cartIndex == -1){
+        if (cartIndex == -1) {
             Cart newCart = cart.withId(UUID.randomUUID());
             carts.add(newCart);
             return newCart;

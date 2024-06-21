@@ -10,10 +10,10 @@ import static org.springframework.boot.Banner.Mode.OFF;
 @ConfigurationPropertiesScan
 public class PriceApplication {
 
-  public static void main(String[] args) {
-    SpringApplication app = new SpringApplication(PriceApplication.class);
-    app.setBannerMode(OFF);
-    app.run(args);
-  }
+    public static void main(String[] args) {
+        SpringApplication app = new SpringApplication(PriceApplication.class);
+        app.setBannerMode(OFF);
+        app.run(args);
+    }
 
 }

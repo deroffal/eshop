@@ -13,9 +13,12 @@ import java.util.UUID;
 public interface CartMapper {
 
     CartModel toModel(Cart cart);
+
     ItemModel toModel(CartItem cartItem);
+
     @Mapping(target = "withQuantity", ignore = true)
     CartItem toItem(ItemModel item);
+
     @Mapping(target = "cart", source = "id")
     CartPriceModel from(UUID id, Price price);
 }

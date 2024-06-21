@@ -1,18 +1,8 @@
 package fr.deroffal.eshop.price.api;
 
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.web.reactive.function.BodyInserters.fromValue;
-
 import fr.deroffal.eshop.price.api.request.ItemRequest;
 import fr.deroffal.eshop.price.domain.PriceCalculator;
 import fr.deroffal.eshop.price.domain.model.Price;
-
-import java.util.List;
-import java.util.UUID;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +11,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.List;
+import java.util.UUID;
+
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
 @WebFluxTest

@@ -21,6 +21,7 @@
         <module>eshop-product</module>
         <module>eshop-price</module>
         <module>eshop-marketplace</module>
+        <module>report-aggregate</module>
     </modules>
 
     <properties>
@@ -29,23 +30,48 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <sonar.organization>deroffal-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.organization>deroffal-github</sonar.organization>
+<!--        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>-->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../report-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <jacoco.version>0.8.12</jacoco.version>
 
         <spring-cloud-starter-openfeign.version>4.1.2</spring-cloud-starter-openfeign.version>
+
+        <opentelemetry.version>1.39.0</opentelemetry.version>
 
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <cucumber.version>7.18.0</cucumber.version>
 
         <mockserver.version>5.15.0</mockserver.version>
 
-        <pitest.version>1.16.1</pitest.version>
         <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
-        <opentelemetry.version>1.39.0</opentelemetry.version>
+        <pitest.version>1.16.1</pitest.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-stock</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-product</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-price</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-marketplace</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -92,6 +118,12 @@
                 <artifactId>mockserver-spring-test-listener</artifactId>
                 <version>${mockserver.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -103,7 +135,47 @@
                     <artifactId>pitest-maven</artifactId>
                     <version>${pitest.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <formats>
+                                        <format>XML</format>
+                                    </formats>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>

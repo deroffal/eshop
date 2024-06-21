@@ -10,5 +10,6 @@ import java.util.UUID;
 public interface PriceStoragePort {
 
     Optional<ItemPrice> loadItem(String item);
+
     Mono<Price> getPrice(UUID product);
 }

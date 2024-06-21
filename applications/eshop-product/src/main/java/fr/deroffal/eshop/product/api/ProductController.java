@@ -39,7 +39,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable UUID id) {
-        LOGGER.debug("getProductById - {}" , id);
+        LOGGER.debug("getProductById - {}", id);
         return service.getProductDetail(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
     }

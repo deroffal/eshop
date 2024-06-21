@@ -2,14 +2,13 @@ package fr.deroffal.eshop.product.repository;
 
 import fr.deroffal.eshop.product.domain.Product;
 import fr.deroffal.eshop.product.domain.ProductRepository;
+import fr.deroffal.eshop.product.domain.ProductType;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import fr.deroffal.eshop.product.domain.ProductType;
-import org.springframework.stereotype.Service;
 
 import static fr.deroffal.eshop.product.domain.ProductType.*;
 
