@@ -1,5 +1,6 @@
 package fr.deroffal.eshop.price.domain;
 
+import fr.deroffal.eshop.price.domain.exception.CartException;
 import fr.deroffal.eshop.price.domain.model.CartItem;
 import fr.deroffal.eshop.price.domain.model.Price;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class PriceCalculator {
 
     private Mono<Price> getPrice(final CartItem cartItem) {
         return priceStoragePort.getItemPrice(cartItem.product())
-                .switchIfEmpty(Mono.error(() -> new IllegalArgumentException("Unknown product : " + cartItem.product())))
+                .switchIfEmpty(Mono.error(() -> new CartException("Product %s not found".formatted(cartItem.product()))))
                 .flatMap(item ->
                         discountService.findDiscountOnItem(cartItem).map(discount -> discount.applyOn(item))
                                 .switchIfEmpty(Mono.just(item))
