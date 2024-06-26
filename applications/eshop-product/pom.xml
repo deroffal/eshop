@@ -6,11 +6,11 @@
   <parent>
     <groupId>fr.deroffal</groupId>
     <artifactId>eshop-parent</artifactId>
-    <version>0.8</version>
+    <version>0.9</version>
   </parent>
 
   <artifactId>eshop-product</artifactId>
-  <version>0.8</version>
+  <version>0.9</version>
 
   <dependencies>
     <dependency>
