@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.UUID;
 
-@RestController()
+@RestController
 @RequestMapping("/cart")
 public class CartController {
 

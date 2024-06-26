@@ -5,7 +5,6 @@ import fr.deroffal.eshop.marketplace.domain.service.ProductPort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -18,11 +17,6 @@ class ProductService implements ProductPort {
     public ProductService(ProductClient productClient, ProductMapper productMapper) {
         this.productClient = productClient;
         this.productMapper = productMapper;
-    }
-
-    @Override
-    public Optional<Product> findById(UUID id) {
-        return Optional.empty();
     }
 
     @Override

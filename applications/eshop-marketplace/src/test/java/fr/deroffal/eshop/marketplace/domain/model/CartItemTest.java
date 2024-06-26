@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class CartItemTest {
 
     @Test
@@ -13,9 +15,18 @@ class CartItemTest {
         int quantity = 5;
         CartItem item = new CartItem(id, quantity);
 
-        Assertions.assertThat(item.product()).isEqualTo(id);
-        Assertions.assertThat(item.quantity()).isEqualTo(quantity);
+        assertThat(item.product()).isEqualTo(id);
+        assertThat(item.quantity()).isEqualTo(quantity);
+    }
 
+    @Test
+    void withId(){
+        UUID id = UUID.randomUUID();
+
+        CartItem item =  new CartItem(id, 0).withQuantity(5);
+
+        assertThat(item.product()).isEqualTo(id);
+        assertThat(item.quantity()).isEqualTo(5);
     }
 
 

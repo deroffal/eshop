@@ -3,6 +3,7 @@ package fr.deroffal.eshop.marketplace.domain.service;
 import fr.deroffal.eshop.marketplace.domain.CartPort;
 import fr.deroffal.eshop.marketplace.domain.model.Cart;
 import fr.deroffal.eshop.marketplace.domain.model.CartItem;
+import fr.deroffal.eshop.marketplace.domain.model.CartNotFoundException;
 import fr.deroffal.eshop.marketplace.domain.model.Price;
 import org.springframework.stereotype.Service;
 
@@ -46,11 +47,14 @@ public class CartService {
             } else {
                 CartItem cartItem = items.get(itemIndex);
                 items.remove(itemIndex);
-                items.add(cartItem.withQuantity(cartItem.quantity() + item.quantity()));
+                long newQuantity = cartItem.quantity() + item.quantity();
+                if(newQuantity > 0){
+                    items.add(cartItem.withQuantity(newQuantity));
+                }
             }
+            return port.save(cart);
         }
-        port.save(cart);
-        return cart;
+        throw new CartNotFoundException();
     }
 
     public void delete(UUID cart) {
@@ -59,6 +63,9 @@ public class CartService {
 
     public Price getPrice(UUID id) {
         Cart cart = port.findById(id);
+        if (cart == null) {
+            throw new CartNotFoundException();
+        }
         return pricePort.getCartPrice(cart);
     }
 }

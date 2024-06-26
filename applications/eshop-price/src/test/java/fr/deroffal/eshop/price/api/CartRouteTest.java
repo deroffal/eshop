@@ -1,7 +1,9 @@
 package fr.deroffal.eshop.price.api;
 
 import fr.deroffal.eshop.price.api.request.ItemRequest;
+import fr.deroffal.eshop.price.api.response.ErrorResponse;
 import fr.deroffal.eshop.price.domain.PriceCalculator;
+import fr.deroffal.eshop.price.domain.exception.CartException;
 import fr.deroffal.eshop.price.domain.model.Price;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,14 +17,16 @@ import reactor.test.StepVerifier;
 import java.util.List;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
-@ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
 @WebFluxTest
-class RoutersTest {
+@ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
+class CartRouteTest {
 
     @Autowired
     private WebTestClient webTestClient;
@@ -30,8 +34,8 @@ class RoutersTest {
     private PriceCalculator priceCalculator;
 
     @Test
-    @DisplayName("api : /cart")
-    void postBasket() {
+    @DisplayName("POST /cart")
+    void createCart_returnsSuccess() {
         //given the following items :
         UUID id1 = UUID.randomUUID();
         UUID id2 = UUID.randomUUID();
@@ -54,6 +58,38 @@ class RoutersTest {
 
         StepVerifier.create(result.getResponseBody())
                 .expectNext(Price.euros(100822))
+                .verifyComplete();
+
+    }
+
+    @Test
+    @DisplayName("POST /cart")
+    void createCart_whenUnknownProduct_returnsBadRequest() {
+        //given the following items :
+        UUID id1 = UUID.randomUUID();
+        UUID id2 = UUID.randomUUID();
+        List<ItemRequest> items = List.of(new ItemRequest(id1.toString(), 1), new ItemRequest(id2.toString(), 2));
+
+        when(priceCalculator.getPrice(argThat(
+                basketItems ->
+                        basketItems.items().stream().anyMatch(item -> item.product().equals(id1) && item.quantity() == 1L)
+                                && basketItems.items().stream()
+                                .anyMatch(item -> item.product().equals(id2) && item.quantity() == 2L))
+        )).thenReturn(Mono.error(new CartException("Product %s is unknown".formatted(id1))));
+
+
+        var result = webTestClient.post()
+                .uri("/cart").accept(APPLICATION_JSON)
+                .body(fromValue(items))
+                .exchange()
+                .expectStatus().isBadRequest()
+                .returnResult(ErrorResponse.class);
+
+        StepVerifier.create(result.getResponseBody())
+                .assertNext(error -> assertAll(
+                        () -> assertThat(error.description()).isEqualTo("Product %s is unknown".formatted(id1)),
+                        () -> assertThat(error.time()).isNotNull()
+                ))
                 .verifyComplete();
 
     }
