@@ -1,5 +1,6 @@
 package fr.deroffal.eshop.marketplace.application;
 
+import io.opentelemetry.context.Context;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.VirtualThreadTaskExecutor;
@@ -13,6 +14,6 @@ public class AsyncConfiguration {
 
     @Bean
     public Executor productsTaskExecutor() {
-        return new VirtualThreadTaskExecutor();
+        return Context.taskWrapping(new VirtualThreadTaskExecutor());
     }
 }

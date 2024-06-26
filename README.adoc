@@ -1,0 +1,17 @@
+= eshop
+
+== Build project
+
+Java version currently used is `21`.
+
+To build the projet, simply run :
+
+[source,shell]
+----
+# will build Docker images
+make build-docker
+
+# or :
+# will build jar
+make build-maven
+----

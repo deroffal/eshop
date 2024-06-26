@@ -30,6 +30,7 @@ jobs:
     secrets: inherit
     with:
       working-directory: ./applications/eshop-${{ inputs.api-name }}
+      build-method: 'dockerfile'
       java-version: 21
       java-distribution: 'temurin'
       image-name: 'deroffal/eshop-${{ inputs.api-name }}'
