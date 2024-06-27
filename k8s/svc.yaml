@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketplace-service
+  namespace: eshop-app
+spec:
+  selector:
+    app: marketplace-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: price-service
+  namespace: eshop-app
+spec:
+  selector:
+    app: price-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+  namespace: eshop-app
+spec:
+  selector:
+    app: product-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock-service
+  namespace: eshop-app
+spec:
+  selector:
+    app: stock-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
