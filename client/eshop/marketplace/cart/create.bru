@@ -1,0 +1,21 @@
+meta {
+  name: create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{marketplace.url}}/cart/
+  body: none
+  auth: none
+}
+
+vars:post-response {
+  cartId: res.body.id
+}
+
+tests {
+  test("Status code is 201", function () {
+      expect(res.getStatus()).to.equal(201);
+  });
+}

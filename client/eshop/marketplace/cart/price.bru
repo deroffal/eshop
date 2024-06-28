@@ -1,0 +1,11 @@
+meta {
+  name: price
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{marketplace.url}}/cart/{{cartId}}/price
+  body: none
+  auth: none
+}
