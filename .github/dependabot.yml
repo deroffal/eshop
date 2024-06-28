@@ -5,7 +5,17 @@
 
 version: 2
 updates:
-  - package-ecosystem: "maven" # See documentation for possible values
-    directory: "./applications" # Location of package manifests
+  - package-ecosystem: "maven"
+    directory: "./applications"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: ".github"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: docker
+    directory: "./applications"
     schedule:
       interval: "weekly"
