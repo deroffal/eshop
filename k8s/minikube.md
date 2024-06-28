@@ -14,7 +14,7 @@ minikube stop
 
 https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
 
-To enable the NGINX Ingress controller:
+To enable the NGINX Ingress controller on Minikube:
 
 ```shell
 minikube addons enable ingress
