@@ -23,8 +23,8 @@ spec:
           image: deroffal/eshop-marketplace:0.9
           env:
             - name: STOCK_API_URL
-              value: http://stock-api:8080
+              value: http://stock.eshop-app.svc.cluster.local
             - name: PRICE_API_URL
-              value: http://price-api:8080
+              value: http://price.eshop-app.svc.cluster.local
             - name: PRODUCT_API_URL
-              value: http://product-api:8080
+              value: http://product.eshop-app.svc.cluster.local
