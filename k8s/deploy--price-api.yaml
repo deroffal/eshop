@@ -21,6 +21,6 @@ spec:
       containers:
         - name: price-api
           image: deroffal/eshop-price:0.9
-          env:
-            - name: PRODUCT_API_URL
-              value: http://product.eshop-app.svc.cluster.local
+          envFrom:
+            - configMapRef:
+                name: price-cm
