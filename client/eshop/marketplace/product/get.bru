@@ -1,0 +1,24 @@
+meta {
+  name: get
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{marketplace.url}}/product/73aa5936-4410-47a7-96c3-80407b57d710
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+      {
+          "item": "book",
+          "quantity": 2
+      },
+      {
+          "item": "ball",
+          "quantity": 3
+      }
+  ]
+}
