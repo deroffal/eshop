@@ -1,5 +1,5 @@
 ---
-name: Build project
+name: Kube lint
 
 on:
   pull_request:
@@ -20,5 +20,5 @@ jobs:
         id: kube-lint-scan
         uses: stackrox/kube-linter-action@v1
         with:
-          directory: k8S
+          directory: './k8s'
           config: .kube-linter/config.yaml
