@@ -1,0 +1,24 @@
+---
+name: Build project
+
+on:
+  pull_request:
+    paths:
+      - 'k8s/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'k8s/**'
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 'Scan yamls'
+        id: kube-lint-scan
+        uses: stackrox/kube-linter-action@v1
+        with:
+          directory: k8S
+          config: .kube-linter/config.yaml

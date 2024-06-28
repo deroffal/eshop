@@ -21,10 +21,7 @@ spec:
       containers:
         - name: marketplace-api
           image: deroffal/eshop-marketplace:0.9
-          env:
-            - name: STOCK_API_URL
-              value: http://stock-api:8080
-            - name: PRICE_API_URL
-              value: http://price-api:8080
-            - name: PRODUCT_API_URL
-              value: http://product-api:8080
+          envFrom:
+            - configMapRef:
+                name: marketplace-cm
+

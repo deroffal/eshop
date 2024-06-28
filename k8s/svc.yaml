@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketplace
+  namespace: eshop-app
+  labels:
+    app.kubernetes.io/name: marketplace
+spec:
+  selector:
+    app: marketplace-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: price
+  namespace: eshop-app
+  labels:
+    app.kubernetes.io/name: price
+spec:
+  selector:
+    app: price-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product
+  namespace: eshop-app
+  labels:
+    app.kubernetes.io/name: product
+spec:
+  selector:
+    app: product-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock
+  namespace: eshop-app
+  labels:
+    app.kubernetes.io/name: stock
+spec:
+  selector:
+    app: stock-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
