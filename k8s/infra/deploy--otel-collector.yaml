@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  namespace: eshop-infra
+  labels:
+    app: otel-collector
+    env: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-collector
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+        env: dev
+    spec:
+      containers:
+        - name: opentelemetry-collector
+          image: otel/opentelemetry-collector
+          volumeMounts:
+            - mountPath: /etc/otelcol/
+              name: otel-config
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
+      volumes:
+        - name: otel-config
+          configMap:
+            name: config.yaml
+

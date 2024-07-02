@@ -21,7 +21,20 @@ spec:
       containers:
         - name: marketplace-api
           image: deroffal/eshop-marketplace:0.9
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-javaagent:/app/otel/opentelemetry-javaagent.jar"
+            - name: OTEL_SERVICE_NAME
+              value: "marketplace-api"
           envFrom:
             - configMapRef:
                 name: marketplace-cm
-
+            - configMapRef:
+                name: otel-cm
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
