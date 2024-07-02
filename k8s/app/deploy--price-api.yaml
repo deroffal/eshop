@@ -21,6 +21,20 @@ spec:
       containers:
         - name: price-api
           image: deroffal/eshop-price:0.9
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-javaagent:/app/otel/opentelemetry-javaagent.jar"
+            - name: OTEL_SERVICE_NAME
+              value: "price-api"
           envFrom:
             - configMapRef:
                 name: price-cm
+            - configMapRef:
+                name: otel-cm
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
