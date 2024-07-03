@@ -1,5 +1,12 @@
 # Minikube
 
+## Customize config
+
+````shell
+minikube config set cpus 4
+minikube config set memory 8192
+````
+
 ## Basics
 
 ```shell
