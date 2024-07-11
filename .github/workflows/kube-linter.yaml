@@ -2,6 +2,7 @@
 name: Kube lint
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'k8s/**'
