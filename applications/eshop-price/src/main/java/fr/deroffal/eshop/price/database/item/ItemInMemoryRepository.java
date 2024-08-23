@@ -1,7 +1,6 @@
 package fr.deroffal.eshop.price.database.item;
 
 import fr.deroffal.eshop.price.domain.PriceStoragePort;
-import fr.deroffal.eshop.price.domain.model.ItemPrice;
 import fr.deroffal.eshop.price.domain.model.Price;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;

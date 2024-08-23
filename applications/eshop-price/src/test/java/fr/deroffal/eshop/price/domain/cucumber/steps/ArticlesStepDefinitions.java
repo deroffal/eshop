@@ -15,7 +15,7 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 
-public class ItemStepDefinitions {
+public class ArticlesStepDefinitions {
 
     @Autowired
     private PriceStoragePort priceStoragePort;
@@ -29,7 +29,7 @@ public class ItemStepDefinitions {
     @Autowired
     private PriceCalculationContext priceCalculationContext;
 
-    @Given("the following items :")
+    @Given("the following articles :")
     public void initializeItems(List<Map<String, String>> items) {
         items.forEach(item -> {
             UUID id = UUID.randomUUID();

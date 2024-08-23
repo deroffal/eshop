@@ -1,7 +1,7 @@
-Feature: Price calculation with discount on an item
+Feature: Price calculation when there is discount related to one item
 
   Background:
-    Given the following items :
+    Given the following articles :
       | name                       | type | amount | currency |
       | The Fellowship of the Ring | book | 1500   | EUR      |
       | The Two Towers             | book | 2000   | EUR      |

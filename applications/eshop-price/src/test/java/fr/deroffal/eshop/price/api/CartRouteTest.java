@@ -36,7 +36,7 @@ class CartRouteTest {
     @Test
     @DisplayName("POST /cart")
     void createCart_returnsSuccess() {
-        //given the following items :
+        //given the following articles :
         UUID id1 = UUID.randomUUID();
         UUID id2 = UUID.randomUUID();
         List<ItemRequest> items = List.of(new ItemRequest(id1.toString(), 1), new ItemRequest(id2.toString(), 2));
@@ -65,7 +65,7 @@ class CartRouteTest {
     @Test
     @DisplayName("POST /cart")
     void createCart_whenUnknownProduct_returnsBadRequest() {
-        //given the following items :
+        //given the following articles :
         UUID id1 = UUID.randomUUID();
         UUID id2 = UUID.randomUUID();
         List<ItemRequest> items = List.of(new ItemRequest(id1.toString(), 1), new ItemRequest(id2.toString(), 2));
