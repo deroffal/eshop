@@ -1,9 +1,12 @@
 package fr.deroffal.eshop.price.domain;
 
-import fr.deroffal.eshop.price.domain.model.CartItem;
-import fr.deroffal.eshop.price.domain.model.DiscountOnItem;
+import fr.deroffal.eshop.price.domain.model.DiscountOnProduct;
+import fr.deroffal.eshop.price.domain.model.DiscountOnNextSameProduct;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.UUID;
 
 @Service
 public class DiscountService {
@@ -14,8 +17,11 @@ public class DiscountService {
         this.discountPort = discountPort;
     }
 
-    public Mono<DiscountOnItem> findDiscountOnItem(CartItem cartItem) {
-        return discountPort.loadByProduct(cartItem.product())
-                .filter(discount -> discount.product().equals(cartItem.product()));
+    public Mono<DiscountOnProduct> findDiscountOnProduct(UUID product) {
+        return discountPort.loadByProduct(product);
+    }
+
+    public Flux<DiscountOnNextSameProduct> findDiscountsOnType() {
+        return discountPort.loadDiscountOnType();
     }
 }

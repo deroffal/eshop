@@ -33,35 +33,48 @@ class PriceTest {
     class add {
 
         @Test
-        @DisplayName("throws NPE when other is null")
-        void add_throwsNpe_whenOtherIsNull() {
-            var price = Price.euros(1);
+        @DisplayName("add amount when currencies match")
+        void add_addsAmount_whenCurrenciesMatch() {
+            var price = Price.euros(150);
+            var other = Price.euros(810);
 
-            assertThatThrownBy(() -> price.add(null))
-                    .isInstanceOf(NullPointerException.class);
+            var sum = price.add(other);
+
+            assertThat(sum).satisfies(PriceMatcher.of(960, "EUR"));
         }
 
-        @Test
-        @DisplayName("throws exception when other currency does not match")
-        void add_throwsException_whenCurrencyDoesNotMatch() {
-            var price = Price.euros(1);
+        @Nested
+        @DisplayName("throws")
+        class ThrowsException {
+            @Test
+            @DisplayName("NPE when other is null")
+            void add_throwsNpe_whenOtherIsNull() {
+                var price = Price.euros(1);
 
-            assertThatThrownBy(() -> price.add(new Price(ZERO, "USD")))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Currencies do not match.");
+                assertThatThrownBy(() -> price.add(null))
+                        .isInstanceOf(NullPointerException.class);
+            }
+
+            @Test
+            @DisplayName("exception when other currency does not match")
+            void add_throwsException_whenCurrencyDoesNotMatch() {
+                var price = Price.euros(1);
+
+                assertThatThrownBy(() -> price.add(new Price(ZERO, "USD")))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("Currencies do not match.");
+            }
         }
     }
 
     @Test
-    @DisplayName("add amount when currencies match")
-    void add_addsAmount_whenCurrenciesMatch() {
+    @DisplayName("multiply an amount")
+    void multiply_an_amount() {
         var price = Price.euros(150);
-        var other = Price.euros(810);
 
-        var sum = price.add(other);
+        var twice = price.times(2);
 
-        assertThat(sum).satisfies(PriceMatcher.of(960, "EUR"));
+        assertThat(twice).satisfies(PriceMatcher.of(300, "EUR"));
     }
-
 
 }

@@ -1,15 +1,18 @@
 package fr.deroffal.eshop.price.domain.cucumber.steps;
 
 import fr.deroffal.eshop.price.domain.DiscountPort;
-import fr.deroffal.eshop.price.domain.model.DiscountOnItem;
+import fr.deroffal.eshop.price.domain.model.DiscountOnProduct;
+import fr.deroffal.eshop.price.domain.model.DiscountOnNextSameProduct;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static fr.deroffal.eshop.price.domain.model.Price.HUNDRED;
 import static org.mockito.Mockito.when;
 
 public class DiscountStepDefinition {
@@ -20,25 +23,30 @@ public class DiscountStepDefinition {
     @Autowired
     private PriceCalculationContext priceCalculationContext;
 
-//    private final List<DiscountOnItem>
-
-    //    @Given("a discount of {bigdecimal} % from {int} {string}")
-//    public void registerDiscount(BigDecimal amount, int threshold, String name) {
-//        final DiscountOld discountOld = new DiscountOld(name, threshold, amount);
-//        doReturn(Optional.of(discountOld)).when(discountPort).loadByItemName(name);
-//    }
-
     @Before
     public void before() {
-//        when(discountPort.load()).thenReturn(Flux.fromIterable(priceCalculationContext.getDiscounts()));
+        when(discountPort.loadDiscountOnType()).thenReturn(Flux.fromIterable(priceCalculationContext.getDiscountsOnProducts()));
     }
 
     @Given("there is a discount of {int} % for the item {string}")
-    public void registerDiscountForItem(int discount, String itemName) {
+    public void registerDiscountForArticle(int discount, String itemName) {
         UUID productId = priceCalculationContext.getItemByName(itemName);
-        DiscountOnItem discountOnItem = new DiscountOnItem(productId, BigDecimal.valueOf(discount));
-        priceCalculationContext.addDiscount(discountOnItem);
-        when(discountPort.loadByProduct(productId)).thenReturn(Mono.just(discountOnItem));
+        DiscountOnProduct discountOnProduct = new DiscountOnProduct(productId, BigDecimal.valueOf(discount));
+        priceCalculationContext.addDiscount(discountOnProduct);
+        when(discountPort.loadByProduct(productId)).thenReturn(Mono.just(discountOnProduct));
     }
 
+    @Given("if I buy {int} article(s) of type {string}, the next one is free")
+    public void registerDiscountForSetOfArticle(int threshold, String itemName) {
+        UUID productId = priceCalculationContext.getItemByName(itemName);
+        DiscountOnNextSameProduct discountOnItem = new DiscountOnNextSameProduct(productId, threshold, HUNDRED);
+        priceCalculationContext.addDiscountsOnProduct(discountOnItem);
+    }
+
+    @Given("if I buy {int} article(s) of type {string}, the next one is {int} %")
+    public void registerDiscountForSetOfArticle(int threshold, String itemName, int discount) {
+        UUID productId = priceCalculationContext.getItemByName(itemName);
+        DiscountOnNextSameProduct discountOnItem = new DiscountOnNextSameProduct(productId, threshold, BigDecimal.valueOf(discount));
+        priceCalculationContext.addDiscountsOnProduct(discountOnItem);
+    }
 }
