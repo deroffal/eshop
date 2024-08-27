@@ -1,13 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ProductApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <option name="ACTIVE_PROFILES" value="dev" />
-    <envs>
-      <env name="JAVA_TOOL_OPTIONS" value="-javaagent:&quot;$PROJECT_DIR$/applications/otel/opentelemetry-javaagent.jar&quot;" />
-      <env name="OTEL_METRIC_EXPORT_INTERVAL" value="15000" />
-<!--      <env name="OTEL_LOGS_EXPORTER" value="logging" />-->
-<!--      <env name="OTEL_METRICS_EXPORTER" value="logging" />-->
-<!--      <env name="OTEL_TRACES_EXPORTER" value="logging" />-->
-    </envs>
     <module name="eshop-product" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="fr.deroffal.eshop.product.ProductApplication" />
     <method v="2">
