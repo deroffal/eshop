@@ -1,8 +1,5 @@
 SHELL := /bin/bash
 
-run-with-docker-compose:
-	@docker compose up
-
 build-docker: build-maven
 	@./scripts/build-docker.sh
 
