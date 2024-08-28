@@ -62,7 +62,7 @@ services:
     depends_on:
       - jaeger-server
     volumes:
-      - ./observability/otel/collector-config.yaml:/etc/otelcol/config.yaml
+      - ./otel/collector-config.yaml:/etc/otelcol/config.yaml
 
   jaeger-server:
     image: jaegertracing/all-in-one:1.57
