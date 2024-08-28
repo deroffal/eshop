@@ -20,7 +20,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-project-build
       cancel-in-progress: true
-    uses: deroffal/github-actions/.github/workflows/ci-maven.yml@main
+    uses: deroffal/github-actions/.github/workflows/ci-maven.yml@test-report
     secrets: inherit
     with:
       working-directory: ./applications
