@@ -22,11 +22,10 @@ jobs:
         with:
           working-directory: ./applications/eshop-${{ inputs.api-name }}
 
-
-  build-api:
+  release-api:
     needs:
       - evaluate-version
-    uses: deroffal/github-actions/.github/workflows/build-maven-docker.yml@main
+    uses: deroffal/github-actions/.github/workflows/build-maven-docker-app.yml@main
     secrets: inherit
     with:
       working-directory: ./applications/eshop-${{ inputs.api-name }}

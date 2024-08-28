@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - 'applications/eshop-price/**'
+    branch:
+      - 'main'
 
 jobs:
 

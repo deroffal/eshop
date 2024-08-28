@@ -24,6 +24,9 @@ jobs:
     secrets: inherit
     with:
       working-directory: ./applications
-      sonar-project-key: deroffal-github_eshop
-      skip-sonar: ${{ github.event_name == 'pull_request' }} # skipping sonar for PR as it requires secret (https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions)
+      java-version: 21
+      java-distribution: 'temurin'
+      # skipping sonar for PR as it requires secret that won't be injected
+      # (https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions)
+      sonar-project-key: ${{ (github.event_name == 'pull_request' && 'deroffal-github_eshop') || ''}}
 
