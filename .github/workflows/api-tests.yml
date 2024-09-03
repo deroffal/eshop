@@ -7,4 +7,59 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
+      # Prepare build :
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - uses: actions/setup-node@v4
+
+      - name: 'Install Bruno cli'
+        run: npm install -g @usebruno/cli
+
+      # Start apps
+      - name: 'Build'
+        run: mvn clean package -DskipTests
+
+      - name: 'Start apps'
+        run: docker compose --env-file=./api-tests/.env.ci up --detach
+
+      - name: 'Evaluate ports'
+        id: evaluate-port
+        run: |
+          marketplace_port=$(docker compose port marketplace-api 8080 | awk -F ':' '{print $2}')
+          echo "marketplace_port=${marketplace_port}" >> $GITHUB_OUTPUT
+          
+          price_port=$(docker compose port price-api 8080 | awk -F ':' '{print $2}')
+          echo "price_port=${price_port}" >> $GITHUB_OUTPUT
+
+          product_port=$(docker compose port product-api 8080 | awk -F ':' '{print $2}')
+          echo "product_port=${product_port}" >> $GITHUB_OUTPUT
+  
+          stock_port=$(docker compose port stock-api 8080 | awk -F ':' '{print $2}')
+          echo "stock_port=${stock_port}" >> $GITHUB_OUTPUT      
+
+      # Configure Bruno
+      - name: 'Configure Bruno env'
+        env:
+          marketplace_port: ${{ steps.evaluate-port.outputs.marketplace_port }}
+          price_port: ${{ steps.evaluate-port.outputs.price_port }}
+          product_port: ${{ steps.evaluate-port.outputs.product_port }}
+          stock_port: ${{ steps.evaluate-port.outputs.stock_port }}
+        run: |
+          sed -i 's/marketplace_port/${marketplace_port}/g' ./api-tests/test.bru
+          sed -i 's/price_port/${price_port}/g' ./api-tests/test.bru
+          sed -i 's/product_port/${product_port}/g' ./api-tests/test.bru
+          sed -i 's/stock_port/${stock_port}/g' ./api-tests/test.bru
+          
+          cp ./api-tests/test.bru ./client/eshop/environments/test.bru
+
+      - name: 'Display env for validation'
+        run: cat ./client/eshop/environments/test.bru
+
+      - name: 'Run tests'
+        working-directory: ./client/eshop
+        run: bru run . --env test
