@@ -54,11 +54,9 @@ jobs:
           sed -i 's/price_port/${{ env.price_port }}/g' ./api-tests/test.bru
           sed -i 's/product_port/${{ env.product_port }}/g' ./api-tests/test.bru
           sed -i 's/stock_port/${{ env.stock_port }}/g' ./api-tests/test.bru
-          
-          cp ./api-tests/test.bru ./client/eshop/environments/test.bru
 
-      - name: 'Display env for validation'
-        run: cat ./client/eshop/environments/test.bru
+      - name: 'Copy configuration file'
+        run: cp ./api-tests/test.bru ./client/eshop/environments/test.bru
 
       - name: 'Run tests'
         working-directory: ./client/eshop
