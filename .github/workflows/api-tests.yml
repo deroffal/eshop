@@ -50,10 +50,10 @@ jobs:
           product_port: ${{ steps.evaluate-port.outputs.product_port }}
           stock_port: ${{ steps.evaluate-port.outputs.stock_port }}
         run: |
-          sed -i 's/marketplace_port/${marketplace_port}/g' ./api-tests/test.bru
-          sed -i 's/price_port/${price_port}/g' ./api-tests/test.bru
-          sed -i 's/product_port/${product_port}/g' ./api-tests/test.bru
-          sed -i 's/stock_port/${stock_port}/g' ./api-tests/test.bru
+          sed -i 's/marketplace_port/${{ env.marketplace_port }}/g' ./api-tests/test.bru
+          sed -i 's/price_port/${{ env.price_port }}/g' ./api-tests/test.bru
+          sed -i 's/product_port/${{ env.product_port }}/g' ./api-tests/test.bru
+          sed -i 's/stock_port/${{ env.stock_port }}/g' ./api-tests/test.bru
           
           cp ./api-tests/test.bru ./client/eshop/environments/test.bru
 
