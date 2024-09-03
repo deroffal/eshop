@@ -22,3 +22,13 @@ body:json {
       }
   ]
 }
+
+assert {
+  res.status: eq 200
+  res.body.product.id: eq 73aa5936-4410-47a7-96c3-80407b57d710
+  res.body.product.name: eq bike 1
+  res.body.product.description: eq This is product 1.
+  res.body.quantity: eq 10
+  res.body.price.amount: eq 1200
+  res.body.price.currency: eq EUR
+}
