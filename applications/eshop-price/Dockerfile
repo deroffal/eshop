@@ -11,7 +11,7 @@ ENV OTEL_URL=${OTEL_URL:-"https://github.com/open-telemetry/opentelemetry-java-i
 RUN curl -L -o ./opentelemetry-javaagent.jar ${OTEL_URL}
 
 FROM eclipse-temurin:21-jdk
-RUN addgroup spring && useradd spring -g spring
+RUN groupadd --system spring && useradd --system spring --gid spring
 USER spring:spring
 
 ARG BUILD_DIR=/workspace/app
