@@ -1,11 +1,18 @@
 meta {
   name: price
   type: http
-  seq: 3
+  seq: 4
 }
 
 get {
   url: {{marketplace.url}}/cart/{{cartId}}/price
   body: none
   auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.cart: eq {{cartId}}
+  res.body.amount: eq 2160
+  res.body.currency: eq EUR
 }

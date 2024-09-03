@@ -1,5 +1,8 @@
 SHELL := /bin/bash
 
+run-local:
+	@docker compose --env-file=.env up
+
 build-docker: build-maven
 	@./scripts/build-docker.sh
 

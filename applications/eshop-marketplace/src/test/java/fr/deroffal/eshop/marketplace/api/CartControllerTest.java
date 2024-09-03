@@ -55,7 +55,7 @@ class CartControllerTest {
 
         client.perform(delete("/cart/{id}", cartId)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         verify(service).delete(cartId);
     }
@@ -65,7 +65,7 @@ class CartControllerTest {
 class updateItem {
     @Test
     @DisplayName("returns updated cart")
-    public void updateItem() throws Exception {
+    public void updateItem_returnsUpdatedCart() throws Exception {
         UUID cartId = UUID.randomUUID();
         UUID productId = UUID.randomUUID();
         CartItem cartItem = new CartItem(productId, 5L);
@@ -87,7 +87,6 @@ class updateItem {
     public void updateItem_unknwownCart() throws Exception {
         UUID cartId = UUID.randomUUID();
         UUID productId = UUID.randomUUID();
-        CartItem cartItem = new CartItem(productId, 5L);
 
         doThrow(new CartNotFoundException())
                 .when(service).updateItem(eq(cartId), any());

@@ -1,7 +1,7 @@
 meta {
   name: item
   type: http
-  seq: 4
+  seq: 2
 }
 
 put {
@@ -13,6 +13,13 @@ put {
 body:json {
   {
       "product": "73aa5936-4410-47a7-96c3-80407b57d710",
-      "quantity": 1
+      "quantity": 2
   }
+}
+
+assert {
+  res.status: eq 200
+  res.body.id: eq {{cartId}}
+  res.body.items[0].product: eq 73aa5936-4410-47a7-96c3-80407b57d710
+  res.body.items[0].quantity: eq 2
 }
