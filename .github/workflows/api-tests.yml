@@ -27,28 +27,41 @@ jobs:
       - name: 'Start apps'
         run: docker compose --env-file=./api-tests/.env.ci up --detach
 
-      - name: 'Evaluate ports'
-        id: evaluate-port
-        run: |
-          marketplace_port=$(docker compose port marketplace-api 8080 | awk -F ':' '{print $2}')
-          echo "marketplace_port=${marketplace_port}" >> $GITHUB_OUTPUT
-          
-          price_port=$(docker compose port price-api 8080 | awk -F ':' '{print $2}')
-          echo "price_port=${price_port}" >> $GITHUB_OUTPUT
+      - name: 'Evaluate marketplace-api port'
+        id: evaluate-marketplace-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'marketplace-api'
+          private-port: '8080'
 
-          product_port=$(docker compose port product-api 8080 | awk -F ':' '{print $2}')
-          echo "product_port=${product_port}" >> $GITHUB_OUTPUT
-  
-          stock_port=$(docker compose port stock-api 8080 | awk -F ':' '{print $2}')
-          echo "stock_port=${stock_port}" >> $GITHUB_OUTPUT      
+      - name: 'Evaluate price-api port'
+        id: evaluate-price-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'price-api'
+          private-port: '8080'
+
+      - name: 'Evaluate product-api port'
+        id: evaluate-product-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'product-api'
+          private-port: '8080'
+
+      - name: 'Evaluate stock-api port'
+        id: evaluate-stock-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'stock-api'
+          private-port: '8080'
 
       # Configure Bruno
       - name: 'Configure Bruno env'
         env:
-          marketplace_port: ${{ steps.evaluate-port.outputs.marketplace_port }}
-          price_port: ${{ steps.evaluate-port.outputs.price_port }}
-          product_port: ${{ steps.evaluate-port.outputs.product_port }}
-          stock_port: ${{ steps.evaluate-port.outputs.stock_port }}
+          marketplace_port: ${{ steps.evaluate-marketplace-port.outputs.port }}
+          price_port: ${{ steps.evaluate-price-port.outputs.port }}
+          product_port: ${{ steps.evaluate-product-port.outputs.port }}
+          stock_port: ${{ steps.evaluate-stock-port.outputs.port }}
         run: |
           sed -i 's/marketplace_port/${{ env.marketplace_port }}/g' ./api-tests/test.bru
           sed -i 's/price_port/${{ env.price_port }}/g' ./api-tests/test.bru
