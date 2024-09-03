@@ -22,7 +22,7 @@ jobs:
 
       # Start apps
       - name: 'Build'
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -f applications/pom.xml
 
       - name: 'Start apps'
         run: docker compose --env-file=./api-tests/.env.ci up --detach
