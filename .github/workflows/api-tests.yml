@@ -3,8 +3,80 @@ name: 'API tests'
 
 on:
   workflow_dispatch:
+  workflow_call:
 jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: 'Build'
+        run: mvn clean package -DskipTests -f applications/pom.xml
+
+      - name: 'Start apps'
+        run: docker compose --env-file=./api-tests/.env.ci up --detach
+
+      - name: 'Evaluate marketplace-api port'
+        id: evaluate-marketplace-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'marketplace-api'
+          private-port: '8080'
+
+      - name: 'Evaluate price-api port'
+        id: evaluate-price-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'price-api'
+          private-port: '8080'
+
+      - name: 'Evaluate product-api port'
+        id: evaluate-product-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'product-api'
+          private-port: '8080'
+
+      - name: 'Evaluate stock-api port'
+        id: evaluate-stock-port
+        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+        with:
+          service-name: 'stock-api'
+          private-port: '8080'
+
+      - name: 'Wait for apis to be available'
+        env:
+          marketplace_port: ${{ steps.evaluate-marketplace-port.outputs.public-port }}
+          price_port: ${{ steps.evaluate-price-port.outputs.public-port }}
+          product_port: ${{ steps.evaluate-product-port.outputs.public-port }}
+          stock_port: ${{ steps.evaluate-stock-port.outputs.public-port }}
+        run: |
+          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.marketplace_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
+          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.price_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
+          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.product_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
+          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.stock_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
+
+      - name: 'Configure Bruno env'
+        env:
+          marketplace_port: ${{ steps.evaluate-marketplace-port.outputs.public-port }}
+          price_port: ${{ steps.evaluate-price-port.outputs.public-port }}
+          product_port: ${{ steps.evaluate-product-port.outputs.public-port }}
+          stock_port: ${{ steps.evaluate-stock-port.outputs.public-port }}
+        run: |
+          sed -i 's/marketplace_port/${{ env.marketplace_port }}/g' ./api-tests/environments/ci.bru
+          sed -i 's/price_port/${{ env.price_port }}/g' ./api-tests/environments/ci.bru
+          sed -i 's/product_port/${{ env.product_port }}/g' ./api-tests/environments/ci.bru
+          sed -i 's/stock_port/${{ env.stock_port }}/g' ./api-tests/environments/ci.bru
+
+      - uses: actions/setup-node@v4
+
+      - name: 'Run tests'
+        working-directory: ./api-tests
+        run: |
+          npm install
+          npm run test:ci

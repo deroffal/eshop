@@ -1,0 +1,36 @@
+name: eshop
+
+services:
+
+  product-api:
+    container_name: "product-api"
+    build:
+      context: applications/eshop-product
+    ports:
+      - "${PORT_BINDING_PRODUCT}8080"
+
+  stock-api:
+    container_name: "stock-api"
+    build:
+      context: applications/eshop-stock
+    ports:
+      - "${PORT_BINDING_STOCK}8080"
+
+  price-api:
+    container_name: "price-api"
+    build:
+      context: applications/eshop-price
+    ports:
+      - "${PORT_BINDING_PRICE}8080"
+
+  marketplace-api:
+    container_name: "marketplace-api"
+    build:
+      context: applications/eshop-marketplace
+    ports:
+      - "${PORT_BINDING_MARKETPLACE}8080"
+
+    environment:
+      - STOCK_API_URL=http://stock-api:8080
+      - PRICE_API_URL=http://price-api:8080
+      - PRODUCT_API_URL=http://product-api:8080

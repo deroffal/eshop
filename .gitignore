@@ -2,4 +2,4 @@
 target
 *.iml
 
-observability/otel/*.jar
+**/node_modules
