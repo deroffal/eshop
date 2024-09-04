@@ -18,7 +18,7 @@ jobs:
 
   project-build:
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.ref }}-project-build
       cancel-in-progress: true
     uses: deroffal/github-actions/.github/workflows/ci-maven.yml@main
     secrets: inherit
@@ -30,3 +30,8 @@ jobs:
       # (https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions)
       sonar-project-key: ${{ (github.event_name == 'pull_request' && 'deroffal-github_eshop') || ''}}
 
+  api-tests:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-api-tests
+      cancel-in-progress: true
+    uses: ./.github/workflows/api-tests.yml
