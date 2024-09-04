@@ -1,17 +1,26 @@
 = eshop
 
-== Build project
+== Build and run project
 
 Java version currently used is `21`.
 
-To build the projet, simply run :
+To build the projetc, simply run :
 
 [source,shell]
 ----
-# will build Docker images
 make build-docker
+----
 
-# or :
-# will build jar
-make build-maven
+Then, to run the project in local env :
+
+[source,shell]
+----
+make run-local
+----
+
+It is possible to run Bruno tests :
+
+[source,shell]
+----
+make test-local
 ----

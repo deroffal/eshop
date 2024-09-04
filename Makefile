@@ -1,7 +1,16 @@
 SHELL := /bin/bash
 
+run-local: build-docker
+	@docker compose --env-file=.env up
+
+test-local: build-api-tests
+	@npm --prefix api-tests run test:local
+
+build-api-tests:
+	@npm --prefix api-tests install
+
 build-docker: build-maven
-	@./scripts/build-docker.sh
+	@docker compose build
 
 build-maven:
 	@mvn clean package -f applications/pom.xml

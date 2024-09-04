@@ -1,0 +1,25 @@
+meta {
+  name: item
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{marketplace.url}}/cart/{{cartId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "product": "73aa5936-4410-47a7-96c3-80407b57d710",
+      "quantity": 2
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.id: eq {{cartId}}
+  res.body.items[0].product: eq 73aa5936-4410-47a7-96c3-80407b57d710
+  res.body.items[0].quantity: eq 2
+}

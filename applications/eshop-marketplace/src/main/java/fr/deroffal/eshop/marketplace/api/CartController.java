@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.UUID;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -28,6 +30,7 @@ public class CartController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
     public void deleteCart(@PathVariable("id") UUID id) {
         service.delete(id);
     }
