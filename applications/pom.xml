@@ -47,6 +47,7 @@
 
         <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
         <pitest.version>1.17.0</pitest.version>
+        <spring-cloud-contract.version>4.1.4</spring-cloud-contract.version>
     </properties>
 
     <dependencyManagement>
@@ -117,6 +118,12 @@
                 <groupId>org.mock-server</groupId>
                 <artifactId>mockserver-spring-test-listener</artifactId>
                 <version>${mockserver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-contract-verifier</artifactId>
+                <version>${spring-cloud-contract.version}</version>
             </dependency>
 
             <dependency>
