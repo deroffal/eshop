@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 @WebFluxTest
 @ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
-class PriceRouteTest {
+class PriceEndpointTest {
 
     @Autowired
     private WebTestClient webTestClient;
