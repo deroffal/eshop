@@ -1,0 +1,20 @@
+request:
+  method: GET
+  url: /price/e0ddf766-567d-4fbf-9f31-18f6085bc233
+#  body:
+#    "client.id": 1234567890
+#    loanAmount: 99999
+#  headers:
+#    Content-Type: application/json
+#  matchers:
+#    body:
+#      - path: $.['client.id']
+#        type: by_regex
+#        value: "[0-9]{10}"
+response:
+  status: 404
+#  body:
+#    amount: 1200
+#    currency: "EUR"
+#  headers:
+#    Content-Type: application/json
