@@ -9,10 +9,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(config = MapperConfiguration.class)
-interface ApiMapper {
+public interface ApiMapper {
 
     @Mapping(source = "item", target = "product")
-    CartItem toBasketItem(ItemRequest itemRequest);
+    CartItem toCartItem(ItemRequest itemRequest);
 
     PriceResponse toPriceResponse(Price itemPrice);
 }
