@@ -1,13 +1,13 @@
 SHELL := /bin/bash
 
-run-local: build-docker
-	@docker compose --env-file=.env up
-
-test-local: build-api-tests
+test-local: run-local build-api-tests
 	@npm --prefix api-tests run test:local
 
 build-api-tests:
 	@npm --prefix api-tests install
+
+run-local: build-docker
+	@docker compose --env-file=.env up
 
 build-docker: build-maven
 	@docker compose build
