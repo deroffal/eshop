@@ -2,7 +2,6 @@
   "name": "eshop-api-tests",
   "version": "1.0.0",
   "description": "tests for eshop api",
-  "main": "index.js",
   "scripts": {
     "test:local": "bru run -r . --env local",
     "test:ci": "bru run -r . --env ci"
