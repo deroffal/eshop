@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 @Service
 public class StockService {
 
-    private final static Map<UUID, Stock> STOCKS = Stream.of(
+    private static final  Map<UUID, Stock> STOCKS = Stream.of(
                     UUID.fromString("73aa5936-4410-47a7-96c3-80407b57d710"),
                     UUID.fromString("e207a162-610b-4edf-953f-271b3adfbef7"),
                     UUID.fromString("9f84da1e-415b-4e3e-aad4-8012234f629d"),
