@@ -5,7 +5,6 @@ import fr.deroffal.eshop.marketplace.domain.model.Price;
 import fr.deroffal.eshop.marketplace.domain.model.Product;
 import fr.deroffal.eshop.marketplace.domain.model.ProductDetail;
 import fr.deroffal.eshop.marketplace.domain.model.Stock;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

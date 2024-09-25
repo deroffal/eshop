@@ -36,7 +36,7 @@ class CartControllerTest {
     private CartService service;
 
     @Test
-    public void newCart() throws Exception {
+    void newCart() throws Exception {
         UUID cartId = UUID.randomUUID();
         Cart cart = new Cart(cartId, List.of());
 
@@ -50,7 +50,7 @@ class CartControllerTest {
     }
 
     @Test
-    public void deleteCart() throws Exception {
+    void deleteCart() throws Exception {
         UUID cartId = UUID.randomUUID();
 
         client.perform(delete("/cart/{id}", cartId)
@@ -60,47 +60,47 @@ class CartControllerTest {
         verify(service).delete(cartId);
     }
 
-@Nested
-@DisplayName("updateItem")
-class updateItem {
-    @Test
-    @DisplayName("returns updated cart")
-    public void updateItem_returnsUpdatedCart() throws Exception {
-        UUID cartId = UUID.randomUUID();
-        UUID productId = UUID.randomUUID();
-        CartItem cartItem = new CartItem(productId, 5L);
-        Cart cart = new Cart(cartId, List.of(cartItem));
+    @Nested
+    @DisplayName("updateItem")
+    class updateItem {
+        @Test
+        @DisplayName("returns updated cart")
+        void updateItem_returnsUpdatedCart() throws Exception {
+            UUID cartId = UUID.randomUUID();
+            UUID productId = UUID.randomUUID();
+            CartItem cartItem = new CartItem(productId, 5L);
+            Cart cart = new Cart(cartId, List.of(cartItem));
 
-        when(service.updateItem(eq(cartId), any())).thenReturn(cart);
+            when(service.updateItem(eq(cartId), any())).thenReturn(cart);
 
-        client.perform(put("/cart/{id}", cartId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"product\":\"" + productId + "\", \"quantity\":5}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(cartId.toString()))
-                .andExpect(jsonPath("$.items[0].product").value(productId.toString()))
-                .andExpect(jsonPath("$.items[0].quantity").value(5L));
+            client.perform(put("/cart/{id}", cartId)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"product\":\"" + productId + "\", \"quantity\":5}"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.id").value(cartId.toString()))
+                    .andExpect(jsonPath("$.items[0].product").value(productId.toString()))
+                    .andExpect(jsonPath("$.items[0].quantity").value(5L));
+        }
+
+        @Test
+        @DisplayName("returns bad request when unknown cart")
+        void updateItem_unknwownCart() throws Exception {
+            UUID cartId = UUID.randomUUID();
+            UUID productId = UUID.randomUUID();
+
+            doThrow(new CartNotFoundException())
+                    .when(service).updateItem(eq(cartId), any());
+
+
+            client.perform(put("/cart/{id}", cartId)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"product\":\"" + productId + "\", \"quantity\":5}"))
+                    .andExpect(status().isBadRequest());
+        }
     }
 
     @Test
-    @DisplayName("returns bad request when unknown cart")
-    public void updateItem_unknwownCart() throws Exception {
-        UUID cartId = UUID.randomUUID();
-        UUID productId = UUID.randomUUID();
-
-        doThrow(new CartNotFoundException())
-                .when(service).updateItem(eq(cartId), any());
-
-
-        client.perform(put("/cart/{id}", cartId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"product\":\"" + productId + "\", \"quantity\":5}"))
-                .andExpect(status().isBadRequest());
-    }
-}
-
-    @Test
-    public void getCart() throws Exception {
+    void getCart() throws Exception {
         UUID cartId = UUID.randomUUID();
         UUID productId1 = UUID.randomUUID();
         UUID productId2 = UUID.randomUUID();
@@ -122,7 +122,7 @@ class updateItem {
 
 
     @Test
-    public void getPrice() throws Exception {
+    void getPrice() throws Exception {
         UUID cartId = UUID.randomUUID();
         BigDecimal amount = new BigDecimal("2000");
         String currency = "EUR";
@@ -137,8 +137,3 @@ class updateItem {
                 .andExpect(jsonPath("$.currency").value(currency));
     }
 }
-
-
-
-
-

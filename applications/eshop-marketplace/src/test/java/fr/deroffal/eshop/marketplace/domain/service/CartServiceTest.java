@@ -232,7 +232,7 @@ class CartServiceTest {
 
                 Cart actual = cartCaptor.getValue();
                 List<CartItem> items = actual.items();
-                assertThat(items).hasSize(0);
+                assertThat(items).isEmpty();
             }
 
             @Test
@@ -250,7 +250,7 @@ class CartServiceTest {
 
                 Cart actual = cartCaptor.getValue();
                 List<CartItem> items = actual.items();
-                assertThat(items).hasSize(0);
+                assertThat(items).isEmpty();
             }
         }
     }

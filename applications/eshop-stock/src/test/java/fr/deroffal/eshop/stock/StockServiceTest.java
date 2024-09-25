@@ -11,7 +11,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class StockServiceTest {
+class StockServiceTest {
 
     private StockService stockService;
 
