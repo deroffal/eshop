@@ -31,7 +31,7 @@ class ProductPageControllerTest {
 
 
     @Test
-    public void getProduct() throws Exception {
+    void getProduct() throws Exception {
         UUID id = UUID.randomUUID();
         ProductDetail productDetail = new ProductDetail(new Product(id, "name", "description"), 5, new Price(new BigDecimal("2000"), "EUR"));
         when(service.getProductDetail(id)).thenReturn(productDetail);
