@@ -60,7 +60,7 @@ class PriceEndpointTest {
 
             UUID product = UUID.randomUUID();
 
-            when(priceService.getItemPrice(product)).thenReturn(Mono.error(new NotFoundException("Product %s not found".formatted(product))));
+            when(priceService.getItemPrice(product)).thenReturn(Mono.error(new NotFoundException("Product %s not found.".formatted(product))));
 
             FluxExchangeResult<ErrorResponse> result = webTestClient.get()
                     .uri("/price/{product}", product)
@@ -70,7 +70,7 @@ class PriceEndpointTest {
 
             StepVerifier.create(result.getResponseBody())
                     .assertNext(error -> assertAll(
-                            () -> assertThat(error.description()).isEqualTo("Product %s not found".formatted(product)),
+                            () -> assertThat(error.description()).isEqualTo("Product %s not found.".formatted(product)),
                             () -> assertThat(error.time()).isNotNull()
                     ))
                     .verifyComplete();
