@@ -1,0 +1,23 @@
+---
+request:
+  method: GET
+  url: /products/73aa5936-4410-47a7-96c3-80407b57d710
+response:
+  status: 200
+  body:
+    id: "73aa5936-4410-47a7-96c3-80407b57d710"
+    productType: "BIKE"
+    name: "bike 1"
+    description: "This is product 1."
+  headers:
+    Content-Type: application/json
+---
+request:
+  method: GET
+  url: /products/e0ddf766-567d-4fbf-9f31-18f6085bc233
+response:
+  status: 404
+  body:
+    description: 404 NOT_FOUND
+  headers:
+    Content-Type: application/json

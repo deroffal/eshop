@@ -88,19 +88,11 @@
             <artifactId>spring-cloud-starter-contract-verifier</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.rest-assured</groupId>-->
-<!--            <artifactId>rest-assured</artifactId>-->
-<!--            <version>5.5.0</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-web-test-client</artifactId>
-            <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 
@@ -147,11 +139,9 @@
                 <version>${spring-cloud-contract.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-<!--                    <testMode>EXPLICIT</testMode>-->
                     <testFramework>JUNIT5</testFramework>
                     <testMode>WEBTESTCLIENT</testMode>
                     <baseClassForTests>fr.deroffal.eshop.price.api.ContractsTestClass</baseClassForTests>
-<!--                    <baseClassForTests>fr.deroffal.eshop.price.api.ContractsTestClass</baseClassForTests>-->
                 </configuration>
             </plugin>
         </plugins>
