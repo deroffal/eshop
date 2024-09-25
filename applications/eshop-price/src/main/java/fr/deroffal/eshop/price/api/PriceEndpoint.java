@@ -2,14 +2,12 @@ package fr.deroffal.eshop.price.api;
 
 import fr.deroffal.eshop.price.api.response.PriceResponse;
 import fr.deroffal.eshop.price.domain.PriceService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/price")
@@ -23,12 +21,11 @@ public class PriceEndpoint {
         this.apiMapper = apiMapper;
     }
 
+    @ResponseStatus(OK)
     @GetMapping("/{productId}")
-    public Mono<ResponseEntity<PriceResponse>> getPrice(@PathVariable UUID productId) {
+    public Mono<PriceResponse> getPrice(@PathVariable UUID productId) {
         return priceService.getItemPrice(productId)
-                .map(apiMapper::toPriceResponse)
-                .map(ResponseEntity::ok)
-                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+                .map(apiMapper::toPriceResponse);
     }
 
 }
