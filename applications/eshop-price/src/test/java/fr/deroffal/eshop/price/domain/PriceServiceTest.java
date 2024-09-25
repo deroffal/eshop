@@ -31,7 +31,7 @@ class PriceServiceTest {
         StepVerifier.create(itemPrice)
                 .expectErrorMatches(throwable ->
                         throwable instanceof NotFoundException nfe
-                                && nfe.getMessage().equals("Product %s not found".formatted(product)))
+                                && nfe.getMessage().equals("Product %s not found.".formatted(product)))
                 .verify();
     }
 }

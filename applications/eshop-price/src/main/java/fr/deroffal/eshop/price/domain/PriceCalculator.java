@@ -43,7 +43,7 @@ public class PriceCalculator {
 
     private Mono<Price> getUnitPriceFor(UUID product) {
         return priceStoragePort.getItemPrice(product)
-                .switchIfEmpty(Mono.error(() -> new CartException("Product %s not found".formatted(product))))
+                .switchIfEmpty(Mono.error(() -> new CartException("Product %s not found.".formatted(product))))
                 .flatMap(price ->
                         discountService.findDiscountOnProduct(product).map(discount -> discount.applyOn(price))
                                 .switchIfEmpty(Mono.just(price))
