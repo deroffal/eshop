@@ -35,7 +35,7 @@ class CartEndpointTest {
 
     @Test
     @DisplayName("POST /cart")
-    void createCart_returnsSuccess() {
+    void cartPrice_returnsSuccess() {
         //given the following articles :
         UUID id1 = UUID.randomUUID();
         UUID id2 = UUID.randomUUID();
@@ -64,7 +64,7 @@ class CartEndpointTest {
 
     @Test
     @DisplayName("POST /cart")
-    void createCart_whenUnknownProduct_returnsBadRequest() {
+    void cartPrice_whenUnknownProduct_returnsBadRequest() {
         //given the following articles :
         UUID id1 = UUID.randomUUID();
         UUID id2 = UUID.randomUUID();

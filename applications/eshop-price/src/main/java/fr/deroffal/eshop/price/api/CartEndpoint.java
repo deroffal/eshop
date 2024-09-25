@@ -4,7 +4,6 @@ import fr.deroffal.eshop.price.api.request.ItemRequest;
 import fr.deroffal.eshop.price.domain.PriceCalculationRequest;
 import fr.deroffal.eshop.price.domain.PriceCalculator;
 import fr.deroffal.eshop.price.domain.model.Price;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -27,9 +26,9 @@ public class CartEndpoint {
 
     @PostMapping
     @ResponseStatus(OK)
-    public Mono<Price> createCart(@RequestBody List<ItemRequest> items){
-        PriceCalculationRequest priceCalculationRequest = new PriceCalculationRequest(items.stream().map(apiMapper::toCartItem).toList());
-        return priceCalculator.getPrice(priceCalculationRequest);
+    public Mono<Price> cartPrice(@RequestBody List<ItemRequest> items){
+        var request = new PriceCalculationRequest(items.stream().map(apiMapper::toCartItem).toList());
+        return priceCalculator.getPrice(request);
     }
 
 }

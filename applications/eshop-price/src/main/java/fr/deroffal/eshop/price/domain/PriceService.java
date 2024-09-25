@@ -18,6 +18,6 @@ public class PriceService {
 
     public Mono<Price> getItemPrice(final UUID product) {
         return priceStoragePort.getPrice(product)
-                .switchIfEmpty(Mono.error(() -> new NotFoundException("Product %s not found".formatted(product))));
+                .switchIfEmpty(Mono.error(() -> new NotFoundException("Product %s not found.".formatted(product))));
     }
 }
