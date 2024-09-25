@@ -47,6 +47,7 @@
         <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
         <pitest.version>1.17.0</pitest.version>
         <spring-cloud-contract.version>4.1.4</spring-cloud-contract.version>
+        <spring-web-test-client.version>5.5.0</spring-web-test-client.version>
     </properties>
 
     <dependencyManagement>
@@ -123,6 +124,11 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-contract-verifier</artifactId>
                 <version>${spring-cloud-contract.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>spring-web-test-client</artifactId>
+                <version>${spring-web-test-client.version}</version>
             </dependency>
 
             <dependency>

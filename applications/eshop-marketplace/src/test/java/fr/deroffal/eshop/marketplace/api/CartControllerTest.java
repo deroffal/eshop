@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@ContextConfiguration(classes = WebFluxApiConfiguration.class)
+@ContextConfiguration(classes = WebTestConfiguration.class)
 @WebMvcTest
 class CartControllerTest {
 

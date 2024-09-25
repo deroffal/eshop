@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackageClasses = WebFluxApiConfiguration.class)
-public class WebFluxApiConfiguration {
+@ComponentScan(basePackageClasses = WebTestConfiguration.class)
+public class WebTestConfiguration {
 
     @MockBean
     private CartService service;
