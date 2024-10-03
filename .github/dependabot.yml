@@ -9,6 +9,10 @@ updates:
     directory: "./applications"
     schedule:
       interval: "weekly"
+    groups:
+      all:
+        patterns:
+          - "*"
 
   - package-ecosystem: "npm"
     directory: "./api-tests"
