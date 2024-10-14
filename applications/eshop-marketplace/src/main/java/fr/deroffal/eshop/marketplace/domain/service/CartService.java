@@ -25,7 +25,7 @@ public class CartService {
     public CartService(CartPort port, PricePort pricePort, OpenTelemetry openTelemetry) {
         this.port = port;
         this.pricePort = pricePort;
-        this.tracer = openTelemetry.getTracer("fr.deroffal.eshop.marketplace", "0.10-span");
+        this.tracer = openTelemetry.getTracer("fr.deroffal.eshop.marketplace", "0.10");
     }
 
     public Cart getByUuid(UUID uuid) {
