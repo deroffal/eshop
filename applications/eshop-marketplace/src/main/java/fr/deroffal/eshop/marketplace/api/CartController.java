@@ -37,9 +37,7 @@ public class CartController {
     public CartController(CartService service, CartMapper mapper, OpenTelemetry openTelemetry) {
         this.service = service;
         this.mapper = mapper;
-        this.tracer =
-        GlobalOpenTelemetry.getTracer(CartController.class.getName());
-//                openTelemetry.getTracer(CartController.class.getName());
+        this.tracer = openTelemetry.getTracer(CartController.class.getName());
     }
 
     @PostMapping("/")
