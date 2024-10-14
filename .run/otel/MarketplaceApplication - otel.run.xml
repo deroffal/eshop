@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MarketplaceApplication - otel" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="otel">
+    <option name="ACTIVE_PROFILES" value="dev,otel" />
+    <module name="eshop-marketplace" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="fr.deroffal.eshop.marketplace.MarketplaceApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

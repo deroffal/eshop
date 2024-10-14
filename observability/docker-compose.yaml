@@ -3,7 +3,7 @@ name: eshop
 services:
 
   product-api:
-    image: deroffal/eshop-product:0.10-span
+    image: eshop-product-api:latest
     container_name: "product-api"
     ports:
       - "8081:8080"
@@ -15,7 +15,7 @@ services:
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 
   stock-api:
-    image: deroffal/eshop-stock:0.10-span
+    image: eshop-stock-api:latest
     container_name: "stock-api"
     ports:
       - "8082:8080"
@@ -27,7 +27,7 @@ services:
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 
   price-api:
-    image: deroffal/eshop-price:0.10-span
+    image: eshop-price-api:latest
     container_name: "price-api"
     ports:
       - "8083:8080"
@@ -40,7 +40,7 @@ services:
       - PRODUCT_API_URL=http://product-api:8080
 
   marketplace-api:
-    image: deroffal/eshop-marketplace:0.10-span
+    image: eshop-marketplace-api:latest
     container_name: "marketplace-api"
     ports:
       - "8080:8080"
@@ -63,6 +63,9 @@ services:
       - jaeger-server
     volumes:
       - ./otel/collector-config.yaml:/etc/otelcol/config.yaml
+    ports: # note: port exposition is only need here for apps local mode
+      - "4317:4317"
+      - "4318:4318"
 
   jaeger-server:
     image: jaegertracing/all-in-one:1.57

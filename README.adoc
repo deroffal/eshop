@@ -4,7 +4,7 @@
 
 Java version currently used is `21`.
 
-To build the projetc, simply run :
+To build the project, simply run :
 
 [source,shell]
 ----
@@ -24,3 +24,7 @@ It is possible to run Bruno tests :
 ----
 make test-local
 ----
+
+== Observability
+
+link:

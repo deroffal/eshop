@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PriceApplication - otel" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="otel">
+    <option name="ACTIVE_PROFILES" value="dev,otel" />
+    <envs>
+      <env name="JAVA_TOOL_OPTIONS" value="-javaagent:&quot;$PROJECT_DIR$/observability/otel/opentelemetry-javaagent.jar&quot;" />
+    </envs>
+    <module name="eshop-price" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="fr.deroffal.eshop.price.PriceApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
