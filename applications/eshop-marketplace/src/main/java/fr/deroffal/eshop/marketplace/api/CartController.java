@@ -37,33 +37,15 @@ public class CartController {
     public CartController(CartService service, CartMapper mapper, OpenTelemetry openTelemetry) {
         this.service = service;
         this.mapper = mapper;
-        this.tracer = GlobalOpenTelemetry.getTracer(CartController.class.getName());
-
-//                openTelemetry.getTracer(
-////                "fr.deroffal.eshop.marketplace",
-//                CartController.class.getName(),
-//                "0.10-span"
-//        );
+        this.tracer =
+        GlobalOpenTelemetry.getTracer(CartController.class.getName());
+//                openTelemetry.getTracer(CartController.class.getName());
     }
 
     @PostMapping("/")
     public ResponseEntity<CartModel> newCart() {
-
-
-        Context current = Context.current();
-        Span span = tracer.spanBuilder("cart")
-                .setParent(current)
+        Span span = tracer.spanBuilder("newCart-span")
                 .startSpan();
-
-
-
-
-
-        SpanContext spanContext = span.getSpanContext();
-        String spanId = spanContext.getSpanId();
-        String traceId = spanContext.getTraceId();
-
-        LOGGER.info("traceId: {}, spanId: {}", traceId, spanId);
 
         try (Scope scope = span.makeCurrent()) {
             Cart cart = service.create();
