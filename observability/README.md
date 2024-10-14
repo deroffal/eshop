@@ -1,29 +1,27 @@
-= Observability
+# Observability
 
-== Run in local, with IDE
+## Run in local, with IDE
 
-[source,shell]
-----
+```shell
 # download otel agent
 make download-otel-agent
 # start collector and jaeger
 docker compose -f observability/docker-compose.yaml up otel-collector jaeger-server
-----
+```
 
 idée : avoir un fichier de conf only debug ?
 
-== Run in local, with Docker
+## Run in local, with Docker
 
-[source,shell]
-----
+```shell
 # first, build docker images in local
 make build-docker
 # then run docker-compose file
 docker compose -f observability/docker-compose.yaml up
-----
+```
 
 Then browse to `http://localhost:16686/`.
 
 Use Bruno with environment `local`.
 
-== Run in k8s
+## Run in k8s

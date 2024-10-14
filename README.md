@@ -1,30 +1,27 @@
-= eshop
+# eshop
 
-== Build and run project
+## Build and run project
 
 Java version currently used is `21`.
 
 To build the project, simply run :
 
-[source,shell]
-----
+```shell
 make build-docker
-----
+```
 
 Then, to run the project in local env :
 
-[source,shell]
-----
+```shell
 make run-local
-----
+```
 
 It is possible to run Bruno tests :
 
-[source,shell]
-----
+```shell
 make test-local
-----
+```
 
-== Observability
+## Observability
 
-link:
+See [Observability](observability/README.adoc) section
