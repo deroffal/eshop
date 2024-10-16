@@ -23,28 +23,40 @@ jobs:
         run: docker compose --env-file=./api-tests/.env.ci up --detach
 
       - name: 'Check deployment - marketplace'
-        uses: ./.github/workflows/actions/check-api-deployment
+        id: check-marketplace-deployment
+        uses: ./actions/check-api-deployment
         with:
           service-name: 'marketplace-api'
           port-placeholder: 'marketplace_port'
 
       - name: 'Check deployment - price'
-        uses: ./.github/workflows/actions/check-api-deployment
+        id: check-price-deployment
+        uses: ./actions/check-api-deployment
         with:
           service-name: 'price-api'
           port-placeholder: 'price_port'
 
       - name: 'Check deployment - stock'
-        uses: ./.github/workflows/actions/check-api-deployment
+        id: check-stock-deployment
+        uses: ./actions/check-api-deployment
         with:
           service-name: 'stock-api'
           port-placeholder: 'stock_port'
 
       - name: 'Check deployment - product'
-        uses: ./.github/workflows/actions/check-api-deployment
+        id: check-product-deployment
+        uses: ./actions/check-api-deployment
         with:
           service-name: 'product-api'
           port-placeholder: 'product_port'
+
+      - name: 'Configure Bruno'
+        uses: ./actions/configure-bruno
+        with:
+          marketplace-port: ${{ steps.check-marketplace-deployment.outputs.public-port }}
+          price-port: ${{ steps.check-price-deployment.outputs.public-port }}
+          product-port: ${{ steps.check-product-deployment.outputs.public-port }}
+          stock-port: ${{ steps.check-stock-deployment.outputs.public-port }}
 
       - uses: actions/setup-node@v4
 

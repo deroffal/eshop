@@ -9,6 +9,11 @@ inputs:
     required: true
     description: 'Value of placeholder in configuration file'
 
+outputs:
+  public-port:
+    description: 'The value of the public port'
+    value: ${{ steps.evaluate-port.outputs.public-port }}
+
 runs:
   using: composite
   steps:
