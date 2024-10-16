@@ -4,6 +4,6 @@ metadata:
   name: marketplace-cm
   namespace: eshop-app
 data:
-  STOCK_API_URL: 'http://stock.eshop-app.svc.cluster.local'
-  PRICE_API_URL: 'http://price.eshop-app.svc.cluster.local'
-  PRODUCT_API_URL: 'http://product.eshop-app.svc.cluster.local'
+  MARKETPLACE_STOCK_API_URL: 'http://stock.eshop-app.svc.cluster.local'
+  MARKETPLACE_PRICE_API_URL: 'http://price.eshop-app.svc.cluster.local'
+  MARKETPLACE_PRODUCT_API_URL: 'http://product.eshop-app.svc.cluster.local'
