@@ -2,12 +2,10 @@ package fr.deroffal.eshop.marketplace.api;
 
 import fr.deroffal.eshop.marketplace.domain.model.Cart;
 import fr.deroffal.eshop.marketplace.domain.service.CartService;
-import io.opentelemetry.api.OpenTelemetry;
+import fr.deroffal.eshop.marketplace.observability.EshopTracer;
+import fr.deroffal.eshop.marketplace.observability.TracerFactory;
 import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.api.common.Attributes;
-import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.api.trace.Tracer;
-import io.opentelemetry.context.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +13,6 @@ import java.net.URI;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
@@ -26,17 +22,17 @@ public class CartController {
 
     private final CartService service;
     private final CartMapper mapper;
-    private final Tracer tracer;
+    private final EshopTracer tracer;
 
-    public CartController(CartService service, CartMapper mapper, OpenTelemetry openTelemetry) {
+    public CartController(CartService service, CartMapper mapper, TracerFactory tracerFactory) {
         this.service = service;
         this.mapper = mapper;
-        this.tracer = openTelemetry.getTracer(CartController.class.getName());
+        this.tracer = tracerFactory.newTracer(CartController.class);
     }
 
     @PostMapping("/")
     public ResponseEntity<CartModel> newCart() {
-        return executeInSpan("newCart-span", span -> {
+        return tracer.executeInSpan("cart-create", span -> {
             Cart cart = service.create();
 
             span.addEvent("cart created", Attributes.of(
@@ -54,7 +50,7 @@ public class CartController {
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleteCart(@PathVariable("id") UUID id) {
-        executeInSpan("delete-cart", span -> {
+        tracer.executeInSpan("cart-delete", span -> {
             span.setAttribute("cart", id.toString());
             service.delete(id);
         });
@@ -62,7 +58,7 @@ public class CartController {
 
     @PutMapping("/{id}")
     public CartModel updateItem(@PathVariable("id") UUID cartId, @RequestBody ItemModel item) {
-        return executeInSpan("cart", span -> {
+        return tracer.executeInSpan("cart-update", span -> {
             span.setAttribute("cart", cartId.toString());
             return mapper.toModel(service.updateItem(cartId, mapper.toItem(item)));
         });
@@ -71,7 +67,7 @@ public class CartController {
 
     @GetMapping("/{id}")
     public CartModel getCart(@PathVariable("id") UUID id) {
-        return executeInSpan("newCart-span", span -> {
+        return tracer.executeInSpan("span-get", span -> {
             span.setAttribute("cart", id.toString());
             return mapper.toModel(service.getByUuid(id));
         });
@@ -79,7 +75,7 @@ public class CartController {
 
     @GetMapping("/{id}/price")
     public CartPriceModel getPrice(@PathVariable("id") UUID id) {
-        return executeInSpan("cart-price", span -> {
+        return tracer.executeInSpan("cart-price", span -> {
             span.setAttribute("cart", id.toString());
 
             var price = service.getPrice(id);
@@ -91,29 +87,5 @@ public class CartController {
 
             return mapper.from(id, price);
         });
-    }
-
-    private <T> T executeInSpan(String spanName, Function<Span, T> function) {
-        Span span = tracer.spanBuilder(spanName).startSpan();
-        try (Scope ignored = span.makeCurrent()) {
-            return function.apply(span);
-        } catch (Throwable t) {
-            span.recordException(t);
-            throw t;
-        } finally {
-            span.end();
-        }
-    }
-
-    private void executeInSpan(String spanName, Consumer<Span> consumer) {
-        Span span = tracer.spanBuilder(spanName).startSpan();
-        try (Scope ignored = span.makeCurrent()) {
-            consumer.accept(span);
-        } catch (Throwable t) {
-            span.recordException(t);
-            throw t;
-        } finally {
-            span.end();
-        }
     }
 }
