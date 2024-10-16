@@ -22,64 +22,29 @@ jobs:
       - name: 'Start apps'
         run: docker compose --env-file=./api-tests/.env.ci up --detach
 
-      - name: 'Evaluate marketplace-api port'
-        id: evaluate-marketplace-port
-        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+      - name: 'tbd - marketplace'
+        uses: ./.github/workflows/actions/check-api-deployment.yml
         with:
           service-name: 'marketplace-api'
-          private-port: '8080'
+          port-placeholder: 'marketplace_port'
 
-      - name: 'Evaluate price-api port'
-        id: evaluate-price-port
-        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+      - name: 'tbd - price'
+        uses: ./.github/workflows/actions/check-api-deployment.yml
         with:
           service-name: 'price-api'
-          private-port: '8080'
+          port-placeholder: 'price_port'
 
-      - name: 'Evaluate product-api port'
-        id: evaluate-product-port
-        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
-        with:
-          service-name: 'product-api'
-          private-port: '8080'
-
-      - name: 'Evaluate stock-api port'
-        id: evaluate-stock-port
-        uses: deroffal/github-actions/actions/docker/compose/evaluate-public-port@main
+      - name: 'tbd - stock'
+        uses: ./.github/workflows/actions/check-api-deployment.yml
         with:
           service-name: 'stock-api'
-          private-port: '8080'
+          port-placeholder: 'stock_port'
 
-      - name: 'Wait for apis to be available'
-        env:
-          marketplace_port: ${{ steps.evaluate-marketplace-port.outputs.public-port }}
-          price_port: ${{ steps.evaluate-price-port.outputs.public-port }}
-          product_port: ${{ steps.evaluate-product-port.outputs.public-port }}
-          stock_port: ${{ steps.evaluate-stock-port.outputs.public-port }}
-        strategy:
-          matrix:
-            url: [
-              localhost:${{ env.marketplace_port }}/actuator/health,
-              localhost:${{ env.price_port }}/actuator/health,
-              localhost:${{ env.product_port }}/actuator/health,
-              localhost:${{ env.stock_port }}/actuator/health,
-            ]
-        uses: deroffal/github-actions/actions/wait-for-healthcheck@healthcheck
+      - name: 'tbd - product'
+        uses: ./.github/workflows/actions/check-api-deployment.yml
         with:
-          expected-response: '200'
-          url: ${{ matrix.url }}
-
-      - name: 'Configure Bruno env'
-        env:
-          marketplace_port: ${{ steps.evaluate-marketplace-port.outputs.public-port }}
-          price_port: ${{ steps.evaluate-price-port.outputs.public-port }}
-          product_port: ${{ steps.evaluate-product-port.outputs.public-port }}
-          stock_port: ${{ steps.evaluate-stock-port.outputs.public-port }}
-        run: |
-          sed -i 's/marketplace_port/${{ env.marketplace_port }}/g' ./api-tests/environments/ci.bru
-          sed -i 's/price_port/${{ env.price_port }}/g' ./api-tests/environments/ci.bru
-          sed -i 's/product_port/${{ env.product_port }}/g' ./api-tests/environments/ci.bru
-          sed -i 's/stock_port/${{ env.stock_port }}/g' ./api-tests/environments/ci.bru
+          service-name: 'product-api'
+          port-placeholder: 'product_port'
 
       - uses: actions/setup-node@v4
 
