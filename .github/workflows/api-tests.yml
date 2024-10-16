@@ -22,26 +22,26 @@ jobs:
       - name: 'Start apps'
         run: docker compose --env-file=./api-tests/.env.ci up --detach
 
-      - name: 'tbd - marketplace'
-        uses: ./.github/workflows/actions/check-api-deployment.yml
+      - name: 'Check deployment - marketplace'
+        uses: ./.github/workflows/actions/check-api-deployment
         with:
           service-name: 'marketplace-api'
           port-placeholder: 'marketplace_port'
 
-      - name: 'tbd - price'
-        uses: ./.github/workflows/actions/check-api-deployment.yml
+      - name: 'Check deployment - price'
+        uses: ./.github/workflows/actions/check-api-deployment
         with:
           service-name: 'price-api'
           port-placeholder: 'price_port'
 
-      - name: 'tbd - stock'
-        uses: ./.github/workflows/actions/check-api-deployment.yml
+      - name: 'Check deployment - stock'
+        uses: ./.github/workflows/actions/check-api-deployment
         with:
           service-name: 'stock-api'
           port-placeholder: 'stock_port'
 
-      - name: 'tbd - product'
-        uses: ./.github/workflows/actions/check-api-deployment.yml
+      - name: 'Check deployment - product'
+        uses: ./.github/workflows/actions/check-api-deployment
         with:
           service-name: 'product-api'
           port-placeholder: 'product_port'
