@@ -16,7 +16,8 @@ jobs:
           distribution: 'temurin'
 
       - name: 'Build'
-        run: mvn clean package -DskipTests -f applications/pom.xml
+        working-directory: 'applications'
+        run: ./mvnw clean package -DskipTests
 
       - name: 'Start apps'
         run: docker compose --env-file=./api-tests/.env.ci up --detach
