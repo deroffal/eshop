@@ -56,11 +56,18 @@ jobs:
           price_port: ${{ steps.evaluate-price-port.outputs.public-port }}
           product_port: ${{ steps.evaluate-product-port.outputs.public-port }}
           stock_port: ${{ steps.evaluate-stock-port.outputs.public-port }}
-        run: |
-          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.marketplace_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
-          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.price_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
-          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.product_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
-          (timeout 300 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.stock_port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
+        strategy:
+          matrix:
+            url: [
+              localhost:${{ env.marketplace_port }}/actuator/health,
+              localhost:${{ env.price_port }}/actuator/health,
+              localhost:${{ env.product_port }}/actuator/health,
+              localhost:${{ env.stock_port }}/actuator/health,
+            ]
+        uses: deroffal/github-actions/actions/wait-for-healthcheck@healthcheck
+        with:
+          expected-response: '200'
+          url: ${{ matrix.url }}
 
       - name: 'Configure Bruno env'
         env:
