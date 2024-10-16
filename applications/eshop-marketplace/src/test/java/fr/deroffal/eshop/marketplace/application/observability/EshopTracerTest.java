@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = OpenTelemetryConfiguration.class)
+@SpringBootTest(classes = OpenTelemetryTestConfiguration.class)
 class EshopTracerTest {
 
     @Autowired

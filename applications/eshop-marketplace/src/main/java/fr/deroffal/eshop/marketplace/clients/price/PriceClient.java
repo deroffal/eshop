@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(value = "priceClient", url = "${price.api.url}")
+@FeignClient(value = "priceClient", url = "${marketplace.price.api.url}")
 interface PriceClient {
 
     @GetMapping("/price/{product}")

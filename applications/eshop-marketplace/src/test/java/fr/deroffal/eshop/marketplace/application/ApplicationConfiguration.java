@@ -1,6 +1,7 @@
 package fr.deroffal.eshop.marketplace.application;
 
 import fr.deroffal.eshop.marketplace.application.observability.OpenTelemetryConfiguration;
+import fr.deroffal.eshop.marketplace.application.observability.OpenTelemetryTestConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -9,6 +10,6 @@ import org.springframework.context.annotation.Import;
  * It will import all required configuration from `application` package.
  */
 @Configuration
-@Import(OpenTelemetryConfiguration.class)
+@Import(OpenTelemetryTestConfiguration.class)
 public class ApplicationConfiguration {
 }
