@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.marketplace.observability;
+package fr.deroffal.eshop.marketplace.application.observability;
 
 import io.opentelemetry.api.OpenTelemetry;
 import org.springframework.stereotype.Component;

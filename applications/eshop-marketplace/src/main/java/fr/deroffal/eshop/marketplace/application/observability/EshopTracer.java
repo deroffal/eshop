@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.marketplace.observability;
+package fr.deroffal.eshop.marketplace.application.observability;
 
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
