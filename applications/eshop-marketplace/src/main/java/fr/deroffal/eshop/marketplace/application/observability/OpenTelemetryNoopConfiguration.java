@@ -12,7 +12,7 @@ import static fr.deroffal.eshop.marketplace.application.Profiles.Otel.SKIP_OTEL;
 public class OpenTelemetryNoopConfiguration {
 
     @Bean
-    public OpenTelemetry openTelemetryNoop() {
+    public OpenTelemetry openTelemetry() {
         return OpenTelemetry.noop();
     }
 }

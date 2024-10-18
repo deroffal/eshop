@@ -25,3 +25,5 @@ Then browse to `http://localhost:16686/`.
 Use Bruno with environment `local`.
 
 ## Run in k8s
+
+See 
