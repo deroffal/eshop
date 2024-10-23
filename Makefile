@@ -1,20 +1,7 @@
-SHELL := /bin/bash
+include api-tests/Makefile applications/Makefile observability/Makefile
 
-test-local: run-local build-api-tests
-	@npm --prefix api-tests run test:local
+test-local:
+	@make -C api-tests run-api-tests;
 
-build-api-tests:
-	@npm --prefix api-tests install
-
-run-local: build-docker
-	@docker compose --env-file=.env up
-
-build-docker: build-maven
-	@docker compose build
-
-build-maven:
-	@mvn clean package -f applications/pom.xml
-
-download-otel-agent:
-	@mkdir -p observability/otel 2>&1
-	@curl -L -o observability/otel/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+run-local:
+	@make -C applications run-docker;

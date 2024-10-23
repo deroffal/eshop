@@ -23,6 +23,7 @@ runs:
       with:
         service-name: ${{ inputs.service-name }}
         private-port: '8080'
+        file: applications/docker-compose.yaml
 
     - name: 'Curl healthcheck'
       shell: bash
