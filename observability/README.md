@@ -2,19 +2,20 @@
 
 ## Run in local, with IDE
 
+
 ```shell
-# download otel agent
+# from $project-dir
 make download-otel-agent
-# start collector and jaeger
-docker compose -f observability/docker-compose.yaml up otel-collector jaeger-server
+make start-otel-platform
 ```
 
-idée : avoir un fichier de conf only debug ?
+To start with IntelliJ, we can use run configurations stored in `.run/otel` directory.
+They are configured to start with OpenTelemetry environment variables, and to use the downloaded agent.
 
 ## Run in local, with Docker
 
 ```shell
-# first, build docker images in local
+# from $project-dir
 make build-docker
 # then run docker-compose file
 docker compose -f observability/docker-compose.yaml up
