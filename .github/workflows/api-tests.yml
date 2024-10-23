@@ -20,7 +20,8 @@ jobs:
         run: ./mvnw clean package -DskipTests
 
       - name: 'Start apps'
-        run: docker compose --env-file=./api-tests/.env.ci up --detach
+        working-directory: 'applications'
+        run: docker compose --env-file=../api-tests/.env.ci up --detach
 
       - name: 'Check deployment - marketplace'
         id: check-marketplace-deployment
