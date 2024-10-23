@@ -4,13 +4,7 @@
 
 Java version currently used is `21`.
 
-To build the project, simply run :
-
-```shell
-make build-docker
-```
-
-Then, to run the project in local env :
+To run the project in local env :
 
 ```shell
 make run-local
