@@ -1,9 +1,12 @@
 package fr.deroffal.eshop.marketplace.domain.service;
 
+import fr.deroffal.eshop.marketplace.application.observability.EshopTracer;
+import fr.deroffal.eshop.marketplace.application.observability.TracerFactory;
 import fr.deroffal.eshop.marketplace.domain.model.Price;
 import fr.deroffal.eshop.marketplace.domain.model.Product;
 import fr.deroffal.eshop.marketplace.domain.model.ProductDetail;
 import fr.deroffal.eshop.marketplace.domain.model.Stock;
+import io.opentelemetry.api.trace.Span;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,18 +22,28 @@ public class ProductAggregatorService {
     private final ProductPort productPort;
     private final StockPort stockPort;
     private final PricePort pricePort;
+    private final EshopTracer tracer;
 
-    public ProductAggregatorService(ProductPort productPort, StockPort stockPort, PricePort pricePort) {
+    public ProductAggregatorService(ProductPort productPort, StockPort stockPort, PricePort pricePort, TracerFactory tracerFactory) {
         this.productPort = productPort;
         this.stockPort = stockPort;
         this.pricePort = pricePort;
+        this.tracer = tracerFactory.newTracer(ProductAggregatorService.class);
     }
 
     public ProductDetail getProductDetail(UUID id) {
+        return tracer.executeInSpan("product-detail-aggregation", span -> {
+            return getProductDetail(id, span);
+        });
+
+    }
+
+    private ProductDetail getProductDetail(UUID productId, Span span) {
+        span.addEvent("product-detail-aggregation");
         var futures = List.of(
-                productPort.getProduct(id).thenApply(ProductAggregatorService::withProduct),
-                pricePort.getPriceByProduct(id).thenApply(ProductAggregatorService::withPrice),
-                stockPort.getStockByProduct(id).thenApply(ProductAggregatorService::withQuantity)
+                productPort.getProduct(productId).thenApply(ProductAggregatorService::withProduct),
+                pricePort.getPriceByProduct(productId).thenApply(ProductAggregatorService::withPrice),
+                stockPort.getStockByProduct(productId).thenApply(ProductAggregatorService::withQuantity)
         );
 
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new))
@@ -38,7 +51,6 @@ public class ProductAggregatorService {
                 .join()
                 .reduce(identity(), Function::andThen)
                 .apply(new ProductDetail(null, 0, null));
-
     }
 
     private static Function<ProductDetail, ProductDetail> withProduct(Product product) {
