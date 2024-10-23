@@ -4,39 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-
-  product-release:
+  release:
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-product
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.api }}
       cancel-in-progress: true
+    strategy:
+      matrix:
+        api: [product, stock, price, marketplace]
     uses: ./.github/workflows/release-api.yml
     secrets: inherit
     with:
-      api-name: 'product'
-
-  stock-release:
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-stock
-      cancel-in-progress: true
-    uses: ./.github/workflows/release-api.yml
-    secrets: inherit
-    with:
-      api-name: 'stock'
-
-  price-release:
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-price
-      cancel-in-progress: true
-    uses: ./.github/workflows/release-api.yml
-    secrets: inherit
-    with:
-      api-name: 'price'
-
-  marketplace-release:
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-marketplace
-      cancel-in-progress: true
-    uses: ./.github/workflows/release-api.yml
-    secrets: inherit
-    with:
-      api-name: 'marketplace'
+      api-name: ${{ matrix.api }}
