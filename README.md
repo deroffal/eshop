@@ -18,4 +18,4 @@ make test-local
 
 ## Observability
 
-See [Observability](observability/README.adoc) section
+See [Observability](observability/README.md) section

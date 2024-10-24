@@ -7,6 +7,8 @@ import io.opentelemetry.context.Scope;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import static io.opentelemetry.api.trace.StatusCode.ERROR;
+
 public class EshopTracer {
 
     private final Tracer tracer;
@@ -20,7 +22,8 @@ public class EshopTracer {
         try (Scope ignored = span.makeCurrent()) {
             return function.apply(span);
         } catch (Throwable t) {
-            span.recordException(t);
+            span.recordException(t)
+                    .setStatus(ERROR);
             throw t;
         } finally {
             span.end();
@@ -32,7 +35,8 @@ public class EshopTracer {
         try (Scope ignored = span.makeCurrent()) {
             consumer.accept(span);
         } catch (Throwable t) {
-            span.recordException(t);
+            span.recordException(t)
+                    .setStatus(ERROR);
             throw t;
         } finally {
             span.end();

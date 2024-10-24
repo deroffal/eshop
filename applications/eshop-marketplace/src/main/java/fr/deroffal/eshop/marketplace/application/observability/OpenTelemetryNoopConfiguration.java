@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Profile;
 
 import static fr.deroffal.eshop.marketplace.application.Profiles.Otel.SKIP_OTEL;
 
+/**
+ * Configuration class allowing to run code dedicated to instrumentation without having OpenTelemetry enabled.
+ * This class is used for tests.
+ */
 @Configuration
 @Profile(SKIP_OTEL)
 public class OpenTelemetryNoopConfiguration {

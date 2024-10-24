@@ -15,4 +15,8 @@ public class Example {
     public String getWorld() {
         return world;
     }
+
+    public void throwException() {
+        throw new RuntimeException("this is an exception !");
+    }
 }

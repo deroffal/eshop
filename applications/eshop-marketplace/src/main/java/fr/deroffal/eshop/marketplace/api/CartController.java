@@ -67,7 +67,7 @@ public class CartController {
 
     @GetMapping("/{id}")
     public CartModel getCart(@PathVariable("id") UUID id) {
-        return tracer.executeInSpan("span-get", span -> {
+        return tracer.executeInSpan("cart-get", span -> {
             span.setAttribute("cart", id.toString());
             return mapper.toModel(service.getByUuid(id));
         });
