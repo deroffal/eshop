@@ -4,7 +4,20 @@ on:
   workflow_dispatch:
 
 jobs:
+  evaluate-version:
+    runs-on: ubuntu-latest
+    outputs:
+      api-version: ${{ steps.evaluate-version.outputs.maven-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Evaluate version
+        id: evaluate-version
+        uses: deroffal/github-actions/actions/maven/evaluate-version@main
+        with:
+          working-directory: ./applications
+
   release:
+    needs: evaluate-version
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.api }}
       cancel-in-progress: true
@@ -15,3 +28,4 @@ jobs:
     secrets: inherit
     with:
       api-name: ${{ matrix.api }}
+      version: ${{ needs.evaluate-version.outputs.api-version }}
