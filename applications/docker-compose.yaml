@@ -32,6 +32,6 @@ services:
     ports:
       - "${PORT_BINDING_MARKETPLACE}8080"
     environment:
-      - STOCK_API_URL=http://stock-api:8080
-      - PRICE_API_URL=http://price-api:8080
-      - PRODUCT_API_URL=http://product-api:8080
+      - MARKETPLACE_STOCK_API_URL=http://stock-api:8080
+      - MARKETPLACE_PRICE_API_URL=http://price-api:8080
+      - MARKETPLACE_PRODUCT_API_URL=http://product-api:8080

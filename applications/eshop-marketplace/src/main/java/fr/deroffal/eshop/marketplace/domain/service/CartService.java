@@ -31,6 +31,7 @@ public class CartService {
     }
 
     public Cart updateItem(UUID cartId, CartItem item) {
+
         Cart cart = port.findById(cartId);
         if (cart != null) {
             int itemIndex = -1;
@@ -48,7 +49,7 @@ public class CartService {
                 CartItem cartItem = items.get(itemIndex);
                 items.remove(itemIndex);
                 long newQuantity = cartItem.quantity() + item.quantity();
-                if(newQuantity > 0){
+                if (newQuantity > 0) {
                     items.add(cartItem.withQuantity(newQuantity));
                 }
             }
