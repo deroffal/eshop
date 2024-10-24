@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="StockApplication - otel" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="otel">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <envs>
+      <env name="JAVA_TOOL_OPTIONS" value="-javaagent:&quot;$PROJECT_DIR$/observability/otel/opentelemetry-javaagent.jar&quot;" />
+      <env name="OTEL_SERVICE_NAME" value="stock" />
+      <env name="OTEL_EXPORTER_OTLP_ENDPOINT" value="http://localhost:4317" />
+      <env name="OTEL_EXPORTER_OTLP_PROTOCOL" value="grpc" />
+<!--      <env name="OTEL_LOGS_EXPORTER" value="logging" />-->
+<!--      <env name="OTEL_METRICS_EXPORTER" value="logging" />-->
+<!--      <env name="OTEL_TRACES_EXPORTER" value="logging" />-->
+      <env name="OTEL_METRIC_EXPORT_INTERVAL" value="15000" />
+    </envs>
+    <module name="eshop-stock" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="fr.deroffal.eshop.stock.StockApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
