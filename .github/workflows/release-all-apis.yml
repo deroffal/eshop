@@ -6,6 +6,9 @@ on:
 jobs:
   evaluate-version:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-evaluate-version
+      cancel-in-progress: true
     outputs:
       api-version: ${{ steps.evaluate-version.outputs.maven-version }}
     steps:
@@ -24,8 +27,12 @@ jobs:
     strategy:
       matrix:
         api: [product, stock, price, marketplace]
-    uses: ./.github/workflows/release-api.yml
+    uses: deroffal/github-actions/.github/workflows/build-maven-docker-app.yml@main
     secrets: inherit
     with:
-      api-name: ${{ matrix.api }}
-      version: ${{ needs.evaluate-version.outputs.api-version }}
+      working-directory: ./applications/eshop-${{ matrix.api }}
+      build-method: 'dockerfile'
+      java-version: 21
+      java-distribution: 'temurin'
+      image-name: 'deroffal/eshop-${{ matrix.api }}'
+      tag-name: ${{ needs.evaluate-version.outputs.api-version }}
