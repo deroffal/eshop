@@ -7,24 +7,13 @@ on:
         required: true
         type: string
         description: name of the api to release.
-
+      version:
+        required: true
+        type: string
+        description: version to release.
 jobs:
 
-  evaluate-version:
-    runs-on: ubuntu-latest
-    outputs:
-      api-version: ${{ steps.evaluate-version.outputs.maven-version }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Evaluate version
-        id: evaluate-version
-        uses: deroffal/github-actions/actions/maven/evaluate-version@main
-        with:
-          working-directory: ./applications/eshop-${{ inputs.api-name }}
-
   release-api:
-    needs:
-      - evaluate-version
     uses: deroffal/github-actions/.github/workflows/build-maven-docker-app.yml@main
     secrets: inherit
     with:
@@ -33,4 +22,4 @@ jobs:
       java-version: 21
       java-distribution: 'temurin'
       image-name: 'deroffal/eshop-${{ inputs.api-name }}'
-      tag-name: ${{ needs.evaluate-version.outputs.api-version }}
+      tag-name: ${{ inputs.api-version }}
