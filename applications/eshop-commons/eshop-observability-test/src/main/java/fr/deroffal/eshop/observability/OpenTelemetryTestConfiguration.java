@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.marketplace.application.observability;
+package fr.deroffal.eshop.observability;
 
 import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Test configuration
- *
+ * <p>
  * injecting a fake implementation of OpenTelemetry (see {@link io.opentelemetry.api.OpenTelemetry#noop()}).
  * Use it associated with @ActiveProfiles(SKIP_OTEL)
  * <p>
  * Test configuration is using OpenTelemetry sdk.
  */
 @Configuration
-@ComponentScan(basePackageClasses = OpenTelemetryConfiguration.class)
+@ComponentScan(basePackageClasses = OpenTelemetryTestConfiguration.class)
 public class OpenTelemetryTestConfiguration {
 
     @RegisterExtension

@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.marketplace.application.observability;
+package fr.deroffal.eshop.observability;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import static fr.deroffal.eshop.marketplace.application.Profiles.Otel.SKIP_OTEL;
+import static fr.deroffal.eshop.observability.Profiles.SKIP_OTEL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

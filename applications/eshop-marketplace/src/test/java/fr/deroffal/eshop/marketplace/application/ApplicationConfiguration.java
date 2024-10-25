@@ -1,6 +1,6 @@
 package fr.deroffal.eshop.marketplace.application;
 
-import fr.deroffal.eshop.marketplace.application.observability.OpenTelemetryTestConfiguration;
+import fr.deroffal.eshop.observability.OpenTelemetryTestConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

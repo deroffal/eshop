@@ -1,11 +1,11 @@
 package fr.deroffal.eshop.marketplace.domain.service;
 
-import fr.deroffal.eshop.marketplace.application.observability.EshopTracer;
-import fr.deroffal.eshop.marketplace.application.observability.TracerFactory;
 import fr.deroffal.eshop.marketplace.domain.model.Price;
 import fr.deroffal.eshop.marketplace.domain.model.Product;
 import fr.deroffal.eshop.marketplace.domain.model.ProductDetail;
 import fr.deroffal.eshop.marketplace.domain.model.Stock;
+import fr.deroffal.eshop.observability.EshopTracer;
+import fr.deroffal.eshop.observability.TracerFactory;
 import io.opentelemetry.api.trace.Span;
 import org.springframework.stereotype.Service;
 

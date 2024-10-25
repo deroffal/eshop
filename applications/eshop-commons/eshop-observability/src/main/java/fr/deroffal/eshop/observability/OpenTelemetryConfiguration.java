@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.marketplace.application.observability;
+package fr.deroffal.eshop.observability;
 
 import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.api.OpenTelemetry;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import static fr.deroffal.eshop.marketplace.application.Profiles.Otel.NOT_SKIP_OTEL;
+import static fr.deroffal.eshop.observability.Profiles.NOT_SKIP_OTEL;
 
 /**
  * Default configuration class for OpenTelemetry.
