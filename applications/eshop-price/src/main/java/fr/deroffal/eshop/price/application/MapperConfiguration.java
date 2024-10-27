@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.price.config;
+package fr.deroffal.eshop.price.application;
 
 import org.mapstruct.MapperConfig;
 

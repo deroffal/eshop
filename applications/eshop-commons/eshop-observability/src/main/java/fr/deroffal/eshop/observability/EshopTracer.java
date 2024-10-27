@@ -19,6 +19,10 @@ public class EshopTracer {
 
     public <T> T executeInSpan(String spanName, Function<Span, T> function) {
         Span span = tracer.spanBuilder(spanName).startSpan();
+        return addToSpan(span, function);
+    }
+
+    public <T> T addToSpan(Span span, Function<Span, T> function) {
         try (Scope ignored = span.makeCurrent()) {
             return function.apply(span);
         } catch (Throwable t) {
@@ -42,4 +46,5 @@ public class EshopTracer {
             span.end();
         }
     }
+
 }
