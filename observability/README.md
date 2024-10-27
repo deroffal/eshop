@@ -2,9 +2,8 @@
 
 ## Run in local, with IDE
 
-
 ```shell
-# from $project-dir
+# from $project-dir/observability
 make download-otel-agent
 make start-otel-platform
 ```
@@ -15,10 +14,10 @@ They are configured to start with OpenTelemetry environment variables, and to us
 ## Run in local, with Docker
 
 ```shell
-# from $project-dir
+# from $project-dir/applications
 make build-docker
-# then run docker-compose file
-docker compose -f observability/docker-compose.yaml up
+# from $project-dir/observability
+make run-observability
 ```
 
 Then browse to `http://localhost:16686/`.

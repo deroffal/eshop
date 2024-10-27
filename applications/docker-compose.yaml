@@ -23,7 +23,7 @@ services:
     ports:
       - "${PORT_BINDING_PRICE}8080"
     environment:
-      - PRODUCT_API_URL=http://product-api:8080
+      - PRICE_CLIENT_PRODUCT_URL=http://product-api:8080
 
   marketplace-api:
     container_name: "marketplace-api"
@@ -32,6 +32,6 @@ services:
     ports:
       - "${PORT_BINDING_MARKETPLACE}8080"
     environment:
-      - MARKETPLACE_STOCK_API_URL=http://stock-api:8080
-      - MARKETPLACE_PRICE_API_URL=http://price-api:8080
-      - MARKETPLACE_PRODUCT_API_URL=http://product-api:8080
+      - MARKETPLACE_CLIENT_STOCK_URL=http://stock-api:8080
+      - MARKETPLACE_CLIENT_PRICE_URL=http://price-api:8080
+      - MARKETPLACE_CLIENT_PRODUCT_URL=http://product-api:8080

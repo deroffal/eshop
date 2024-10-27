@@ -37,7 +37,7 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_SERVICE_NAME=price-api
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-      - PRODUCT_API_URL=http://product-api:8080
+      - PRICE_CLIENT_PRODUCT_URL=http://product-api:8080
 
   marketplace-api:
     image: eshop-marketplace-api:latest
@@ -52,9 +52,9 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_SERVICE_NAME=marketplace-api
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-      - STOCK_API_URL=http://stock-api:8080
-      - PRICE_API_URL=http://price-api:8080
-      - PRODUCT_API_URL=http://product-api:8080
+      - MARKETPLACE_CLIENT_STOCK_URL=http://stock-api:8080
+      - MARKETPLACE_CLIENT_PRICE_URL=http://price-api:8080
+      - MARKETPLACE_CLIENT_PRODUCT_URL=http://product-api:8080
 
   otel-collector:
     image: otel/opentelemetry-collector

@@ -21,6 +21,7 @@ spec:
       containers:
         - name: stock-api
           image: deroffal/eshop-stock:0.10
+          imagePullPolicy: Always
           env:
             - name: JAVA_TOOL_OPTIONS
               value: "-javaagent:/app/otel/opentelemetry-javaagent.jar"
