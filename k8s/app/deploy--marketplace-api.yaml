@@ -21,6 +21,7 @@ spec:
       containers:
         - name: marketplace-api
           image: deroffal/eshop-marketplace:0.10
+          imagePullPolicy: Always
           env:
             - name: JAVA_TOOL_OPTIONS
               value: "-javaagent:/app/otel/opentelemetry-javaagent.jar"

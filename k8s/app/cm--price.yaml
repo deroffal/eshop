@@ -4,4 +4,4 @@ metadata:
   name: price-cm
   namespace: eshop-app
 data:
-  PRODUCT_API_URL: 'http://product.eshop-app.svc.cluster.local'
+  PRICE_CLIENT_PRODUCT_URL: 'http://product.eshop-app.svc.cluster.local'

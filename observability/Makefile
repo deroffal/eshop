@@ -1,3 +1,6 @@
+run-observability:
+	@docker compose -f docker-compose.yaml up
+
 start-otel-platform:
 	@docker compose up otel-collector jaeger-server
 
