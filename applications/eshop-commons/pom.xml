@@ -15,7 +15,6 @@
     <modules>
         <module>eshop-observability-test</module>
         <module>eshop-observability</module>
-        <module>eshop-observability-webflux</module>
     </modules>
 
 </project>

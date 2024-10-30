@@ -7,9 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Test configuration
- * <p>
- * injecting a fake implementation of OpenTelemetry (see {@link io.opentelemetry.api.OpenTelemetry#noop()}).
+ * Test configuration injecting a fake implementation of OpenTelemetry (see {@link io.opentelemetry.api.OpenTelemetry#noop()}).
  * Use it associated with @ActiveProfiles(SKIP_OTEL)
  * <p>
  * Test configuration is using OpenTelemetry sdk.

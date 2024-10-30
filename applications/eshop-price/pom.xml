@@ -28,11 +28,6 @@
         </dependency>
 
         <dependency>
-            <groupId>fr.deroffal</groupId>
-            <artifactId>eshop-observability-webflux</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
