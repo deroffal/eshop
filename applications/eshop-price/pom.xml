@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>fr.deroffal</groupId>
-            <artifactId>eshop-observability</artifactId>
+            <artifactId>eshop-observability-webflux</artifactId>
         </dependency>
 
         <dependency>

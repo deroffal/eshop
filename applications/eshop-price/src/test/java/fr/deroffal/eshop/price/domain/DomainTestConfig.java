@@ -1,6 +1,6 @@
 package fr.deroffal.eshop.price.domain;
 
-import fr.deroffal.eshop.price.config.ApplicationConfiguration;
+import fr.deroffal.eshop.price.application.ApplicationConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

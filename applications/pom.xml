@@ -63,6 +63,11 @@
                 <artifactId>eshop-observability</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>fr.deroffal</groupId>
+                <artifactId>eshop-observability-webflux</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>fr.deroffal</groupId>

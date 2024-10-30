@@ -9,17 +9,27 @@
         <version>0.10</version>
     </parent>
 
-    <artifactId>eshop-observability-test</artifactId>
+    <artifactId>eshop-observability-webflux</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
             <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-sdk-testing</artifactId>
+            <artifactId>opentelemetry-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-otlp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.deroffal</groupId>
+            <artifactId>eshop-observability-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

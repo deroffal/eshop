@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.price.application.observability;
+package fr.deroffal.eshop.price.application;
 
 import fr.deroffal.eshop.observability.OpenTelemetryConfiguration;
 import org.springframework.context.annotation.ComponentScan;

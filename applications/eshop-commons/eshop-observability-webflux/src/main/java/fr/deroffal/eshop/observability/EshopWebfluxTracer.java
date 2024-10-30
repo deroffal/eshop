@@ -1,11 +1,8 @@
-package fr.deroffal.eshop.price.application.observability;
+package fr.deroffal.eshop.observability;
 
-import fr.deroffal.eshop.observability.EshopTracer;
-import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.StatusCode;
 import io.opentelemetry.api.trace.Tracer;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.function.BiConsumer;
