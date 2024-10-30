@@ -12,7 +12,7 @@ public class TracerFactory {
         this.openTelemetry = openTelemetry;
     }
 
-    public <T> EshopTracer newTracer(Class<T> clazz) {
-        return new EshopTracer(openTelemetry.getTracer(clazz.getName()));
+    public <T> Tracing newTracer(Class<T> clazz) {
+        return new Tracing(openTelemetry.getTracer(clazz.getName()));
     }
 }

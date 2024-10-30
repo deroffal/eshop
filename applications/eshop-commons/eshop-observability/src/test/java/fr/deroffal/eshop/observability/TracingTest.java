@@ -21,18 +21,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 @ActiveProfiles(SKIP_OTEL)
 @SpringBootTest(classes = OpenTelemetryTestConfiguration.class)
-public class EshopTracerTest {
+public class TracingTest {
 
     @Autowired
     private OpenTelemetryExtension otelTesting;
 
-    private EshopTracer eshopTracer;
+    private Tracing tracing;
 
     @BeforeEach
     void setUp() {
         OpenTelemetry openTelemetry = otelTesting.getOpenTelemetry();
         TracerFactory tracerFactory = new TracerFactory(openTelemetry);
-        eshopTracer = tracerFactory.newTracer(Example.class);
+        tracing = tracerFactory.newTracer(Example.class);
     }
 
     @AfterEach
@@ -45,7 +45,7 @@ public class EshopTracerTest {
     void executeInSpan_function_success() {
         Example example = new Example();
 
-        var result = eshopTracer.executeInSpan("span-name", span -> {
+        var result = tracing.executeInSpan("span-name", span -> {
             return example.hello();
         });
 
@@ -63,7 +63,7 @@ public class EshopTracerTest {
     void executeInSpan_function_throwsException() {
         Example example = new Example();
 
-        assertThatThrownBy(() -> eshopTracer.executeInSpan("span-name", span -> {
+        assertThatThrownBy(() -> tracing.executeInSpan("span-name", span -> {
             example.throwException();
         })).isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("this is an exception !");

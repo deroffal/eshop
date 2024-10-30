@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @ActiveProfiles(SKIP_OTEL)
 @SpringBootTest(classes = OpenTelemetryTestConfiguration.class)
-class EshopTracerNoopTest {
+class TracingNoopTest {
 
     @Autowired
     private TracerFactory tracerFactory;
 
-    private EshopTracer tracer;
+    private Tracing tracer;
 
     @BeforeEach
     void test() {

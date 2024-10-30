@@ -1,7 +1,7 @@
 package fr.deroffal.eshop.price.domain;
 
-import fr.deroffal.eshop.observability.EshopWebfluxTracer;
-import fr.deroffal.eshop.observability.EshopWebfluxTracerFactory;
+import fr.deroffal.eshop.observability.Tracing;
+import fr.deroffal.eshop.observability.TracerFactory;
 import fr.deroffal.eshop.price.domain.exception.CartException;
 import fr.deroffal.eshop.price.domain.model.CartItem;
 import fr.deroffal.eshop.price.domain.model.DiscountOnNextSameProduct;
@@ -23,9 +23,9 @@ public class PriceCalculator {
 
     private final PriceService priceStoragePort;
     private final DiscountService discountService;
-    private final EshopWebfluxTracer tracer;
+    private final Tracing tracer;
 
-    public PriceCalculator(PriceService priceStoragePort, DiscountService discountService, EshopWebfluxTracerFactory tracerFactory) {
+    public PriceCalculator(PriceService priceStoragePort, DiscountService discountService, TracerFactory tracerFactory) {
         this.priceStoragePort = priceStoragePort;
         this.discountService = discountService;
         this.tracer = tracerFactory.newTracer(PriceCalculator.class);

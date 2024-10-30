@@ -4,7 +4,7 @@ import fr.deroffal.eshop.marketplace.domain.model.Price;
 import fr.deroffal.eshop.marketplace.domain.model.Product;
 import fr.deroffal.eshop.marketplace.domain.model.ProductDetail;
 import fr.deroffal.eshop.marketplace.domain.model.Stock;
-import fr.deroffal.eshop.observability.EshopTracer;
+import fr.deroffal.eshop.observability.Tracing;
 import fr.deroffal.eshop.observability.TracerFactory;
 import io.opentelemetry.api.trace.Span;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ProductAggregatorService {
     private final ProductPort productPort;
     private final StockPort stockPort;
     private final PricePort pricePort;
-    private final EshopTracer tracer;
+    private final Tracing tracer;
 
     public ProductAggregatorService(ProductPort productPort, StockPort stockPort, PricePort pricePort, TracerFactory tracerFactory) {
         this.productPort = productPort;
