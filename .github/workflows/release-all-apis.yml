@@ -34,5 +34,6 @@ jobs:
       build-method: 'dockerfile'
       java-version: 21
       java-distribution: 'temurin'
+      projects: ':eshop-${{ matrix.api }}'
       image-name: 'deroffal/eshop-${{ matrix.api }}'
       tag-name: ${{ needs.evaluate-version.outputs.api-version }}
