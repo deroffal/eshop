@@ -37,9 +37,9 @@
 
         <spring-cloud-starter-openfeign.version>4.1.3</spring-cloud-starter-openfeign.version>
 
-        <opentelemetry.version>1.43.0</opentelemetry.version>
+        <opentelemetry.version>1.44.1</opentelemetry.version>
 
-        <mapstruct.version>1.6.2</mapstruct.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
         <cucumber.version>7.20.1</cucumber.version>
 
         <mockserver.version>5.15.0</mockserver.version>
