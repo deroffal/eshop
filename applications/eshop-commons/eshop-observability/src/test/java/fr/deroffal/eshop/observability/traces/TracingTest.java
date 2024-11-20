@@ -8,20 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
-import static fr.deroffal.eshop.observability.Profiles.SKIP_OTEL;
 import static io.opentelemetry.api.trace.StatusCode.ERROR;
 import static io.opentelemetry.api.trace.StatusCode.UNSET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-/**
- * See <a href="https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk/testing/src/test/java/io/opentelemetry/sdk/testing/junit5/OpenTelemetryExtensionTest.java">OpenTelemetryExtensionTest</a>.
- * Here, we can test that span are actually created by OpenTelemetry sdk.
- */
-@ActiveProfiles(SKIP_OTEL)
-@SpringBootTest(classes = OpenTelemetryTestConfiguration.class)
+@SpringBootTest(classes = OpenTelemetryTestConfiguration.class, properties = "eshop.observability.enabled=true")
 public class TracingTest {
 
     @Autowired

@@ -5,16 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
-import static fr.deroffal.eshop.observability.Profiles.SKIP_OTEL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Example of test class, where we are rather testing `executeInSpan` method, ignoring the behavior of otel.
  */
-@ActiveProfiles(SKIP_OTEL)
-@SpringBootTest(classes = OpenTelemetryTestConfiguration.class)
+@SpringBootTest(classes = OpenTelemetryTestConfiguration.class, properties = "eshop.observability.enabled=true")
 class TracingNoopTest {
 
     @Autowired

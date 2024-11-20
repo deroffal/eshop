@@ -1,9 +1,7 @@
 package fr.deroffal.eshop.observability.traces;
 
 import io.opentelemetry.api.OpenTelemetry;
-import org.springframework.stereotype.Component;
 
-@Component
 public class TracerFactory {
 
     private final OpenTelemetry openTelemetry;

@@ -7,8 +7,6 @@ In main configuration, it means that we are not injecting the production `OpenTe
 
 It is easier to configure for testing, but it is not sufficient if we actually want to test the OpenTelemetry instrumentation : indeed, the `noop` implementation does not do anything, so we can't know if our instrumentation is correct.
 
-Implementation : `EshopTracerNoopTest.java`.
-
 ## Testing with OpenTelemetryExtension
 
 We are registering and creating a bean with `OpenTelemetryExtension`.
