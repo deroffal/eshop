@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.observability;
+package fr.deroffal.eshop.observability.traces;
 
 public class Example {
 

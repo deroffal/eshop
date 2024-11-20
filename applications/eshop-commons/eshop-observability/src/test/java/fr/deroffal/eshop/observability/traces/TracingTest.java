@@ -1,5 +1,6 @@
-package fr.deroffal.eshop.observability;
+package fr.deroffal.eshop.observability.traces;
 
+import fr.deroffal.eshop.observability.OpenTelemetryTestConfiguration;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
 import org.junit.jupiter.api.AfterEach;

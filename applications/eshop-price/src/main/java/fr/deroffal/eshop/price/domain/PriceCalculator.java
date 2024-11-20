@@ -1,7 +1,7 @@
 package fr.deroffal.eshop.price.domain;
 
-import fr.deroffal.eshop.observability.Tracing;
-import fr.deroffal.eshop.observability.TracerFactory;
+import fr.deroffal.eshop.observability.traces.Tracing;
+import fr.deroffal.eshop.observability.traces.TracerFactory;
 import fr.deroffal.eshop.price.domain.exception.CartException;
 import fr.deroffal.eshop.price.domain.model.CartItem;
 import fr.deroffal.eshop.price.domain.model.DiscountOnNextSameProduct;

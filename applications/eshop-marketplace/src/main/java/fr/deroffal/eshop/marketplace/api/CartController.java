@@ -2,8 +2,8 @@ package fr.deroffal.eshop.marketplace.api;
 
 import fr.deroffal.eshop.marketplace.domain.model.Cart;
 import fr.deroffal.eshop.marketplace.domain.service.CartService;
-import fr.deroffal.eshop.observability.Tracing;
-import fr.deroffal.eshop.observability.TracerFactory;
+import fr.deroffal.eshop.observability.traces.Tracing;
+import fr.deroffal.eshop.observability.traces.TracerFactory;
 import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.api.common.Attributes;
 import org.springframework.http.ResponseEntity;

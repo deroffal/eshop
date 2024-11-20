@@ -1,4 +1,4 @@
-package fr.deroffal.eshop.observability;
+package fr.deroffal.eshop.observability.traces;
 
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.StatusCode;

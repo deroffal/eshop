@@ -1,5 +1,6 @@
-package fr.deroffal.eshop.observability;
+package fr.deroffal.eshop.observability.traces;
 
+import fr.deroffal.eshop.observability.OpenTelemetryTestConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
