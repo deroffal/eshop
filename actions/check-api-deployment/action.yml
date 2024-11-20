@@ -32,10 +32,3 @@ runs:
       run: |
         (timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:${{ env.port }}/actuator/health)" != "200" ]]; do sleep 5; done' || false)
 
-
-    - name: 'Configure Bruno env'
-      env:
-        port: ${{ steps.evaluate-port.outputs.public-port }}
-      shell: bash
-      run: |
-        sed -i 's/${{ inputs.port-placeholder }}/${{ env.port }}/g' ./api-tests/environments/ci.bru
