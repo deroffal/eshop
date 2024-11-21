@@ -22,4 +22,5 @@ jobs:
 
       - uses: deroffal/github-actions/actions/maven/mutation-testing@main
         with:
-          working-directory: ./applications/eshop-price
+          working-directory: ./applications
+          projects: eshop-price
