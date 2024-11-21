@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: marketplace-api
-          image: deroffal/eshop-marketplace:0.10
+          image: deroffal/eshop-marketplace:0.11
           imagePullPolicy: Always
           env:
             - name: JAVA_TOOL_OPTIONS
