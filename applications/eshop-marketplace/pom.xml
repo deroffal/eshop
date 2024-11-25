@@ -6,7 +6,7 @@
     <parent>
         <groupId>fr.deroffal</groupId>
         <artifactId>eshop-parent</artifactId>
-        <version>0.10</version>
+        <version>0.11</version>
     </parent>
 
     <artifactId>eshop-marketplace</artifactId>
@@ -32,12 +32,8 @@
         </dependency>
 
         <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-exporter-otlp</artifactId>
+            <groupId>fr.deroffal</groupId>
+            <artifactId>eshop-observability</artifactId>
         </dependency>
 
         <dependency>
@@ -48,12 +44,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-
+            <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-sdk-testing</artifactId>
+            <groupId>fr.deroffal</groupId>
+            <artifactId>eshop-observability-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

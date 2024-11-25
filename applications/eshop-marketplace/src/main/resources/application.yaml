@@ -1,0 +1,22 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eshop:
+  observability:
+    enabled: true
+
+marketplace:
+  client:
+    product:
+      url: ""
+    stock:
+      url: ""
+    price:
+      url: ""
+
+logging.level:
+  fr.deroffal.eshop.marketplace.clients: DEBUG
+

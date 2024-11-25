@@ -25,34 +25,34 @@ jobs:
 
       - name: 'Check deployment - marketplace'
         id: check-marketplace-deployment
-        uses: ./actions/check-api-deployment
+        uses: ./.github/actions/check-api-deployment
         with:
           service-name: 'marketplace-api'
           port-placeholder: 'marketplace_port'
 
       - name: 'Check deployment - price'
         id: check-price-deployment
-        uses: ./actions/check-api-deployment
+        uses: ./.github/actions/check-api-deployment
         with:
           service-name: 'price-api'
           port-placeholder: 'price_port'
 
       - name: 'Check deployment - stock'
         id: check-stock-deployment
-        uses: ./actions/check-api-deployment
+        uses: ./.github/actions/check-api-deployment
         with:
           service-name: 'stock-api'
           port-placeholder: 'stock_port'
 
       - name: 'Check deployment - product'
         id: check-product-deployment
-        uses: ./actions/check-api-deployment
+        uses: ./.github/actions/check-api-deployment
         with:
           service-name: 'product-api'
           port-placeholder: 'product_port'
 
       - name: 'Configure Bruno'
-        uses: ./actions/configure-bruno
+        uses: ./.github/actions/configure-bruno
         with:
           marketplace-port: ${{ steps.check-marketplace-deployment.outputs.public-port }}
           price-port: ${{ steps.check-price-deployment.outputs.public-port }}

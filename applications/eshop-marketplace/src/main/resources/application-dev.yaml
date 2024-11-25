@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+marketplace:
+  client:
+    product:
+      url: http://localhost:8081
+    stock:
+      url: http://localhost:8082
+    price:
+      url: http://localhost:8083
