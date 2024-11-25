@@ -21,19 +21,30 @@ jobs:
 
   release:
     needs: evaluate-version
+    runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.api }}
       cancel-in-progress: true
     strategy:
       matrix:
         api: [product, stock, price, marketplace]
-    uses: deroffal/github-actions/.github/workflows/build-maven-docker-app.yml@main
-    secrets: inherit
-    with:
-      working-directory: ./applications/eshop-${{ matrix.api }}
-      build-method: 'dockerfile'
-      java-version: 21
-      java-distribution: 'temurin'
-      projects: ':eshop-${{ matrix.api }}'
-      image-name: 'deroffal/eshop-${{ matrix.api }}'
-      tag-name: ${{ needs.evaluate-version.outputs.api-version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 'Build with Maven'
+        uses: deroffal/github-actions/actions/maven/build@main
+        with:
+          working-directory: ./applications
+          java-version: 21
+          java-distribution: 'temurin'
+          projects: ':eshop-${{ matrix.api }}'
+
+      - name: 'Build and push Docker image'
+        uses: deroffal/github-actions/actions/docker/build-and-push@main
+        with:
+          working-directory: ./applications/eshop-${{ matrix.api }}
+          dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+          build-method: 'dockerfile'
+          image-name: 'deroffal/eshop-${{ matrix.api }}'
+          tag-name: ${{ needs.evaluate-version.outputs.api-version }}
