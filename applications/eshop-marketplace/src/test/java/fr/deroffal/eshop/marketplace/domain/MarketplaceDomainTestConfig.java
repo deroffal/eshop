@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(ApplicationConfiguration.class)
-@ComponentScan(basePackages = "fr.deroffal.eshop.marketplace.domain")
+@ComponentScan(basePackages = {"fr.deroffal.eshop.marketplace.domain"})
 public class MarketplaceDomainTestConfig {
 
     @MockBean
