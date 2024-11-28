@@ -14,9 +14,14 @@ on:
   schedule:
     - cron: '0 7 * * 1'
 
-jobs:
 
+
+jobs:
   project-build:
+    permissions:
+      contents: read
+      actions: read
+      checks: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-project-build
       cancel-in-progress: true
@@ -29,6 +34,10 @@ jobs:
       sonar-project-key: 'deroffal-github_eshop'
 
   api-tests:
+    permissions:
+      contents: read
+      actions: read
+      checks: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-api-tests
       cancel-in-progress: true

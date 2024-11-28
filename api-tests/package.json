@@ -4,7 +4,7 @@
   "description": "tests for eshop api",
   "scripts": {
     "test:local": "bru run -r . --env local",
-    "test:ci": "bru run -r . --env ci"
+    "test:ci": "bru run -r . --env ci --format junit --output report.xml"
   },
   "repository": {
     "type": "git",
