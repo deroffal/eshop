@@ -9,6 +9,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties("eshop.observability")
 public record ObservabilityProperties(boolean enabled) {
-    //
- //
+
 }
