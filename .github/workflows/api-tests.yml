@@ -10,6 +10,7 @@ permissions:
   checks: write
 jobs:
   tests:
+    name: 'Run API tests'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
