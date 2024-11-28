@@ -4,8 +4,13 @@ name: 'API tests'
 on:
   workflow_dispatch:
   workflow_call:
+permissions:
+  contents: read
+  actions: read
+  checks: write
 jobs:
   tests:
+    name: 'Run API tests'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -66,3 +71,11 @@ jobs:
         run: |
           npm install
           npm run test:ci
+
+      - name: Publish Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Bruno API Tests
+          path: api-tests/report.xml
+          reporter: java-junit
