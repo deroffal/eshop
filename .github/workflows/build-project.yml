@@ -14,11 +14,6 @@ on:
   schedule:
     - cron: '0 7 * * 1'
 
-permissions:
-  contents: read
-  actions: read
-  checks: write
-
 jobs:
 
   project-build:
