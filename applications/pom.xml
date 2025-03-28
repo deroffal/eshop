@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.3</version>
+        <version>3.4.4</version>
         <relativePath/>
     </parent>
 
@@ -36,7 +36,7 @@
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../report-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <jacoco.version>0.8.12</jacoco.version>
 
-        <spring-cloud-starter-openfeign.version>4.2.0</spring-cloud-starter-openfeign.version>
+        <spring-cloud-starter-openfeign.version>4.2.1</spring-cloud-starter-openfeign.version>
 
         <opentelemetry.version>1.48.0</opentelemetry.version>
 
@@ -46,8 +46,8 @@
         <mockserver.version>5.15.0</mockserver.version>
 
         <pitest-junit5-plugin.version>1.2.2</pitest-junit5-plugin.version>
-        <pitest.version>1.18.2</pitest.version>
-        <spring-cloud-contract.version>4.2.0</spring-cloud-contract.version>
+        <pitest.version>1.19.0</pitest.version>
+        <spring-cloud-contract.version>4.2.1</spring-cloud-contract.version>
         <spring-web-test-client.version>5.5.1</spring-web-test-client.version>
     </properties>
 
