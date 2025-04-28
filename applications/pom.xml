@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.4</version>
+        <version>3.4.5</version>
         <relativePath/>
     </parent>
 
@@ -41,7 +41,7 @@
         <opentelemetry.version>1.49.0</opentelemetry.version>
 
         <mapstruct.version>1.6.3</mapstruct.version>
-        <cucumber.version>7.22.0</cucumber.version>
+        <cucumber.version>7.22.1</cucumber.version>
 
         <mockserver.version>5.15.0</mockserver.version>
 
