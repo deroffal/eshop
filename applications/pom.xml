@@ -46,9 +46,9 @@
         <mockserver.version>5.15.0</mockserver.version>
 
         <pitest-junit5-plugin.version>1.2.2</pitest-junit5-plugin.version>
-        <pitest.version>1.19.2</pitest.version>
+        <pitest.version>1.19.3</pitest.version>
         <spring-cloud-contract.version>4.2.1</spring-cloud-contract.version>
-        <spring-web-test-client.version>5.5.1</spring-web-test-client.version>
+        <spring-web-test-client.version>5.5.2</spring-web-test-client.version>
     </properties>
 
     <dependencyManagement>
