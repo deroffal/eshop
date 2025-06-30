@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: "maven"
     directory: "./applications"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     groups:
       all:
         patterns:
@@ -17,14 +17,14 @@ updates:
   - package-ecosystem: "npm"
     directory: "./api-tests"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
 
   - package-ecosystem: "github-actions"
     directory: ".github"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
 
   - package-ecosystem: docker
     directory: "./applications"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
