@@ -1,10 +1,15 @@
 package fr.deroffal.eshop.price.domain;
 
 import fr.deroffal.eshop.price.application.ApplicationConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Mandatory configuration to load Spring application for Cucumber tests.
@@ -15,13 +20,11 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages = "fr.deroffal.eshop.price.domain")
 public class DomainTestConfig {
 
-    @MockBean
-    private PriceStoragePort priceStoragePort;
+    @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.RUNTIME)
+    @MockitoBean(types = {PriceStoragePort.class, DiscountPort.class, ProductPort.class})
+    public @interface DomainTestMocks {
 
-    @MockBean
-    private DiscountPort discountPort;
-
-    @MockBean
-    private ProductPort productPort;
+    }
 
 }

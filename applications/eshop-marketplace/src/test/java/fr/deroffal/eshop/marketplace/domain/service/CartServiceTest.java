@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = MarketplaceDomainTestConfig.class)
+@MarketplaceDomainTestConfig.MarketplaceDomainMocks
 class CartServiceTest {
 
     @Autowired
