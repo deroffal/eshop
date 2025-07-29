@@ -26,6 +26,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @WebFluxTest
 @ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
+@WebFluxTestContextConfiguration.WebFluxTestMocks
 class CartEndpointTest {
 
     @Autowired

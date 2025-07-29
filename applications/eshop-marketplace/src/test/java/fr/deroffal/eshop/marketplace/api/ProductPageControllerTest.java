@@ -21,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ContextConfiguration(classes = WebTestConfiguration.class)
 @WebMvcTest
+@WebTestConfiguration.WebTestMocks
 class ProductPageControllerTest {
 
     @Autowired

@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = {DomainTestConfig.class, DomainCucumberConfig.class})
 @CucumberContextConfiguration
+@DomainTestConfig.DomainTestMocks
 public class DomainContextCucumberConfig {
 
     @Autowired

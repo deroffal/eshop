@@ -13,6 +13,7 @@ import java.util.UUID;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = DomainTestConfig.class)
+@DomainTestConfig.DomainTestMocks
 class PriceServiceTest {
 
     @Autowired
