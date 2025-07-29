@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 @WebFluxTest
 @ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
+@WebFluxTestContextConfiguration.WebFluxTestMocks
 public abstract class ContractsTestClass {
 
     @Autowired

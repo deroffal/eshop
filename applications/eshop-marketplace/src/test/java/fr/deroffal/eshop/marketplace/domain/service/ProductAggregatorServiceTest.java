@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = MarketplaceDomainTestConfig.class)
+@MarketplaceDomainTestConfig.MarketplaceDomainMocks
 class ProductAggregatorServiceTest {
 
     @Autowired
