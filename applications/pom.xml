@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.3</version>
+        <version>3.5.4</version>
         <relativePath/>
     </parent>
 
@@ -38,15 +38,15 @@
 
         <spring-cloud-starter-openfeign.version>4.3.0</spring-cloud-starter-openfeign.version>
 
-        <opentelemetry.version>1.51.0</opentelemetry.version>
+        <opentelemetry.version>1.52.0</opentelemetry.version>
 
         <mapstruct.version>1.6.3</mapstruct.version>
-        <cucumber.version>7.23.0</cucumber.version>
+        <cucumber.version>7.27.0</cucumber.version>
 
         <mockserver.version>5.15.0</mockserver.version>
 
         <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
-        <pitest.version>1.20.0</pitest.version>
+        <pitest.version>1.20.1</pitest.version>
         <spring-cloud-contract.version>4.3.0</spring-cloud-contract.version>
         <spring-web-test-client.version>5.5.5</spring-web-test-client.version>
     </properties>
