@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/deroffal/eshop#readme",
   "dependencies": {
-    "@usebruno/cli": "^2.6.1"
+    "@usebruno/cli": "^2.8.1"
   }
 }
