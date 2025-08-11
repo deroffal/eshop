@@ -33,7 +33,9 @@
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>deroffal-github</sonar.organization>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../report-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.basedir}/../report-aggregate/target/site/jacoco-aggregate/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
         <jacoco.version>0.8.13</jacoco.version>
 
         <spring-cloud-starter-openfeign.version>4.3.0</spring-cloud-starter-openfeign.version>
@@ -49,6 +51,9 @@
         <pitest.version>1.20.1</pitest.version>
         <spring-cloud-contract.version>4.3.0</spring-cloud-contract.version>
         <spring-web-test-client.version>5.5.5</spring-web-test-client.version>
+
+        <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
+        <required-maven-version>3.9</required-maven-version>
     </properties>
 
     <dependencyManagement>
@@ -155,6 +160,11 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer-plugin.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
                     <version>${pitest.version}</version>
@@ -163,10 +173,30 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco.version}</version>
-
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${required-maven-version}</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>
