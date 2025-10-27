@@ -22,7 +22,7 @@ jobs:
 
       - name: 'Build'
         working-directory: 'applications'
-        run: ./mvnw clean package -DskipTests
+        run: ./mvnw -B clean package -DskipTests
 
       - name: 'Start apps'
         working-directory: 'applications'
