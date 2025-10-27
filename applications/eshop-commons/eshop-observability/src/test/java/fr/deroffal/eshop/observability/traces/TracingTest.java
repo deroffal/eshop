@@ -39,7 +39,7 @@ public class TracingTest {
     void executeInSpan_function_success() {
         Example example = new Example();
 
-        var result = tracing.executeInSpan("span-name", span -> {
+        var result = tracing.executeInSpan("span-name", _ -> {
             return example.hello();
         });
 
@@ -57,7 +57,7 @@ public class TracingTest {
     void executeInSpan_function_throwsException() {
         Example example = new Example();
 
-        assertThatThrownBy(() -> tracing.executeInSpan("span-name", span -> {
+        assertThatThrownBy(() -> tracing.executeInSpan("span-name", _ -> {
             example.throwException();
         })).isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("this is an exception !");

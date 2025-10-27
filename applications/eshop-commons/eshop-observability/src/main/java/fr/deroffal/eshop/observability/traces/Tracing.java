@@ -54,7 +54,7 @@ public class Tracing {
                         .doOnNext(result -> next.accept(span, result))
                         .doOnError(error -> span.recordException(error)
                                 .setStatus(StatusCode.ERROR))
-                        .doFinally(ignored -> span.end())
+                        .doFinally(_ -> span.end())
                 );
 
     }
