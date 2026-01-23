@@ -1,12 +1,13 @@
 package fr.deroffal.eshop.product.api;
 
 
+import fr.deroffal.eshop.product.api.WebTestConfiguration.EndpointTestMocks;
 import fr.deroffal.eshop.product.domain.Product;
 import fr.deroffal.eshop.product.domain.ProductService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.when;
 
 @WebMvcTest
 @ContextConfiguration(classes = WebTestConfiguration.class)
+@EndpointTestMocks
 abstract class ContractsTestClass {
 
     @Autowired
