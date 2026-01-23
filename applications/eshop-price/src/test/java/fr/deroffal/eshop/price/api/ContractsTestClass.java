@@ -1,5 +1,6 @@
 package fr.deroffal.eshop.price.api;
 
+import fr.deroffal.eshop.price.api.WebFluxTestContextConfiguration.WebFluxTestMocks;
 import fr.deroffal.eshop.price.domain.PriceCalculationRequest;
 import fr.deroffal.eshop.price.domain.PriceCalculator;
 import fr.deroffal.eshop.price.domain.PriceService;
@@ -10,8 +11,8 @@ import fr.deroffal.eshop.price.domain.model.Price;
 import io.restassured.module.webtestclient.RestAssuredWebTestClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.boot.web.reactive.context.ReactiveWebApplicationContext;
+import org.springframework.boot.web.context.reactive.ReactiveWebApplicationContext;
+import org.springframework.boot.webflux.test.autoconfigure.WebFluxTest;
 import org.springframework.test.context.ContextConfiguration;
 import reactor.core.publisher.Mono;
 
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.*;
 
 @WebFluxTest
 @ContextConfiguration(classes = WebFluxTestContextConfiguration.class)
-@WebFluxTestContextConfiguration.WebFluxTestMocks
+@WebFluxTestMocks
 public abstract class ContractsTestClass {
 
     @Autowired
