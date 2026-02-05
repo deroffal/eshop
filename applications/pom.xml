@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.2</version>
         <relativePath/>
     </parent>
 
@@ -38,17 +38,17 @@
         </sonar.coverage.jacoco.xmlReportPaths>
         <jacoco.version>0.8.14</jacoco.version>
 
-        <spring-cloud-starter-openfeign.version>5.0.0</spring-cloud-starter-openfeign.version>
+        <spring-cloud-starter-openfeign.version>5.0.1</spring-cloud-starter-openfeign.version>
 
-        <opentelemetry.version>1.57.0</opentelemetry.version>
+        <opentelemetry.version>1.58.0</opentelemetry.version>
 
         <mapstruct.version>1.6.3</mapstruct.version>
-        <cucumber.version>7.33.0</cucumber.version>
+        <cucumber.version>7.34.2</cucumber.version>
 
         <mockserver.version>5.15.0</mockserver.version>
 
         <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
-        <pitest.version>1.22.0</pitest.version>
+        <pitest.version>1.22.1</pitest.version>
         <spring-cloud-contract.version>5.0.2</spring-cloud-contract.version>
         <spring-web-test-client.version>6.0.0</spring-web-test-client.version>
 
