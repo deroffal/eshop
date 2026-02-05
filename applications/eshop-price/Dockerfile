@@ -1,4 +1,4 @@
-FROM eclipse-temurin:25_36-jdk-noble as build
+FROM eclipse-temurin:25_36-jdk as build
 
 # prepare app dependecies
 WORKDIR /workspace/app
