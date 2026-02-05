@@ -47,7 +47,7 @@ public class ProductAggregatorService {
         );
 
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new))
-                .thenApply(ignored -> futures.stream().map(CompletableFuture::join))
+                .thenApply(_ -> futures.stream().map(CompletableFuture::join))
                 .join()
                 .reduce(identity(), Function::andThen)
                 .apply(new ProductDetail(null, 0, null));

@@ -28,7 +28,7 @@ class TracingNoopTest {
     void executeInSpan_function_success() {
         Example example = new Example();
 
-        var result = tracer.executeInSpan("span-name", span -> {
+        var result = tracer.executeInSpan("span-name", _ -> {
             return example.hello();
         });
 
@@ -39,7 +39,7 @@ class TracingNoopTest {
     void executeInSpan_consumer_success() {
         Example example = new Example();
 
-        tracer.executeInSpan("span-name", span -> {
+        tracer.executeInSpan("span-name", _ -> {
             example.world("world");
         });
 

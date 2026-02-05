@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk as build
+FROM eclipse-temurin:25-jdk-noble AS build
 
 # prepare app dependecies
 WORKDIR /workspace/app
@@ -7,10 +7,14 @@ RUN mkdir -p /workspace/app/dependency && (cd /workspace/app/dependency; jar -xf
 
 # prepare otel agent
 WORKDIR /workspace/app/otel
+
+RUN apt-get update && apt-get install -y curl
+
 ENV OTEL_URL=${OTEL_URL:-"https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar"}
+
 RUN curl -L -o ./opentelemetry-javaagent.jar ${OTEL_URL}
 
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:25-jdk-noble
 RUN groupadd --system spring && useradd --system spring --gid spring
 USER spring:spring
 

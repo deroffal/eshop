@@ -2,7 +2,7 @@
 
 ## Build and run project
 
-Java version currently used is `21`.
+Java version currently used is `25`.
 
 To run the project in local env :
 
