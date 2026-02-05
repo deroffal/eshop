@@ -18,13 +18,27 @@ updates:
     directory: "./api-tests"
     schedule:
       interval: "monthly"
+    groups:
+      all:
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
-    directory: ".github"
+    directories:
+      - ".github/**/*"
     schedule:
       interval: "monthly"
+    groups:
+      all:
+        patterns:
+          - "*"
 
   - package-ecosystem: docker
-    directory: "./applications"
+    directories:
+      - "./applications/**/*"
     schedule:
       interval: "monthly"
+    groups:
+      all:
+        patterns:
+          - "*"
