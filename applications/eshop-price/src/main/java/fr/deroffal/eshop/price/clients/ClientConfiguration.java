@@ -1,5 +1,6 @@
 package fr.deroffal.eshop.price.clients;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,7 @@ import java.net.URI;
 
 @Validated
 @ConfigurationProperties(prefix = "price.client")
-public record ClientConfiguration(@NotNull ProductConfiguration product) {
+public record ClientConfiguration(@NotNull @Valid ProductConfiguration product) {
 
     public record ProductConfiguration(@NotNull URI url) {
     }

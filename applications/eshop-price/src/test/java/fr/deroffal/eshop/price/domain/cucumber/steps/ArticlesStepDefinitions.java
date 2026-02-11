@@ -1,6 +1,6 @@
 package fr.deroffal.eshop.price.domain.cucumber.steps;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import fr.deroffal.eshop.price.domain.PriceStoragePort;
 import fr.deroffal.eshop.price.domain.ProductPort;
 import fr.deroffal.eshop.price.domain.model.Price;
