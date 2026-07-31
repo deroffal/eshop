@@ -11,8 +11,8 @@ on:
       - main
     paths:
       - applications/**
-  schedule:
-    - cron: '0 7 * * 1'
+#  schedule:
+#    - cron: '0 7 * * 1'
 
 
 
