@@ -5,3 +5,5 @@ target
 observability/otel/*.jar
 
 **/node_modules
+
+api-tests/package-lock.json
