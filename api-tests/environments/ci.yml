@@ -1,0 +1,11 @@
+name: ci
+variables:
+  - name: marketplace.url
+    value: http://localhost:marketplace_port
+    description: ""
+  - name: price.url
+    value: http://localhost:price_port
+    description: ""
+  - name: catalog.url
+    value: http://localhost:catalog_port
+    description: ""

@@ -1,0 +1,39 @@
+package fr.deroffal.eshop.catalog.pim.api;
+
+import fr.deroffal.eshop.catalog.pim.api.WebTestConfiguration.EndpointTestMocks;
+import fr.deroffal.eshop.catalog.pim.domain.Product;
+import fr.deroffal.eshop.catalog.pim.domain.ProductService;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import static fr.deroffal.eshop.catalog.pim.domain.ProductType.BIKE;
+import static org.mockito.Mockito.when;
+
+@WebMvcTest
+@ContextConfiguration(classes = WebTestConfiguration.class)
+@EndpointTestMocks
+abstract class ContractsTestClass {
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @BeforeEach
+    void setup() {
+        RestAssuredMockMvc.mockMvc(mockMvc);
+
+        when(productService.getProductDetail(UUID.fromString("73aa5936-4410-47a7-96c3-80407b57d710")))
+                .thenReturn(Optional.of(new Product(UUID.fromString("73aa5936-4410-47a7-96c3-80407b57d710"), BIKE, "bike 1", "This is product 1.")));
+
+        when(productService.getProductDetail(UUID.fromString("e0ddf766-567d-4fbf-9f31-18f6085bc233"))).thenReturn(Optional.empty());
+    }
+}

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
-@FeignClient(value = "stockClient", url = "${marketplace.client.stock.url}")
+@FeignClient(value = "stockClient", url = "${marketplace.client.catalog.url}")
 interface StockClient {
 
     @GetMapping("/stock/{product}")

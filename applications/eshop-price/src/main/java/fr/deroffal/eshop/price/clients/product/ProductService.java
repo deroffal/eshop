@@ -25,7 +25,7 @@ public class ProductService implements ProductPort {
     @Override
     public Mono<Product> getProduct(UUID productId) {
         return webClient.get()
-                .uri(clientConfiguration.product().url().resolve("/products/" + productId))
+                .uri(clientConfiguration.catalog().url().resolve("/products/" + productId))
                 .retrieve()
                 .bodyToMono(ProductModel.class)
                 .map(productMapper::convert);

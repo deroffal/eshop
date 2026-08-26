@@ -1,0 +1,30 @@
+info:
+  name: price
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{marketplace.url}}/cart/{{cartId}}/price"
+
+runtime:
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.cart
+      operator: eq
+      value: "{{cartId}}"
+    - expression: res.body.amount
+      operator: eq
+      value: "2160"
+    - expression: res.body.currency
+      operator: eq
+      value: EUR
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true

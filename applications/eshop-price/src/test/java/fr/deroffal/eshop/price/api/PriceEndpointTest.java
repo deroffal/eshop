@@ -32,7 +32,7 @@ class PriceEndpointTest {
     private PriceService priceService;
 
     @Nested
-    @DisplayName("GET : /price/{product}")
+    @DisplayName("GET : /price/{catalog}")
     class GetPrice {
         @Test
         @DisplayName("returns 200 with price")
@@ -56,7 +56,7 @@ class PriceEndpointTest {
         }
 
         @Test
-        @DisplayName("returns 404 when product is not found")
+        @DisplayName("returns 404 when catalog is not found")
         void getPrice_whenProductIsNotFound_returnsNotFound() {
 
             UUID product = UUID.randomUUID();
