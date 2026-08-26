@@ -1,0 +1,11 @@
+[tools]
+java = "25"
+node = "lts"
+
+[tasks.run-local]
+description = "Build the Java services and start the Docker Compose stack"
+run = "cd applications && ./mvnw clean package && docker compose --env-file=.env up"
+
+[tasks.test-local]
+description = "Install API testing dependencies and run the Bruno suite"
+run = "cd api-tests && npm install && npm run test:local"
