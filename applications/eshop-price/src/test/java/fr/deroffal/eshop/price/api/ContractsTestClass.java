@@ -54,7 +54,7 @@ public abstract class ContractsTestClass {
                         new CartItem(UUID.fromString("c3faabbc-1035-4ed4-93d5-af5af715013b"), 3)
                 )));
 
-        // POST /cart : product not found
+        // POST /cart : catalog not found
         doThrow(new CartException("Product e0ddf766-567d-4fbf-9f31-18f6085bc233 not found."))
                 .when(priceCalculator)
                 .getPrice(new PriceCalculationRequest(List.of(

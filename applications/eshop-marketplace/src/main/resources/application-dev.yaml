@@ -3,9 +3,7 @@ server:
 
 marketplace:
   client:
-    product:
-      url: http://localhost:8081
-    stock:
+    catalog:
       url: http://localhost:8082
     price:
       url: http://localhost:8083

@@ -1,0 +1,11 @@
+name: k8s
+variables:
+  - name: marketplace.url
+    value: http://marketplace.eshop.localhost
+    description: ""
+  - name: price.url
+    value: http://price.eshop.localhost
+    description: ""
+  - name: catalog.url
+    value: http://catalog.eshop.localhost
+    description: ""

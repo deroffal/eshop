@@ -6,7 +6,7 @@
     <parent>
         <groupId>fr.deroffal</groupId>
         <artifactId>eshop-parent</artifactId>
-        <version>0.12</version>
+        <version>0.13</version>
     </parent>
 
     <artifactId>report-aggregate</artifactId>
@@ -20,11 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>fr.deroffal</groupId>
-            <artifactId>eshop-stock</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>fr.deroffal</groupId>
-            <artifactId>eshop-product</artifactId>
+            <artifactId>eshop-catalog</artifactId>
         </dependency>
         <dependency>
             <groupId>fr.deroffal</groupId>

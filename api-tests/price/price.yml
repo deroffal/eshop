@@ -1,0 +1,24 @@
+info:
+  name: price
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{price.url}}/cart"
+  body:
+    type: json
+    data: |-
+      [
+          {
+              "item": "73aa5936-4410-47a7-96c3-80407b57d710",
+              "quantity": "1"
+          }
+      ]
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true

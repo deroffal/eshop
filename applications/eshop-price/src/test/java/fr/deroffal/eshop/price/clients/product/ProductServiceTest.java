@@ -18,7 +18,7 @@ import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.MediaType.APPLICATION_JSON;
 
-@MockServerTest("price.client.product.url=http://localhost:${mockServerPort}")
+@MockServerTest("price.client.catalog.url=http://localhost:${mockServerPort}")
 @SpringBootTest(classes = ClientTestConfiguration.class)
 class ProductServiceTest {
 

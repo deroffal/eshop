@@ -42,27 +42,19 @@ jobs:
           service-name: 'price-api'
           port-placeholder: 'price_port'
 
-      - name: 'Check deployment - stock'
-        id: check-stock-deployment
+      - name: 'Check deployment - catalog'
+        id: check-catalog-deployment
         uses: ./.github/actions/check-api-deployment
         with:
-          service-name: 'stock-api'
-          port-placeholder: 'stock_port'
-
-      - name: 'Check deployment - product'
-        id: check-product-deployment
-        uses: ./.github/actions/check-api-deployment
-        with:
-          service-name: 'product-api'
-          port-placeholder: 'product_port'
+          service-name: 'catalog-api'
+          port-placeholder: 'catalog_port'
 
       - name: 'Configure Bruno'
         uses: ./.github/actions/configure-bruno
         with:
           marketplace-port: ${{ steps.check-marketplace-deployment.outputs.public-port }}
           price-port: ${{ steps.check-price-deployment.outputs.public-port }}
-          product-port: ${{ steps.check-product-deployment.outputs.public-port }}
-          stock-port: ${{ steps.check-stock-deployment.outputs.public-port }}
+          catalog-port: ${{ steps.check-catalog-deployment.outputs.public-port }}
 
       - uses: actions/setup-node@v6
 

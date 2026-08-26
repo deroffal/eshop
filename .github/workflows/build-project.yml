@@ -14,8 +14,6 @@ on:
 #  schedule:
 #    - cron: '0 7 * * 1'
 
-
-
 jobs:
   project-build:
     permissions:

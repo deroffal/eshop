@@ -16,9 +16,9 @@ import java.net.URI;
 
 @Validated
 @ConfigurationProperties(prefix = "price.client")
-public record ClientConfiguration(@NotNull @Valid ProductConfiguration product) {
+public record ClientConfiguration(@NotNull @Valid CatalogConfiguration catalog) {
 
-    public record ProductConfiguration(@NotNull URI url) {
+    public record CatalogConfiguration(@NotNull URI url) {
     }
 
     @Bean

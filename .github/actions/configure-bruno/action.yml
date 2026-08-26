@@ -1,5 +1,6 @@
 ---
 name: 'Configure Bruno env'
+description: 'Configure Bruno environment with the correct ports for the APIs'
 
 inputs:
   marketplace-port:
@@ -8,12 +9,9 @@ inputs:
   price-port:
     required: true
     description: 'Price api port'
-  stock-port:
+  catalog-port:
     required: true
-    description: 'Stock api port'
-  product-port:
-    required: true
-    description: 'Product api port'
+    description: 'Catalog api port'
 runs:
   using: composite
   steps:
@@ -21,7 +19,7 @@ runs:
     - name: 'Configure Bruno env'
       shell: bash
       run: |
-        sed -i 's/marketplace_port/${{ inputs.marketplace-port }}/g' ./api-tests/environments/ci.bru
-        sed -i 's/price_port/${{ inputs.price-port }}/g' ./api-tests/environments/ci.bru
-        sed -i 's/stock_port/${{ inputs.stock-port }}/g' ./api-tests/environments/ci.bru
-        sed -i 's/product_port/${{ inputs.product-port }}/g' ./api-tests/environments/ci.bru
+        sed -i 's/marketplace_port/${{ inputs.marketplace-port }}/g' ./api-tests/environments/ci.yml
+        sed -i 's/price_port/${{ inputs.price-port }}/g' ./api-tests/environments/ci.yml
+        sed -i 's/catalog_port/${{ inputs.catalog-port }}/g' ./api-tests/environments/ci.yml
+
