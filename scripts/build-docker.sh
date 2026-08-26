@@ -4,7 +4,7 @@ set -e -o pipefail
 
 version=${1:-"0.9"}
 
-projects=("marketplace" "price" "product" "stock")
+projects=("marketplace" "price" "catalog")
 
 build_docker_image() {
   local project=$1

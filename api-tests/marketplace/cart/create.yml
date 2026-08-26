@@ -1,0 +1,40 @@
+info:
+  name: create
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{marketplace.url}}/cart/"
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status code is 201", function () {
+            expect(res.getStatus()).to.equal(201);
+        });
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "201"
+    - expression: res.body.id
+      operator: isDefined
+    - expression: res.body.items
+      operator: isArray
+  actions:
+    - type: set-variable
+      phase: after-response
+      selector:
+        expression: res.body.id
+        method: jsonq
+      variable:
+        name: cartId
+        scope: runtime
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true

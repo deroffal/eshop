@@ -10,9 +10,7 @@ eshop:
 
 marketplace:
   client:
-    product:
-      url: ""
-    stock:
+    catalog:
       url: ""
     price:
       url: ""

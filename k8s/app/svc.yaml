@@ -32,28 +32,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: product
+  name: catalog
   namespace: eshop-app
   labels:
-    app.kubernetes.io/name: product
+    app.kubernetes.io/name: catalog
 spec:
   selector:
-    app: product-api
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: stock
-  namespace: eshop-app
-  labels:
-    app.kubernetes.io/name: stock
-spec:
-  selector:
-    app: stock-api
+    app: catalog-api
   ports:
     - protocol: TCP
       port: 80

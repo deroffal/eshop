@@ -2,28 +2,16 @@ name: eshop
 
 services:
 
-  product-api:
-    image: eshop-product-api:latest
-    container_name: "product-api"
-    ports:
-      - "8081:8080"
-    environment:
-      - JAVA_TOOL_OPTIONS=-javaagent:/app/otel/opentelemetry-javaagent.jar
-      - OTEL_METRIC_EXPORT_INTERVAL=15000
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
-      - OTEL_SERVICE_NAME=product-api
-      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-
-  stock-api:
-    image: eshop-stock-api:latest
-    container_name: "stock-api"
+  catalog-api:
+    image: eshop-catalog-api:latest
+    container_name: "catalog-api"
     ports:
       - "8082:8080"
     environment:
       - JAVA_TOOL_OPTIONS=-javaagent:/app/otel/opentelemetry-javaagent.jar
       - OTEL_METRIC_EXPORT_INTERVAL=15000
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
-      - OTEL_SERVICE_NAME=stock-api
+      - OTEL_SERVICE_NAME=catalog-api
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 
   price-api:
@@ -37,7 +25,7 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_SERVICE_NAME=price-api
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-      - PRICE_CLIENT_PRODUCT_URL=http://product-api:8080
+      - PRICE_CLIENT_CATALOG_URL=http://catalog-api:8080
 
   marketplace-api:
     image: eshop-marketplace-api:latest
@@ -54,7 +42,7 @@ services:
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - MARKETPLACE_CLIENT_STOCK_URL=http://stock-api:8080
       - MARKETPLACE_CLIENT_PRICE_URL=http://price-api:8080
-      - MARKETPLACE_CLIENT_PRODUCT_URL=http://product-api:8080
+      - MARKETPLACE_CLIENT_CATALOG_URL=http://catalog-api:8080
 
   otel-collector:
     image: otel/opentelemetry-collector

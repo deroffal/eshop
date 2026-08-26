@@ -27,7 +27,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix:
-        api: [product, stock, price, marketplace]
+        api: [catalog, price, marketplace]
     steps:
       - uses: actions/checkout@v7
 

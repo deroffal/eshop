@@ -1,0 +1,7 @@
+variables:
+  - name: marketplace.url
+    value: http://localhost:8080
+  - name: price.url
+    value: http://localhost:8083
+  - name: catalog.url
+    value: http://localhost:8082
